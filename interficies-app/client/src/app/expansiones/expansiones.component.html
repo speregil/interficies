@@ -2,5 +2,6 @@
 <nav>
     <a>Juego</a> |
     <a>Narratones</a> |
-    <a>Debates</a> |
+    <a [routerLink]="[{ outlets: { 'exp-outlet':['debates'] } }]">Debates</a> |
 </nav>
+<router-outlet name="exp-outlet"></router-outlet>
