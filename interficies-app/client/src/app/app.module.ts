@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { RegistroComponent } from './principal/registro.component';
+import { RegistroComponent } from './principal/registro/registro.component';
+import { CreditosComponent } from './principal/creditos/creditos.component';
+import { InstruccionesComponent } from './principal/instrucciones/instrucciones.component';
 import { RemediacionesComponent } from './remediaciones/remediaciones.component';
 import { ArqueologiaComponent } from './arqueologia/arqueologia.component';
 import { InteraccionesComponent } from './interacciones/interacciones.component';
@@ -17,6 +19,8 @@ import { AppRoutingModule } from './/app-routing.module';
   declarations: [
     AppComponent,
     RegistroComponent,
+    CreditosComponent,
+    InstruccionesComponent,
     RemediacionesComponent,
     ArqueologiaComponent,
     InteraccionesComponent,

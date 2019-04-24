@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { RegistroComponent } from './principal/registro.component';
+import { RegistroComponent } from './principal/registro/registro.component';
+import { CreditosComponent } from './principal/creditos/creditos.component';
+import { InstruccionesComponent } from './principal/instrucciones/instrucciones.component';
 import { RemediacionesComponent } from './remediaciones/remediaciones.component';
 import { ArqueologiaComponent } from './arqueologia/arqueologia.component';
 import { InteraccionesComponent } from './interacciones/interacciones.component';
@@ -13,7 +15,10 @@ import { NarratonesExpansiones } from './expansiones/narratones/narratones.expan
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
+  { path: 'interficies', component: AppComponent },
   { path: 'registro', component: RegistroComponent },
+  { path: 'creditos', component: CreditosComponent },
+  { path: 'instrucciones', component: InstruccionesComponent },
   { path: 'remediaciones', component: RemediacionesComponent },
   { path: 'arqueologia', component: ArqueologiaComponent },
   { path: 'interacciones', component: InteraccionesComponent },
