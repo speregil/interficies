@@ -1,14 +1,57 @@
-<h1>{{title}}</h1>
-<nav>
-  <a routerLink="/registro">Registrarse</a> |
-  <a href="/creditos">Creditos</a> |
-  <a href="/instrucciones">Instrucciones</a> |
-</nav>
-<nav>
-  <a routerLink="/remediaciones">Obra Remediada</a> |
-  <a routerLink="/expansiones">Obra Expandida</a> |
-  <a routerLink="/interacciones">Interacciones</a> |
-  <a routerLink="/arqueologia">Arqueología Digital</a> |
-</nav>
-<router-outlet></router-outlet>
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    INTERFICIES
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a routerLink="/registro" class="w3-bar-item w3-button">Registrarse</a> 
+      <a href="/creditos" class="w3-bar-item w3-button">Creditos</a>
+      <a href="/instrucciones" class="w3-bar-item w3-button">Instrucciones</a>
+    </div>
+  </div>
+</div>
 
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
+  <div class="w3-display-middle w3-margin-top w3-center">
+    <h1 class="w3-xxlarge w3-text-white"><span class="w3-hide-small w3-text-light-grey">Interficies</span></h1>
+  </div>
+</header>
+
+<!-- Page content -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+
+  <!-- Project Section -->
+  <div class="w3-container w3-padding-32" id="projects"></div>
+
+  <div class="w3-row-padding">
+    
+    <div class="w3-col l2 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-black w3-padding"><a routerLink="/remediaciones">Obra Remediada</a></div>
+      </div>
+    </div>
+
+    <div class="w3-col l2 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-black w3-padding"><a routerLink="/expansiones">Obra Expandida</a></div>
+      </div>
+    </div>
+
+    <div class="w3-col l2 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-black w3-padding"><a routerLink="/interacciones">Interacciones</a></div>
+      </div>
+    </div>
+
+    <div class="w3-col l2 m6 w3-margin-bottom">
+      <div class="w3-display-container">
+        <div class="w3-black w3-padding"><a routerLink="/arqueologia">Arqueología Digital</a></div>
+      </div>
+    </div>
+    
+  </div>
+
+  <router-outlet></router-outlet>
+
+</div>
