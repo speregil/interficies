@@ -29,6 +29,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', main);
@@ -40,7 +46,7 @@ app.use(function(req, res, next) {
     next(err);
 });
  
-var server = app.listen(3000, function() {
+var server = app.listen(3100, function() {
     var host = 'localhost';
     var port = server.address().port;
     console.log('Servidor corriendo en http://%s:%s', host, port);
