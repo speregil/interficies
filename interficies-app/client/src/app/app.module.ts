@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -14,6 +15,8 @@ import { DebatesExpansiones } from './expansiones/debates/debates.expansiones';
 import { JuegoExpansiones } from './expansiones/juego/juego.expansiones';
 import { NarratonesExpansiones } from './expansiones/narratones/narratones.expansiones';
 import { AppRoutingModule } from './/app-routing.module';
+
+import { RegistroService } from './principal/registro/registro.service';
 
 
 @NgModule({
@@ -33,9 +36,12 @@ import { AppRoutingModule } from './/app-routing.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    RegistroService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
