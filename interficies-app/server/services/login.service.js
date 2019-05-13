@@ -12,7 +12,11 @@ service.register = function(username, password, callback){
 
     user.save(function(err, user, ver){
         connection.disconnect();
-        callback(err, user);
+        if(err){
+            callback(1, err['errmsg'], user);
+        }
+        else
+            callback(0, "Registro exitoso", user);
     });
 }
 

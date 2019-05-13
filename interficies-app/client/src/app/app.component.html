@@ -4,9 +4,9 @@
     INTERFICIES
     <!-- Float links to the right. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
+        <a href="" class="w3-bar-item w3-button">Iniciar Sesión</a>
       <a routerLink="/registro" class="w3-bar-item w3-button">Registrarse</a> 
       <a href="/creditos" class="w3-bar-item w3-button">Creditos</a>
-      <a href="/instrucciones" class="w3-bar-item w3-button">Instrucciones</a>
     </div>
   </div>
 </div>
@@ -18,40 +18,4 @@
   </div>
 </header>
 
-<!-- Page content -->
-<div class="w3-content w3-padding" style="max-width:1564px">
-
-  <!-- Project Section -->
-  <div class="w3-container w3-padding-32" id="projects"></div>
-
-  <div class="w3-row-padding">
-    
-    <div class="w3-col l2 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-black w3-padding"><a routerLink="/remediaciones">Obra Remediada</a></div>
-      </div>
-    </div>
-
-    <div class="w3-col l2 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-black w3-padding"><a routerLink="/expansiones">Obra Expandida</a></div>
-      </div>
-    </div>
-
-    <div class="w3-col l2 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-black w3-padding"><a routerLink="/interacciones">Interacciones</a></div>
-      </div>
-    </div>
-
-    <div class="w3-col l2 m6 w3-margin-bottom">
-      <div class="w3-display-container">
-        <div class="w3-black w3-padding"><a routerLink="/arqueologia">Arqueología Digital</a></div>
-      </div>
-    </div>
-    
-  </div>
-
-  <router-outlet></router-outlet>
-
-</div>
+<router-outlet></router-outlet>

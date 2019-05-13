@@ -10,12 +10,16 @@ export class RegistroComponent {
   
   username = "";
   password = "";
+  msn = "";
 
   constructor(private service: RegistroService){}
 
   register(){
     this.service.register(this.username, this.password).subscribe(data => {
-      console.log("Registro exitoso: " + data);
+      if(data['status'] > 0 )
+        this.msn = data['mensaje'];
+      else
+        this.msn = data['mensaje'];
     });
 }
 

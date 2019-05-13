@@ -15,8 +15,8 @@ var controller = {};
 //---------------------------------------------------------------------------------------------
 
 controller.register = function(req, callback){
-    service.register(req.body.user, req.body.password, function(err, user){
-        callback(err, user);
+    service.register(req.body.user, req.body.password, function(stat, msn, user){
+        callback(stat, msn, user);
     });
 }
 

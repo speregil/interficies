@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
+import { PortadaComponent } from './principal/portada.component';
 import { RegistroComponent } from './principal/registro/registro.component';
 import { CreditosComponent } from './principal/creditos/creditos.component';
 import { InstruccionesComponent } from './principal/instrucciones/instrucciones.component';
@@ -15,6 +16,7 @@ import { NarratonesExpansiones } from './expansiones/narratones/narratones.expan
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
+  { path: '', component: PortadaComponent },
   { path: 'interficies', component: AppComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'creditos', component: CreditosComponent },

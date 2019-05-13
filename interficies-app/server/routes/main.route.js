@@ -15,12 +15,8 @@ var router = express.Router();
 //--------------------------------------------------------------------------------------
 
 router.post('/register', function(req, res, next) {
-    controller.register(req, function(err, user){
-        if(err){
-           res.status(500);
-           res.json({status : 1, error : 'Error de registro: ' + err, data : {}}); 
-        }
-        res.json({status : 0, error : '', data : user});
+    controller.register(req, function(stat, msn, user){
+        res.json({status : stat, mensaje : msn, data : user});
     });
 });
 
