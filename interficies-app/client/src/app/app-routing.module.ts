@@ -15,6 +15,8 @@ import { JuegoExpansiones } from './expansiones/juego/juego.expansiones';
 import { NarratonesExpansiones } from './expansiones/narratones/narratones.expansiones';
 import { AppComponent } from './app.component';
 
+import { PrimeraAnimacionComponent } from './principal/animaciones/primera.component';
+
 const routes: Routes = [
   { path: '', component: PortadaComponent },
   { path: 'interficies', component: AppComponent },
@@ -29,7 +31,8 @@ const routes: Routes = [
       { path: 'juego', component: JuegoExpansiones },
       { path: 'narratones', component: NarratonesExpansiones }
     ]
-  }
+  },
+  { path: 'animaciones-primera', component: PrimeraAnimacionComponent }
 ];
 
 @NgModule({

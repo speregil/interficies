@@ -17,8 +17,10 @@ import { JuegoExpansiones } from './expansiones/juego/juego.expansiones';
 import { NarratonesExpansiones } from './expansiones/narratones/narratones.expansiones';
 import { AppRoutingModule } from './/app-routing.module';
 
-import { RegistroService } from './principal/registro/registro.service';
+import { PrimeraAnimacionComponent } from './principal/animaciones/primera.component';
 
+import { RegistroService } from './principal/registro/registro.service';
+import { UserService } from './models/user.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { RegistroService } from './principal/registro/registro.service';
     ExpansionesComponent,
     DebatesExpansiones,
     JuegoExpansiones,
-    NarratonesExpansiones
+    NarratonesExpansiones,
+    PrimeraAnimacionComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,8 @@ import { RegistroService } from './principal/registro/registro.service';
     FormsModule
   ],
   providers: [
-    RegistroService
+    RegistroService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

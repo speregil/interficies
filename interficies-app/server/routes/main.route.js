@@ -20,4 +20,13 @@ router.post('/register', function(req, res, next) {
     });
 });
 
+router.post('/login', function(req, res, next) {
+    controller.login(req, function(err, isMatch){
+        if(err)
+            res.json({status : 1, mensaje : err, match : isMatch});
+        else
+            res.json({status : 0, mensaje: "Login exitoso", match: isMatch});
+    });
+});
+
 module.exports = router;

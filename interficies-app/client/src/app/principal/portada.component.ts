@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Howl, Howler} from 'howler';
 
 @Component({
@@ -6,7 +6,7 @@ import {Howl, Howler} from 'howler';
   templateUrl: './portada.component.html',
   styleUrls: ['./portada.component.css']
 })
-export class PortadaComponent {
+export class PortadaComponent implements OnInit, OnDestroy {
   
     bgSound = new Howl({
         src: ['/assets/static//snd_portada.mp3']
@@ -19,4 +19,7 @@ export class PortadaComponent {
       Howler.volume(0.5);
     }
 
+    ngOnDestroy() { 
+      this.bgSound.stop();
+    }
 }

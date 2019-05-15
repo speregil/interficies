@@ -20,4 +20,10 @@ controller.register = function(req, callback){
     });
 }
 
+controller.login = function(req, callback){
+    service.login(req.body.user, req.body.password, function(err, isMatch){
+        callback(err, isMatch);
+    });
+}
+
 module.exports = controller;
