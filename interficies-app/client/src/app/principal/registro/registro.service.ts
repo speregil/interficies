@@ -11,7 +11,11 @@ export class RegistroService {
 
     constructor ( private http: HttpClient) {}
 
-    register(pUser : string, pPassword : string){
-        return this.http.post<{}>('http://' + this.host + '/register/', {user : pUser, password : pPassword});
+    register(pUser : string, pPassword : string, pName : String){
+        return this.http.post<{}>('http://' + this.host + '/register/', {user : pUser, password : pPassword, shownName : pName});
+    }
+
+    login(pUser : string, pPassword : string){
+        return this.http.post<{}>('http://' + this.host + '/login/', {user : pUser, password : pPassword});
     }
 }

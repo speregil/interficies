@@ -21,11 +21,11 @@ router.post('/register', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-    controller.login(req, function(err, isMatch){
+    controller.login(req, function(err, isMatch, user){
         if(err)
-            res.json({status : 1, mensaje : err, match : isMatch});
+            res.json({status : 1, mensaje : err, match : isMatch, userOb : null});
         else
-            res.json({status : 0, mensaje: "Login exitoso", match: isMatch});
+            res.json({status : 0, mensaje: "Login exitoso", match: isMatch, data : user});
     });
 });
 

@@ -5,12 +5,13 @@ var User = require('./models/user.model');
 
 var service = {};
 
-service.register = function(username, password, callback){
+service.register = function(username, password, shownName, callback){
     var db = connection.connect();
     var user = new User();
     bcrypt.hash(password, 10, function(err, hash) {
         user.username = username;
         user.password = hash;
+        user.shownName = shownName;
 
         user.save(function(err, user, ver){
             connection.disconnect();
@@ -26,12 +27,17 @@ service.register = function(username, password, callback){
 service.login = function(user, password, callback){
     connection.connect();
     User.find({username: user}, function(err, search){
-        bcrypt.compare(password, search[0].password, function(err, res) {
-            if(res)
-                callback(null, true);          
-            else
-                callback("Login incorrecto", false);
-        });
+        if(search[0]){
+            bcrypt.compare(password, search[0].password, function(err, res) {
+                if(res)
+                    callback(null, true, search[0]);          
+                else
+                    callback("Login incorrecto", false, null);
+            });
+        }
+        else{
+            callback("El usuario no existe", false, null);
+        }
     });  
 }
 
