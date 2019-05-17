@@ -4,11 +4,12 @@
     INTERFICIES
     <!-- Float links to the right. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
-      <span *ngIf="logged" class="w3-bar-item">Bienvenido</span>
-      <input *ngIf="logged==false" [(ngModel)]="username" type="text"  class="w3-bar-item" placeholder="Correo">
-      <input *ngIf="logged==false" [(ngModel)]="password" type="password"  class="w3-bar-item" placeholder="Contraseña">
-      <input type="button" class="w3-bar-item w3-button" value="Iniciar Sesión" (click)="login()">
-      <a routerLink="/registro" class="w3-bar-item w3-button">Registrarse</a> 
+      <span *ngIf="isLogged()" class="w3-bar-item">Bienvenido {{getShownName()}}</span>
+      <input *ngIf="isLogged()==false" [(ngModel)]="username" type="text"  class="w3-bar-item" placeholder="Correo">
+      <input *ngIf="isLogged()==false" [(ngModel)]="password" type="password"  class="w3-bar-item" placeholder="Contraseña">
+      <input *ngIf="isLogged()==false" type="button" class="w3-bar-item w3-button" value="Iniciar Sesión" (click)="login()">
+      <input *ngIf="isLogged()" type="button" class="w3-bar-item w3-button" value="Salir" (click)="logout()">
+      <a *ngIf="isLogged()==false" routerLink="/registro" class="w3-bar-item w3-button">Registrarse</a> 
       <a href="/creditos" class="w3-bar-item w3-button">Creditos</a>
     </div>
   </div>

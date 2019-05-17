@@ -5,7 +5,7 @@ import { User } from './user.model';
 export class UserService {
 
   private isUserLoggedIn;
-  public usserLogged:User;
+  
 
   constructor() { 
   	this.isUserLoggedIn = false;
@@ -13,12 +13,19 @@ export class UserService {
 
   setUserLoggedIn(user:User) {
     this.isUserLoggedIn = true;
-    this.usserLogged = user;
     localStorage.setItem('currentUser', JSON.stringify(user));
-  
+  }
+
+  setUserLoggedOut() {
+    this.isUserLoggedIn = false;
+    localStorage.removeItem('currentUser');
   }
 
   getUserLoggedIn() {
   	return JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+  isUserLogged() {
+    return this.isUserLoggedIn;
   }
 }

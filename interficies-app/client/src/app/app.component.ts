@@ -13,6 +13,8 @@ export class AppComponent {
   username = "";
   password = "";
   logged = false;
+  loggedUser = null;
+
 
   constructor(private registro: RegistroService, private userService: UserService){}
 
@@ -21,11 +23,38 @@ export class AppComponent {
       if(data['status'] > 0 )
         alert(data['mensaje']);
       else{
-        this.logged = true;
-        var user : User = new User(this.username, this.password);        
+        var userModel = data["data"];
+        var user : User = new User(this.username, userModel["shownName"]);        
         this.userService.setUserLoggedIn(user);
-        console.log(this.userService.getUserLoggedIn());
+        this.loggedUser = this.userService.getUserLoggedIn();
+
+        this.username = "";
+        this.password = "";
       }     
     });
+  }
+
+  logout(){
+    this.userService.setUserLoggedOut();
+    this.loggedUser = null;
+  }
+
+  isLogged(){
+    return this.userService.isUserLogged();
+  }
+
+  getShownName(){
+    if(this.loggedUser) {
+      return this.loggedUser.shownName;
+    }
+    else
+      return "";
+  }
+
+  updateLogin() {
+    this.loggedUser = this.userService.getUserLoggedIn();
+
+    this.username = "";
+    this.password = "";
   }
 }
