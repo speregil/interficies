@@ -1,7 +1,7 @@
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-wide w3-padding w3-card">
-    INTERFICIES
+    <a href=" ">INTERFICIES</a>
     <!-- Float links to the right. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
       <span *ngIf="isLogged()" class="w3-bar-item">Bienvenido {{getShownName()}}</span>
@@ -10,6 +10,7 @@
       <input *ngIf="isLogged()==false" type="button" class="w3-bar-item w3-button" value="Iniciar Sesión" (click)="login()">
       <input *ngIf="isLogged()" type="button" class="w3-bar-item w3-button" value="Salir" (click)="logout()">
       <a *ngIf="isLogged()==false" routerLink="/registro" class="w3-bar-item w3-button">Registrarse</a> 
+      <a href="/instrucciones" class="w3-bar-item w3-button">Instrucciones</a>
       <a href="/creditos" class="w3-bar-item w3-button">Creditos</a>
     </div>
   </div>
