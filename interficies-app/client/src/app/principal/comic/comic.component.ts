@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { UserService } from '../../models/user.service';
 
 @Component({
   selector: 'comic',
@@ -7,5 +8,13 @@ import { Component } from '@angular/core';
 })
 
 export class ComicComponent{
+  
+  initComic: string;
+  lastComic: string;
+  currentComic: string;
 
+  constructor(private userService: UserService) {
+    this.initComic = this.userService.getInitComic();
+    this.currentComic = "comic-" + this.initComic + ".jpg";
+  }
 }

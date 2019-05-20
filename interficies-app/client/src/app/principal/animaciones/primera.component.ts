@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Howl, Howler} from 'howler';
+import { Component} from '@angular/core';
+import {Router} from "@angular/router"
+import { UserService } from '../../models/user.service';
 
 @Component({
   selector: 'animacion-primera',
@@ -9,7 +10,10 @@ import {Howl, Howler} from 'howler';
 
 export class PrimeraAnimacionComponent {
   
-    constructor() {}
-  
-    ngOnInit() {}
+    constructor(private userService: UserService,  private router: Router) {}
+
+    onContinue() {
+      this.userService.setInitComic("2");
+      this.router.navigate(['comic']);
+    }
 }

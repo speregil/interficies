@@ -5,10 +5,14 @@ import { User } from './user.model';
 export class UserService {
 
   private isUserLoggedIn;
+  private currentInitComic;
+  private currentLastComic;
   
 
   constructor() { 
-  	this.isUserLoggedIn = false;
+    this.isUserLoggedIn = false;
+    this.currentInitComic = 1;
+    this.currentLastComic = 1;
   }
 
   setUserLoggedIn(user:User) {
@@ -27,5 +31,13 @@ export class UserService {
 
   isUserLogged() {
     return this.isUserLoggedIn;
+  }
+
+  getInitComic() {
+    return this.currentInitComic;
+  }
+
+  setInitComic(init: string) {
+    this.currentInitComic = init;
   }
 }
