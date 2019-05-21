@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { PortadaComponent } from './principal/portada.component';
 import { RegistroComponent } from './principal/registro/registro.component';
+import { RolesComponent } from './principal/roles.component';
 import { CreditosComponent } from './principal/creditos/creditos.component';
 import { InstruccionesComponent } from './principal/instrucciones/instrucciones.component';
 import { ComicComponent } from './principal/comic/comic.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: '', component: PortadaComponent },
   { path: 'interficies', component: AppComponent },
   { path: 'registro', component: RegistroComponent },
+  { path: 'roles', component: RolesComponent },
   { path: 'creditos', component: CreditosComponent },
   { path: 'instrucciones', component: InstruccionesComponent },
   { path: 'comic', component: ComicComponent },

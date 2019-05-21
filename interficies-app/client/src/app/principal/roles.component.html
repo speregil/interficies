@@ -1,0 +1,11 @@
+<div class="main-container">
+  <div *ngIf="isLogged">
+    <a routerLink="/remediaciones">Arqueologo</a>
+    <a routerLink="/expansiones">Narrador</a>
+    <a routerLink="/interacciones">Futurologo</a>
+  </div>
+
+  <div *ngIf="isLogged == false">
+    <p>Primero inicia sesión</p>
+  </div>
+</div>

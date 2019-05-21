@@ -40,4 +40,12 @@ export class UserService {
   setInitComic(init: string) {
     this.currentInitComic = init;
   }
+
+  getLastComic() {
+    return this.currentLastComic;
+  }
+
+  setLastComic(init: string) {
+    this.currentLastComic = init;
+  }
 }

@@ -15,6 +15,25 @@ export class ComicComponent{
 
   constructor(private userService: UserService) {
     this.initComic = this.userService.getInitComic();
-    this.currentComic = "comic-" + this.initComic + ".jpg";
+    this.lastComic = this.userService.getLastComic();
+    this.currentComic =  this.initComic;
+  }
+
+  onSig() {
+    var current = Number(this.currentComic);
+    var last = Number(this.lastComic);
+    current++;
+    if(current <= last) {
+      this.currentComic = current + "";
+    }
+  }
+
+  onPrev() {
+    var current = Number(this.currentComic);
+    var first = Number(this.initComic);
+    current--;
+    if(current >= first) {
+      this.currentComic = current + "";
+    }
   }
 }

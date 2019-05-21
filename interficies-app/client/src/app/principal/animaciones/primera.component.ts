@@ -13,7 +13,8 @@ export class PrimeraAnimacionComponent {
     constructor(private userService: UserService,  private router: Router) {}
 
     onContinue() {
-      this.userService.setInitComic("2");
+      this.userService.setInitComic("1");
+      this.userService.setLastComic("4");
       this.router.navigate(['comic']);
     }
 }
