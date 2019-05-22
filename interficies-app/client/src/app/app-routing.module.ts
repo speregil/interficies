@@ -20,7 +20,8 @@ import { AppComponent } from './app.component';
 import { PrimeraAnimacionComponent } from './principal/animaciones/primera.component';
 
 const routes: Routes = [
-  { path: '', component: PortadaComponent },
+  { path: '', redirectTo: '/portada', pathMatch: 'full' },
+  { path: 'portada', component: PortadaComponent },
   { path: 'interficies', component: AppComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'roles', component: RolesComponent },

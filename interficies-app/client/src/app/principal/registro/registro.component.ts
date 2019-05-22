@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Router} from "@angular/router"
+import { Router } from "@angular/router"
 import { AppComponent } from '../../app.component';
 import { RegistroService } from './registro.service';
 import { UserService } from '../../models/user.service';

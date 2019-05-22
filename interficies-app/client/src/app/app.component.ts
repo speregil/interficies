@@ -2,21 +2,32 @@ import { Component } from '@angular/core';
 import { RegistroService } from './principal/registro/registro.service';
 import { UserService } from './models/user.service';
 import { User } from './models/user.model';
+import { LoginObserver } from './models/loginObserver.interface';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   
+  loginObservers: LoginObserver[];
+
   username = "";
   password = "";
-  logged = false;
   loggedUser = null;
 
 
-  constructor(private registro: RegistroService, private userService: UserService){}
+  constructor(private registro: RegistroService, private userService: UserService){
+    this.loginObservers = new Array();
+
+    if(this.isLogged()) {
+      console.log("is logged");
+      this.updateLogin();
+    }
+    console.log("not logged");
+  }
 
   login(){
     this.registro.login(this.username, this.password).subscribe(data => {
@@ -30,6 +41,8 @@ export class AppComponent {
 
         this.username = "";
         this.password = "";
+
+        this.notifyLogin(true);
       }     
     });
   }
@@ -37,6 +50,8 @@ export class AppComponent {
   logout(){
     this.userService.setUserLoggedOut();
     this.loggedUser = null;
+
+    this.notifyLogin(false);
   }
 
   isLogged(){
@@ -56,5 +71,15 @@ export class AppComponent {
 
     this.username = "";
     this.password = "";
+  }
+
+  addLoginObserver (newObserver: LoginObserver) {
+    this.loginObservers.push(newObserver);
+  }
+
+  private notifyLogin(logged: boolean) {
+    for (var observer of this.loginObservers) {
+        observer.notifyLogin(logged);
+    }
   }
 }

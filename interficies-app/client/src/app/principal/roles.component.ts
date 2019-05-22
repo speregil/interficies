@@ -1,19 +1,23 @@
 import { Component, OnInit} from '@angular/core';
+import { AppComponent } from '../app.component';
 import { UserService } from '../models/user.service';
+import { LoginObserver } from '../models/loginObserver.interface';
 
 @Component({
-  selector: 'comic',
+  selector: 'roles',
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.css']
 })
 
-export class RolesComponent implements OnInit {
+export class RolesComponent implements LoginObserver {
 
-    constructor(private userService: UserService) {}
+  isLogged : boolean;  
+  constructor(private userService: UserService, private principal: AppComponent) {
+    this.isLogged = this.userService.isUserLogged();
+    this.principal.addLoginObserver(this);
+  }
 
-    isLogged : boolean;
-
-    ngOnInit() {
-        this.isLogged = this.userService.isUserLogged();
-    }
+  notifyLogin(logged: boolean): void {
+    this.isLogged = logged;
+  }
 }

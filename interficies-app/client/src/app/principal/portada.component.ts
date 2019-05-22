@@ -9,13 +9,15 @@ import {Howl, Howler} from 'howler';
 export class PortadaComponent implements OnInit, OnDestroy {
   
     bgSound = new Howl({
-        src: ['/assets/static//snd_portada.mp3']
+        src: ['/assets/static//snd_portada.mp3'],
+        loop: true
     });
 
     constructor() {}
   
     ngOnInit() {
       this.bgSound.play();
+      this.bgSound.loo
       Howler.volume(0.5);
     }
 
