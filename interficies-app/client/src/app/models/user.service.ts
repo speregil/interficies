@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
 
 @Injectable()
@@ -9,7 +10,7 @@ export class UserService {
   private currentLastComic;
   
 
-  constructor() { 
+  constructor( private http: HttpClient ) { 
     this.isUserLoggedIn = false;
     this.currentInitComic = 1;
     this.currentLastComic = 1;
@@ -47,5 +48,9 @@ export class UserService {
 
   setLastComic(init: string) {
     this.currentLastComic = init;
+  }
+
+  getProgressProfile(user: string) {
+    
   }
 }

@@ -21,12 +21,9 @@ export class AppComponent {
 
   constructor(private registro: RegistroService, private userService: UserService){
     this.loginObservers = new Array();
-
     if(this.isLogged()) {
-      console.log("is logged");
       this.updateLogin();
     }
-    console.log("not logged");
   }
 
   login(){

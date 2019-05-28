@@ -15,7 +15,8 @@ var cors = require('cors');                    // Libreria para manejar el proto
 // Rutas
 //---------------------------------------------------------------------------------------
 
-var main = require('./routes/main.route');
+var login = require('./routes/login.route');
+var progress = require('./routes/progress.route');
 
 //---------------------------------------------------------------------------------------
 // Servidor
@@ -37,7 +38,8 @@ app.use(function(req, res, next) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', main);
+app.use('/', login);
+app.use('/progress', progress);
 
 // Maneja el error 404
 app.use(function(req, res, next) {

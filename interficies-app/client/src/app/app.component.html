@@ -4,7 +4,12 @@
     <a routerLink = "/portada">INTERFICIES</a>
     <!-- Float links to the right. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
-      <span *ngIf="isLogged()" class="w3-bar-item">Bienvenido {{getShownName()}}</span>
+      <div *ngIf="isLogged()" class="w3-bar-item">
+        <span>Rol: </span>
+        <span>Nivel: </span>
+        <span>Puntos: </span>
+        <span >Bienvenido {{getShownName()}}</span>
+      </div>
       <input *ngIf="isLogged()==false" [(ngModel)]="username" type="text"  class="w3-bar-item" placeholder="Correo">
       <input *ngIf="isLogged()==false" [(ngModel)]="password" type="password"  class="w3-bar-item" placeholder="Contraseña">
       <input *ngIf="isLogged()==false" type="button" class="w3-bar-item w3-button" value="Iniciar Sesión" (click)="login()">

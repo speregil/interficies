@@ -1,12 +1,12 @@
-var mongoose = require('mongoose');
 var connection = require('./connection.service');
 var bcrypt = require('bcrypt');
 var User = require('./models/user.model');
+var Progress = require('./progress.service');
 
 var service = {};
 
 service.register = function(username, password, shownName, callback){
-    var db = connection.connect();
+    connection.connect();
     var user = new User();
     bcrypt.hash(password, 10, function(err, hash) {
         user.username = username;
@@ -14,19 +14,28 @@ service.register = function(username, password, shownName, callback){
         user.shownName = shownName;
 
         user.save(function(err, user, ver){
-            connection.disconnect();
             if(err){
                 callback(1, err['errmsg'], user);
             }
-            else
-                callback(0, "Registro exitoso", user);
+            else{
+                Progress.createProgressProfile(user._id, function(status, err, prof){
+                    connection.disconnect();
+                    if(status > 0)
+                        callback(1, err, user);
+                    else
+                        callback(0, null, user);
+                });
+            }
         });
+
+
     });
 }
 
 service.login = function(user, password, callback){
     connection.connect();
     User.find({username: user}, function(err, search){
+        connection.disconnect();
         if(search[0]){
             bcrypt.compare(password, search[0].password, function(err, res) {
                 if(res)
