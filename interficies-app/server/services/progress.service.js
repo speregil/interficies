@@ -28,7 +28,7 @@ service.getProfile = function(user, callback) {
         if(err)
             callback(1, "El usuario no existe", null);
         else {
-            Progress.find({userID: search._id}, function(err, search) {
+            Progress.find({userID: search[0]._id}, function(err, search) {
                 connection.disconnect();
                 if(err)
                     callback(1, err['errmsg'], null);
