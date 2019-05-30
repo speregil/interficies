@@ -9,31 +9,19 @@ import { UserService } from '../../models/user.service';
 
 export class ComicComponent{
   
-  initComic: string;
-  lastComic: string;
-  currentComic: string;
+  comicArray: Array<Number>;
 
   constructor(private userService: UserService) {
-    this.initComic = this.userService.getInitComic();
-    this.lastComic = this.userService.getLastComic();
-    this.currentComic =  this.initComic;
+    var initComic = this.userService.getInitComic();
+    var lastComic = this.userService.getLastComic();
+    this.comicArray = this.range(Number.parseInt(initComic), Number.parseInt(lastComic));
   }
 
-  onSig() {
-    var current = Number(this.currentComic);
-    var last = Number(this.lastComic);
-    current++;
-    if(current <= last) {
-      this.currentComic = current + "";
+  range(start, end): Array<Number> {
+    var ans : Array<Number> = new Array();
+    for (let i = start; i <= end; i++) {
+      ans.push(i);
     }
-  }
-
-  onPrev() {
-    var current = Number(this.currentComic);
-    var first = Number(this.initComic);
-    current--;
-    if(current >= first) {
-      this.currentComic = current + "";
-    }
+    return ans;
   }
 }
