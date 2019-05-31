@@ -32,14 +32,17 @@ export class AppComponent {
         alert(data['mensaje']);
       else{
         var userModel = data["data"];
-        var user : User = new User(this.username, userModel["shownName"]);        
-        this.userService.setUserLoggedIn(user);
-        this.loggedUser = this.userService.getUserLoggedIn();
+        this.userService.getProgressProfile(userModel["username"]).subscribe(progress => {
+          var progressModel = progress["progOb"];
+          var user : User = new User(this.username, userModel["shownName"], progressModel["currentRol"], progressModel["level"], progressModel["points"]);        
+          this.userService.setUserLoggedIn(user);
+          this.loggedUser = this.userService.getUserLoggedIn();
 
-        this.username = "";
-        this.password = "";
+          this.username = "";
+          this.password = "";
 
-        this.notifyLogin(true);
+          this.notifyLogin(true);
+        });
       }     
     });
   }
@@ -58,6 +61,23 @@ export class AppComponent {
   getShownName(){
     if(this.loggedUser) {
       return this.loggedUser.shownName;
+    }
+    else
+      return "";
+  }
+
+  getCurrentRol(){
+    if(this.loggedUser) {
+      console.log(this.loggedUser.currentRol);
+      return this.loggedUser.currentRol;
+    }
+    else
+      return "";
+  }
+
+  getLevel(){
+    if(this.loggedUser) {
+      return this.loggedUser.level;
     }
     else
       return "";

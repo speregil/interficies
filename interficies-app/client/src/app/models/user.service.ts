@@ -9,6 +9,7 @@ export class UserService {
   private currentInitComic;
   private currentLastComic;
   
+  host = 'localhost:3100';
 
   constructor( private http: HttpClient ) { 
     this.isUserLoggedIn = false;
@@ -51,6 +52,6 @@ export class UserService {
   }
 
   getProgressProfile(user: string) {
-    
+    return this.http.get<{}>('http://' + this.host + '/progress/' + user);
   }
 }

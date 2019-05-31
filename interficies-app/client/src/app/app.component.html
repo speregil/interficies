@@ -5,8 +5,8 @@
     <!-- Float links to the right. Hide them on small screens -->
     <div class="w3-right">
       <div *ngIf="isLogged()" class="w3-bar-item">
-        <span>Rol: </span>
-        <span>Nivel: </span>
+        <span>Rol: {{getCurrentRol()}}</span>
+        <span>Nivel: {{getLevel()}}</span>
         <span>Puntos: </span>
         <span >Bienvenido {{getShownName()}}</span>
       </div>
