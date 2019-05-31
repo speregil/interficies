@@ -1,6 +1,8 @@
 <div class="main-content">
-    <a routerLink = "/roles">Continuar</a>
-    <div *ngFor="let i of comicArray">
-        <img src="assets/static/comic/comic-{{i}}.jpg">
+    <div class="comic-container">
+        <div *ngFor="let i of comicArray">
+            <img src="assets/static/comic/comic-{{i}}.jpg" class="w3-image">
+        </div>
+        <a routerLink = "/roles">Continuar</a>
     </div>
 </div>
