@@ -24,9 +24,7 @@ export class RegistroComponent {
       if(data['status'] > 0 )
         this.msn = data['mensaje'];
       else{
-        var user : User = new User(this.username, this.shownName);  
-        this.userService.setUserLoggedIn(user);
-        this.principal.updateLogin();
+        this.principal.externalLogin(this.username, this.password);
         this.router.navigate(['']);
       }
     });

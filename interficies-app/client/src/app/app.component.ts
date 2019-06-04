@@ -47,6 +47,12 @@ export class AppComponent {
     });
   }
 
+  externalLogin(user, pass) {
+    this.username = user;
+    this.password = pass;
+    this.login();
+  }
+
   logout(){
     this.userService.setUserLoggedOut();
     this.loggedUser = null;
