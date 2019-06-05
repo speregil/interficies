@@ -89,6 +89,14 @@ export class AppComponent {
       return "";
   }
 
+  getPoints() {
+    if(this.loggedUser) {
+      return this.loggedUser.points;
+    }
+    else
+      return "";
+  }
+
   updateLogin() {
     this.loggedUser = this.userService.getUserLoggedIn();
 
