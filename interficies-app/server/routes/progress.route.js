@@ -23,4 +23,13 @@ router.get('/:username', function(req, res, next) {
     });
 });
 
+router.post('/achivement', function(req, res, next) {
+    controller.addAchivement(req, function (err) {
+        if(err)
+            res.json({status : 1, mensaje : err});
+        else
+            res.json({status : 0, mensaje : ""});
+    });
+});
+
 module.exports = router;

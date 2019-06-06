@@ -25,4 +25,13 @@ controller.getProgress = function(user, callback) {
     });
 }
 
+controller.addAchivement = function(req, callback) {
+    service.addAchivement(req.body.user, req.body.achivementID, function (err){
+        if(err) 
+            callback(err);
+        else
+            callback(null);
+    });
+}
+
 module.exports = controller;
