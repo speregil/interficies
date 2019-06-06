@@ -27,10 +27,13 @@ controller.getProgress = function(user, callback) {
 
 controller.addAchivement = function(req, callback) {
     service.addAchivement(req.body.user, req.body.achivementID, function (err){
-        if(err) 
-            callback(err);
-        else
-            callback(null);
+        callback(err);
+    });
+}
+
+controller.getAchivements = function(user, callback) {
+    service.getAchivements (user, function (err, achivements){
+        callback(err, achivements);
     });
 }
 

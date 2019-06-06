@@ -23,6 +23,15 @@ router.get('/:username', function(req, res, next) {
     });
 });
 
+router.get('/achivements/:username', function(req, res, next) {
+    controller.getAchivements(req.params.username, function(err, achivements){
+        if(err)
+            res.json({status : 1, mensaje : err, list : []});
+        else
+            res.json({status : 0, mensaje: "", list : achivements});
+    });
+});
+
 router.post('/achivement', function(req, res, next) {
     controller.addAchivement(req, function (err) {
         if(err)
