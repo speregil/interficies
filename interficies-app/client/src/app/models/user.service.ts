@@ -54,4 +54,8 @@ export class UserService {
   getProgressProfile(user: string) {
     return this.http.get<{}>('http://' + this.host + '/progress/' + user);
   }
+
+  getAchivements(user: string) {
+    return this.http.get<{}>('http://' + this.host + '/progress/achivements/' + user);
+  }
 }

@@ -62,14 +62,12 @@ service.getAchivements = function(user, callback) {
                     var achivements = profile[0].achivements;
                     for ( achivement of achivements ) {
                         check++;
-                        console.log(check);
                         Achivement.find({_id: achivement}, function(err, object) {
                             if(err)
                                 callback ("No fue posible recuperar todos los logros", []);
                             else {
-                                achivementList.push(object);
+                                achivementList.push(object[0]);
                                 check--;
-                                console.log(check);
                                 if(check <= 0) {
                                     connection.disconnect();
                                     callback(null, achivementList);

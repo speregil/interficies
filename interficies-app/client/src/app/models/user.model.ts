@@ -4,14 +4,14 @@ export class User {
     shownName: string;
     currentRol: string;
     level: string;
-    points: number;
+    achivements: [];
 
     
-    constructor ( u : string, n : string, r : string, l : string, p: number) {
+    constructor ( u : string, n : string, r : string, l : string, a: []) {
         this.username = u;
         this.shownName = n;
         this.currentRol = r;
         this.level = l;
-        this.points = p;
+        this.achivements = a;
     }
 }

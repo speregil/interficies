@@ -7,15 +7,15 @@
       <a routerLink ="/creditos" class="w3-bar-item w3-button">Creditos</a>
       <a routerLink ="/instrucciones" class="w3-bar-item w3-button">Instrucciones</a>
       <a *ngIf="isLogged()==false" routerLink="/registro" class="w3-bar-item w3-button">Registrarse</a>
-      <input *ngIf="isLogged()" type="button" class="w3-bar-item w3-button" value="Salir" (click)="logout()">
       <input *ngIf="isLogged()==false" type="button" class="w3-bar-item w3-button" value="Iniciar Sesión" (click)="login()"> 
       <input *ngIf="isLogged()==false" [(ngModel)]="password" type="password"  class="w3-bar-item" placeholder="Contraseña">
       <input *ngIf="isLogged()==false" [(ngModel)]="username" type="text"  class="w3-bar-item" placeholder="Correo">
       <div *ngIf="isLogged()" class="w3-bar-item">
         <span>Rol: {{getCurrentRol()}}</span>
         <span>Nivel: {{getLevel()}}</span>
-        <span>Puntos: {{getPoints()}}</span>
         <span >Bienvenido {{getShownName()}}</span>
+        <input type="button" class="w3-bar-item w3-button" value="Salir" (click)="logout()">
+        <span><a routerLink ="/logros" class="w3-bar-item w3-button">Logros</a></span>     
       </div>
     </div>
   </div>

@@ -34,7 +34,7 @@ export class AppComponent {
         var userModel = data["data"];
         this.userService.getProgressProfile(userModel["username"]).subscribe(progress => {
           var progressModel = progress["progOb"];
-          var user : User = new User(this.username, userModel["shownName"], progressModel["currentRol"], progressModel["level"], progressModel["points"]);        
+          var user : User = new User(this.username, userModel["shownName"], progressModel["currentRol"], progressModel["level"], progressModel["achivements"]);        
           this.userService.setUserLoggedIn(user);
           this.loggedUser = this.userService.getUserLoggedIn();
 
@@ -74,7 +74,6 @@ export class AppComponent {
 
   getCurrentRol(){
     if(this.loggedUser) {
-      console.log(this.loggedUser.currentRol);
       return this.loggedUser.currentRol;
     }
     else

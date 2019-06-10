@@ -8,6 +8,7 @@ import { RolesComponent } from './principal/roles.component';
 import { CreditosComponent } from './principal/creditos/creditos.component';
 import { InstruccionesComponent } from './principal/instrucciones/instrucciones.component';
 import { ComicComponent } from './principal/comic/comic.component';
+import { LogrosComponent } from './principal/logros/logros.component';
 import { RemediacionesComponent } from './remediaciones/remediaciones.component';
 import { ArqueologiaComponent } from './arqueologia/arqueologia.component';
 import { InteraccionesComponent } from './interacciones/interacciones.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'creditos', component: CreditosComponent },
   { path: 'instrucciones', component: InstruccionesComponent },
   { path: 'comic', component: ComicComponent },
+  { path: 'logros', component: LogrosComponent },
   { path: 'remediaciones', component: RemediacionesComponent },
   { path: 'arqueologia', component: ArqueologiaComponent },
   { path: 'interacciones', component: InteraccionesComponent },

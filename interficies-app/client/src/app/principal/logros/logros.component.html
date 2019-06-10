@@ -1,0 +1,9 @@
+<div class="main-container">
+    <h1>LOGROS</h1>
+    <p>Puntos totales: {{calcularPuntos()}}</p>
+    <div>
+        <div *ngFor="let achivement of achivements">
+            <p>{{achivement.text}}</p>
+        </div>
+    </div>
+</div>
