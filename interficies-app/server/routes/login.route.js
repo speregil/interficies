@@ -1,25 +1,34 @@
 /**
- * Enrutador principal para todos los componentes del portal
+ * Enrutador para el API de Login de la aplicación
  */
 
  //-------------------------------------------------------------------------------------
  // Requerimientos
  //-------------------------------------------------------------------------------------
 
-var express = require('express');
-var controller = require('../controllers/login.controller');
-var router = express.Router();
+var express = require('express');                                   // Libreria base de express
+var controller = require('../controllers/login.controller');        // Controlador del API                                
 
 //--------------------------------------------------------------------------------------
 // Enrutamientos
 //--------------------------------------------------------------------------------------
 
+var router = express.Router();      // Enrutador a exportar
+
+/**
+* Operación de registro de un nuevo usuario
+* params: usuario, password, nombre a mostrar. Encriptados en el cuerpo
+*/
 router.post('/register', function(req, res, next) {
     controller.register(req, function(stat, msn, user){
         res.json({status : stat, mensaje : msn, data : user});
     });
 });
 
+/**
+ * Operación para verificación de login y retorno de la info del usuario registrado
+ * params: usuario, password. Encriptados en el cuerpo
+ */
 router.post('/login', function(req, res, next) {
     controller.login(req, function(err, isMatch, user){
         if(err)

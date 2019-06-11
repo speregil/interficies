@@ -15,8 +15,8 @@ var cors = require('cors');                    // Libreria para manejar el proto
 // Rutas
 //---------------------------------------------------------------------------------------
 
-var login = require('./routes/login.route');
-var progress = require('./routes/progress.route');
+var login = require('./routes/login.route');            //API para el manejo de login y la información del usuario
+var progress = require('./routes/progress.route');      // API para guardar y recuperar la infromación asociada al progreso del usuario en el juego
 
 //---------------------------------------------------------------------------------------
 // Servidor

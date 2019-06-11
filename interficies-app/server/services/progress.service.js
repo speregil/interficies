@@ -1,10 +1,26 @@
-var connection = require('./connection.service');
-var Progress = require('./models/progress.model');
-var User = require('./models/user.model');
-var Achivement = require('./models/achivement.model');
+/**
+ * Servicio para manejar el progreso en el juego del usuario
+ */
+
+ //------------------------------------------------------------------------------------------
+ // Requerimientos
+ //------------------------------------------------------------------------------------------
+
+var connection = require('./connection.service');        // Conexión con la base de datos
+var Progress = require('./models/progress.model');       // Modelo del progreso
+var User = require('./models/user.model');               // Modelo del usuario
+var Achivement = require('./models/achivement.model');   // Modelo del logro
+
+//-------------------------------------------------------------------------------------------
+// Servicio
+//-------------------------------------------------------------------------------------------
 
 var service = {};
 
+/**
+ * Crea un nuevo modelo de progreso aasociado al usuario cuyo ID entra por parametro
+ * userID ID en al base de datos del usuario al que se le va asociar el perfil de progreso
+ */
 service.createProgressProfile = function(userID, callback) {
     var prof = new Progress();
     prof.userID = userID;
@@ -22,6 +38,10 @@ service.createProgressProfile = function(userID, callback) {
     });
 }
 
+/**
+ * Retorna el perfil de progreso del usuario cuyo username entra por parametro
+ * user Nombre de usuario cuyo perfil de progreso se desea recuperar
+ */
 service.getProfile = function(user, callback) {
     connection.connect();
     User.find({username: user}, function(err, search){
@@ -49,6 +69,10 @@ service.getProfile = function(user, callback) {
     });
 }
 
+/**
+ * Retorna una lista con todos los logros del usuario cuyo username entra por parametro
+ * user Nombre de usuario cuyos logros se desean recuperar
+ */
 service.getAchivements = function(user, callback) {
     connection.connect();
     var achivementList = [];
@@ -81,6 +105,11 @@ service.getAchivements = function(user, callback) {
     });
 }
 
+/**
+ * Asigna el achivmete cuyo id entra por parametro al usuario cuyo username entra por parametro
+ * user Nombre de usuario al que se le desea agregar el nuevo logro
+ * achivementID ID de la base de datos del logro que se desea agregar
+ */
 service.addAchivement = function (user, achivementID, callback) {
     connection.connect();
     User.find({username: user}, function(err, search){

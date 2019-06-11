@@ -1,8 +1,22 @@
-var mongoose = require('mongoose');
+/**
+ * Servicio para la conexión con MongoDB usando la libreria Mongoose
+ */
+
+ //------------------------------------------------------------------------------------------
+ // Requerimientos
+ //------------------------------------------------------------------------------------------
+
+var mongoose = require('mongoose');   // Libreria Mongoose
+
+//-------------------------------------------------------------------------------------------
+// Servicio
+//-------------------------------------------------------------------------------------------
 
 var service = {};
 
-// Conecta a una base MongoDB haciendo uso de Mongoose
+/**
+ * Conecta a una base MongoDB haciendo uso de Mongoose
+*/
 service.connect = function(){
     mongoose.connect('mongodb://localhost/interficiesDB', {useNewUrlParser: true});
     var db = mongoose.connection;
@@ -15,7 +29,9 @@ service.connect = function(){
     return db;
 }
 
-// Elimina la conexión actual de mongoose
+/**
+ * Elimina la conexión actual de mongoose
+ */
 service.disconnect = function(){
     mongoose.disconnect();
 }

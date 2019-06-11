@@ -58,4 +58,19 @@ export class UserService {
   getAchivements(user: string) {
     return this.http.get<{}>('http://' + this.host + '/progress/achivements/' + user);
   }
+
+  setAchivement(pUser: string, achivement: string) {
+    return this.http.post<{}>('http://' + this.host + '/progress/achivement', {user : pUser, achivementID : achivement});
+  }
+
+  checkUserAchivements(user, id) : boolean {
+    var achivements = user.achivements;
+    return achivements.includes(id);
+  }
+
+  localUpdateAchivemets(user, id) {
+    user.achivements.push(id);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    console.log(JSON.parse(localStorage.getItem('currentUser')));
+  }
 }
