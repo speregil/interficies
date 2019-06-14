@@ -37,4 +37,10 @@ controller.getAchivements = function(user, callback) {
     });
 }
 
+controller.getAchivementList = function(callback) {
+    service.getAchivementList(function (err, achivements){
+        callback(err, achivements);
+    });
+}
+
 module.exports = controller;

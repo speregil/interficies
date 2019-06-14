@@ -106,6 +106,18 @@ service.getAchivements = function(user, callback) {
 }
 
 /**
+ * Retorna una lista con todos los logros registrados en la base de datos
+ */
+service.getAchivementList = function(callback) {
+    Achivement.find({}, function(err, response){
+        if(err)
+            callback(err, []);
+        else
+            callback(null, response);
+    })
+}
+
+/**
  * Asigna el achivmete cuyo id entra por parametro al usuario cuyo username entra por parametro
  * user Nombre de usuario al que se le desea agregar el nuevo logro
  * achivementID ID de la base de datos del logro que se desea agregar

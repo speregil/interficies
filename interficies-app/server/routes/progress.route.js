@@ -28,6 +28,18 @@ router.get('/:username', function(req, res, next) {
 });
 
 /**
+ * Retorna una lista con todos los logros registrados en la base de datos
+ */
+router.get('/achivements', function(req, res, next){
+    controller.getAchivementList(function(err, achivements){
+        if(err)
+            res.json({status : 1, mensaje : err, list : []});
+        else
+            res.json({status : 0, mensaje: "", list : achivements});
+    });
+});
+
+/**
  * Returna una lista de objetos con la información de todos los logros conseguidos por el usuario cuyo
  * username entra por parametro
  */
