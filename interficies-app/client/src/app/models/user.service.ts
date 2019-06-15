@@ -8,6 +8,7 @@ export class UserService {
   private isUserLoggedIn;
   private currentInitComic;
   private currentLastComic;
+  private achivementList;
   
   host = 'localhost:3100';
 
@@ -15,6 +16,20 @@ export class UserService {
     this.isUserLoggedIn = false;
     this.currentInitComic = 1;
     this.currentLastComic = 1;
+    this.getAchivementList().subscribe(response => this.achivementList = response['list']);
+  }
+
+  getAchivementList() {
+    return this.http.get<{}>('http://' + this.host + '/progress/list');
+  }
+
+  getAchivementID(text:string) {
+    for(var achivement of this.achivementList) {
+      console.log(achivement['text']);
+      if(achivement['text'] === text)
+        return achivement['_id'];
+    }
+    return null;
   }
 
   setUserLoggedIn(user:User) {
@@ -52,7 +67,7 @@ export class UserService {
   }
 
   getProgressProfile(user: string) {
-    return this.http.get<{}>('http://' + this.host + '/progress/' + user);
+    return this.http.get<{}>('http://' + this.host + '/progress/profile/' + user);
   }
 
   getAchivements(user: string) {

@@ -18,7 +18,7 @@ var router = express.Router();
 /**
  * Retorna un objeto con toda la información del progreso del usuario cuyo username entra por parametro
  */
-router.get('/:username', function(req, res, next) {
+router.get('/profile/:username', function(req, res, next) {
     controller.getProgress(req.params.username, function(status, err, prog){
         if(status > 0)
             res.json({status : 1, mensaje : err, progOb : null});
@@ -30,7 +30,7 @@ router.get('/:username', function(req, res, next) {
 /**
  * Retorna una lista con todos los logros registrados en la base de datos
  */
-router.get('/achivements', function(req, res, next){
+router.get('/list', function(req, res, next){
     controller.getAchivementList(function(err, achivements){
         if(err)
             res.json({status : 1, mensaje : err, list : []});

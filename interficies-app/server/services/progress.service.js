@@ -109,7 +109,9 @@ service.getAchivements = function(user, callback) {
  * Retorna una lista con todos los logros registrados en la base de datos
  */
 service.getAchivementList = function(callback) {
+    connection.connect();
     Achivement.find({}, function(err, response){
+        connection.disconnect();
         if(err)
             callback(err, []);
         else

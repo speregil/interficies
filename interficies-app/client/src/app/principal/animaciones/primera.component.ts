@@ -10,30 +10,38 @@ import { UserService } from '../../models/user.service';
 
 export class PrimeraAnimacionComponent {
   
-  achivementID = '5cf94d51fdd3290d8cb048dc';
+  achivement = 'Viste la animacion 1';
 
   constructor(private userService: UserService,  private router: Router) {}
 
   onContinue() {
     if(this.userService.isUserLogged()) {
       var user = this.userService.getUserLoggedIn();
-      if(!this.userService.checkUserAchivements(user, this.achivementID)) {
-        this.userService.setAchivement(user.username, this.achivementID).subscribe(response => {
-          if(response["status"] == 0) {
-            this.userService.localUpdateAchivemets(user, this.achivementID);
-            alert('Logro conseguido: Ver la animación 1');
-          }
-          else
-            alert('Problema con la base de datos');
+      var achivementID = this.userService.getAchivementID(this.achivement);
+      console.log(achivementID);
+      if(achivementID) {
+        if(!this.userService.checkUserAchivements(user, achivementID)) {
+          this.userService.setAchivement(user.username, achivementID).subscribe(response => {
+            if(response["status"] == 0) {
+              this.userService.localUpdateAchivemets(user, achivementID);
+              alert('Logro conseguido: ' + this.achivement);
+            }
+            else
+              alert('Problema con la base de datos: No fue posible desbloquear el logro');
         
+            this.setComicViewer();
+          });
+        }
+        else
           this.setComicViewer();
-        });
       }
       else
         this.setComicViewer();
     }
-    else
+    else {
+      alert('Problema con la base de datos: El logro no existe');
       this.setComicViewer();
+    }
   }
 
   private setComicViewer() {
