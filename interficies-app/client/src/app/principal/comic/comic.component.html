@@ -3,6 +3,6 @@
         <div *ngFor="let i of comicArray">
             <img src="assets/static/comic/comic-{{i}}.jpeg" class="w3-image">
         </div>
-        <a routerLink = "/roles">Continuar</a>
+        <button (click)="onContinue()">Continuar</button>
     </div>
 </div>

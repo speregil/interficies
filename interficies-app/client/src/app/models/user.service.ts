@@ -25,7 +25,6 @@ export class UserService {
 
   getAchivementID(text:string) {
     for(var achivement of this.achivementList) {
-      console.log(achivement['text']);
       if(achivement['text'] === text)
         return achivement['_id'];
     }
