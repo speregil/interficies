@@ -43,10 +43,8 @@ export class ComicComponent{
     if(this.userService.isUserLogged()) {
       var user = this.userService.getUserLoggedIn();
       var achivementText = "Leiste el comic " + achivementNum;
-      console.log(achivementText);
       var achivementID = this.userService.getAchivementID(achivementText);
       if(achivementID) {
-        console.log("Asignando logro: " + achivementID);
         if(!this.userService.checkUserAchivements(user, achivementID)) {
           this.userService.setAchivement(user.username, achivementID).subscribe(response => {
             if(response["status"] == 0) {
@@ -58,6 +56,9 @@ export class ComicComponent{
               alert('Problema con la base de datos: No fue posible desbloquear el logro');
               this.setRoute(achivementNum);
           });
+        }
+        else {
+          this.setRoute(achivementNum);
         }
       }
     }

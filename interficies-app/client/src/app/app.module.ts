@@ -13,7 +13,7 @@ import { ComicComponent } from './principal/comic/comic.component';
 import { LogrosComponent } from './principal/logros/logros.component';
 import { RemediacionesComponent } from './remediaciones/remediaciones.component';
 import { ArqueologiaComponent } from './arqueologia/arqueologia.component';
-import { InteraccionesComponent } from './interacciones/interacciones.component';
+import { MainFuturologoComponent } from './futurologo/mainFuturologo.component';
 import { ExpansionesComponent } from './expansiones/expansiones.component';
 import { DebatesExpansiones } from './expansiones/debates/debates.expansiones';
 import { JuegoExpansiones } from './expansiones/juego/juego.expansiones';
@@ -21,6 +21,7 @@ import { NarratonesExpansiones } from './expansiones/narratones/narratones.expan
 import { AppRoutingModule } from './/app-routing.module';
 
 import { PrimeraAnimacionComponent } from './principal/animaciones/primera.component';
+import { IntroFuturologoComponent } from './principal/animaciones/introFuturologo.component';
 
 import { RegistroService } from './principal/registro/registro.service';
 import { UserService } from './models/user.service';
@@ -37,12 +38,13 @@ import { UserService } from './models/user.service';
     LogrosComponent,
     RemediacionesComponent,
     ArqueologiaComponent,
-    InteraccionesComponent,
+    MainFuturologoComponent,
     ExpansionesComponent,
     DebatesExpansiones,
     JuegoExpansiones,
     NarratonesExpansiones,
-    PrimeraAnimacionComponent
+    PrimeraAnimacionComponent,
+    IntroFuturologoComponent
   ],
   imports: [
     BrowserModule,

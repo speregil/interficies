@@ -1,11 +1,14 @@
 <div class="main-container">
   <div *ngIf="isLogged">
-    <a routerLink="/remediaciones">Arqueologo</a>
-    <a routerLink="/expansiones">Narrador</a>
-    <a routerLink="/interacciones">Futurologo</a>
+    <p>Debes elegir un rol:</p>
+    <div>
+      <button (click) = "onContinue('animaciones-futurologo')">Futurólogo</button>
+      <button>Arqueólogo</button>
+      <button>Juglar</button>
+    </div>
   </div>
 
   <div *ngIf="isLogged == false">
-    <p>Primero inicia sesión</p>
+    <p>Para continuar con la experiencia, es necesario que inicies sesión</p>
   </div>
 </div>
