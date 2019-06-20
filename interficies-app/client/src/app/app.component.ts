@@ -103,6 +103,18 @@ export class AppComponent {
     this.password = "";
   }
 
+  updateRole( role ) {
+    var currentUser = this.userService.getUserLoggedIn();
+    this.userService.updateRole(currentUser.username, role).subscribe(response => {
+      if(response["status"] > 0){
+        alert(response["mensaje"]);
+      }
+      else {
+        this.loggedUser.role = role;
+      }
+    });
+  }
+
   addLoginObserver (newObserver: LoginObserver) {
     this.loginObservers.push(newObserver);
   }

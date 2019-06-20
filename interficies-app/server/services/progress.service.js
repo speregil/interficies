@@ -137,6 +137,7 @@ service.addAchivement = function (user, achivementID, callback) {
                         }else{
                             profile[0].achivements.push(achivementID);
                             profile[0].save(function(err, prof, ver){
+                                connection.disconnect();
                                 if(err){
                                     callback("No fue posible asignar el logro");
                                 }else{
@@ -144,6 +145,38 @@ service.addAchivement = function (user, achivementID, callback) {
                                 }
                             });
                         }
+                });
+            }
+        }
+    });
+}
+
+/**
+ * Actualiza el rol del usuario cuyo username entra por parametro con el rol peovisto
+ * user Nombre del usuario
+ * role Texto del nuevo rol
+ */
+service.updateRole = function(user, role, callback){
+    connection.connect();
+    User.find({username: user}, function(err, search){
+        if(err)
+            callback("Error en la base de datos");
+        else {
+            if(search[0]) {
+                Progress.find({userID: search[0]._id}, function(err, profile) {
+                    if(err){
+                        callback("No fue posible encontrar el perfil");
+                    }else{
+                        profile[0].currentRol = role;
+                        profile[0].save(function(err, prof, ver){
+                            connection.disconnect();
+                            if(err){
+                                callback("No fue posible cambiar el rol");
+                            }else{
+                                callback(null);
+                            }
+                        });
+                    }
                 });
             }
         }

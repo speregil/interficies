@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { Router } from "@angular/router";
 import { UserService } from '../../models/user.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'animacion-instro-futurologo',
@@ -12,7 +13,16 @@ export class IntroFuturologoComponent {
   
   achivement = 'Viste las animaciones: Futurólogo';
 
-  constructor(private userService: UserService,  private router: Router) {}
+  constructor(private userService: UserService,  private router: Router, private app: AppComponent) {
+    var user = userService.getUserLoggedIn();
+    userService.updateRole(user.username, "Futurólogo").subscribe(response => {
+      if(response["status"] == 0) {
+        user.currentRol = "Futurólogo";
+        userService.setUserLoggedIn(user);
+        app.updateLogin();
+      }
+    });
+  }
 
   onContinue() {
     if(this.userService.isUserLogged()) {
@@ -32,7 +42,9 @@ export class IntroFuturologoComponent {
             }
           });
         }
-     
+        else {
+          this.router.navigate(["futurologo"]);
+        }
       }
     }
     else {

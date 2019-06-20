@@ -57,7 +57,20 @@ router.get('/achivements/:username', function(req, res, next) {
  * params: username, achivementID. Encriptados en el cuerpo
  */
 router.post('/achivement', function(req, res, next) {
-    controller.addAchivement(req, function (err) {
+    controller.addAchivement(req.body.user, req.body.achivementID, function (err) {
+        if(err)
+            res.json({status : 1, mensaje : err});
+        else
+            res.json({status : 0, mensaje : ""});
+    });
+});
+
+/**
+ * Actualiza el rol de un usuario.
+ * params: user, role. Encriptados en el cuerpo
+ */
+router.post('/role', function(req, res, next) {
+    controller.updateRole(req.body.user, req.body.role, function (err){
         if(err)
             res.json({status : 1, mensaje : err});
         else

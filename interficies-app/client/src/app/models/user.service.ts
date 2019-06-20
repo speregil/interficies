@@ -87,4 +87,8 @@ export class UserService {
     localStorage.setItem('currentUser', JSON.stringify(user));
     console.log(JSON.parse(localStorage.getItem('currentUser')));
   }
+
+  updateRole(pUser, pRole) {
+    return this.http.post<{}>('http://' + this.host + '/progress/role', {user : pUser, role : pRole});
+  }
 }
