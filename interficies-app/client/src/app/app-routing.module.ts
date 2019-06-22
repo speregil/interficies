@@ -10,7 +10,8 @@ import { InstruccionesComponent } from './principal/instrucciones/instrucciones.
 import { ComicComponent } from './principal/comic/comic.component';
 import { LogrosComponent } from './principal/logros/logros.component';
 import { RemediacionesComponent } from './remediaciones/remediaciones.component';
-import { ArqueologiaComponent } from './arqueologia/arqueologia.component';
+import { ArqueologoComponent } from './arqueologo/arqueologo.component';
+import { JuglarComponent } from './juglar/juglar.component';
 import { MainFuturologoComponent } from './futurologo/mainFuturologo.component';
 import { ExpansionesComponent } from './expansiones/expansiones.component';
 import { DebatesExpansiones } from './expansiones/debates/debates.expansiones';
@@ -20,6 +21,8 @@ import { AppComponent } from './app.component';
 
 import { PrimeraAnimacionComponent } from './principal/animaciones/primera.component';
 import { IntroFuturologoComponent } from './principal/animaciones/introFuturologo.component';
+import { IntroArqueologoComponent } from './principal/animaciones/introArqueologo.component';
+import { IntroJuglarComponent } from './principal/animaciones/introJuglar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/portada', pathMatch: 'full' },
@@ -32,8 +35,9 @@ const routes: Routes = [
   { path: 'comic', component: ComicComponent },
   { path: 'logros', component: LogrosComponent },
   { path: 'remediaciones', component: RemediacionesComponent },
-  { path: 'arqueologia', component: ArqueologiaComponent },
+  { path: 'arqueologo', component: ArqueologoComponent },
   { path: 'futurologo', component: MainFuturologoComponent },
+  { path: 'juglar', component: JuglarComponent },
   { path: 'expansiones', component: ExpansionesComponent, children: [
       { path: 'debates', component: DebatesExpansiones },
       { path: 'juego', component: JuegoExpansiones },
@@ -41,7 +45,9 @@ const routes: Routes = [
     ]
   },
   { path: 'animaciones-primera', component: PrimeraAnimacionComponent },
-  { path: 'animaciones-futurologo', component: IntroFuturologoComponent }
+  { path: 'animaciones-futurologo', component: IntroFuturologoComponent },
+  { path: 'animaciones-arqueologo', component: IntroArqueologoComponent },
+  { path: 'animaciones-juglar', component: IntroJuglarComponent }
 ];
 
 @NgModule({

@@ -12,7 +12,8 @@ import { InstruccionesComponent } from './principal/instrucciones/instrucciones.
 import { ComicComponent } from './principal/comic/comic.component';
 import { LogrosComponent } from './principal/logros/logros.component';
 import { RemediacionesComponent } from './remediaciones/remediaciones.component';
-import { ArqueologiaComponent } from './arqueologia/arqueologia.component';
+import { ArqueologoComponent } from './arqueologo/arqueologo.component';
+import { JuglarComponent } from './juglar/juglar.component';
 import { MainFuturologoComponent } from './futurologo/mainFuturologo.component';
 import { ExpansionesComponent } from './expansiones/expansiones.component';
 import { DebatesExpansiones } from './expansiones/debates/debates.expansiones';
@@ -22,6 +23,8 @@ import { AppRoutingModule } from './/app-routing.module';
 
 import { PrimeraAnimacionComponent } from './principal/animaciones/primera.component';
 import { IntroFuturologoComponent } from './principal/animaciones/introFuturologo.component';
+import { IntroArqueologoComponent } from './principal/animaciones/introArqueologo.component';
+import { IntroJuglarComponent } from './principal/animaciones/introJuglar.component';
 
 import { RegistroService } from './principal/registro/registro.service';
 import { UserService } from './models/user.service';
@@ -37,14 +40,17 @@ import { UserService } from './models/user.service';
     ComicComponent,
     LogrosComponent,
     RemediacionesComponent,
-    ArqueologiaComponent,
+    ArqueologoComponent,
+    JuglarComponent,
     MainFuturologoComponent,
     ExpansionesComponent,
     DebatesExpansiones,
     JuegoExpansiones,
     NarratonesExpansiones,
     PrimeraAnimacionComponent,
-    IntroFuturologoComponent
+    IntroFuturologoComponent,
+    IntroArqueologoComponent,
+    IntroJuglarComponent
   ],
   imports: [
     BrowserModule,
