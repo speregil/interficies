@@ -11,7 +11,7 @@ import { AppComponent } from '../../app.component';
 
 export class IntroArqueologoComponent {
   
-  achivement = 'Viste las animaciones: Arqueologo';
+  achivement = 'Viste las animaciones: Arqueólogo';
 
   constructor(private userService: UserService,  private router: Router, private app: AppComponent) {
     var user = userService.getUserLoggedIn();

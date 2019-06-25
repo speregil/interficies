@@ -42,7 +42,7 @@ export class ComicComponent{
   setAchivement(achivementNum) {
     if(this.userService.isUserLogged()) {
       var user = this.userService.getUserLoggedIn();
-      var achivementText = "Leiste el comic " + achivementNum;
+      var achivementText = "Leiste el cómic " + achivementNum;
       var achivementID = this.userService.getAchivementID(achivementText);
       if(achivementID) {
         if(!this.userService.checkUserAchivements(user, achivementID)) {

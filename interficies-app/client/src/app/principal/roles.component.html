@@ -2,9 +2,29 @@
   <div *ngIf="isLogged">
     <p>Debes elegir un rol:</p>
     <div>
-      <button (click) = "onContinue('animaciones-futurologo')">Futurólogo</button>
-      <button (click) = "onContinue('animaciones-arqueologo')">Arqueólogo</button>
-      <button (click) = "onContinue('animaciones-juglar')">Juglar</button>
+      <p>Principiante</p>
+      <div>
+        <button (click) = "onContinue('animaciones-futurologo')">Futurólogo</button>
+        <button (click) = "onContinue('animaciones-arqueologo')">Arqueólogo</button>
+        <button (click) = "onContinue('animaciones-juglar')">Juglar</button>
+      </div>
+    </div>
+
+    <div *ngIf="intermedio == true">
+      <p>Intermedio</p>
+      <div>
+        <button *ngIf="interprete == true" (click) = "onContinue('animaciones-futurologo')">Intérprete</button>
+        <button *ngIf="arqueologo == true" (click) = "onContinue('animaciones-arqueologo')">Arqueólogo</button>
+        <button *ngIf="juglar1 == true" (click) = "onContinue('animaciones-juglar')">Juglar</button>
+      </div>
+    </div>
+
+    <div *ngIf="experto == true">
+      <p>Experto</p>
+      <div>
+        <button *ngIf="periodista == true" (click) = "onContinue('animaciones-arqueologo')">Periodista</button>
+        <button *ngIf="juglar2 == true" (click) = "onContinue('animaciones-juglar')">Juglar</button>
+      </div>
     </div>
   </div>
 
