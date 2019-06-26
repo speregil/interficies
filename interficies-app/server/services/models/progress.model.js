@@ -6,7 +6,16 @@ var ProgressSchema = new Schema({
     userID: {type: String, required: true, unique: true},
     currentRol: { type: String, required: true },
     level: { type: String, required: true },
-    achivements: [String]
+    achivements: [String],
+    // Progress Flags
+    a1:Boolean,
+    j1:Boolean,
+    f:Boolean,
+    i:Boolean,
+    a2:Boolean,
+    j2:Boolean,
+    p:Boolean,
+    j3:Boolean
 });
 
 module.exports = mongoose.model('Progress', ProgressSchema);
