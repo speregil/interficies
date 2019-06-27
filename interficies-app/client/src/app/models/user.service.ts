@@ -91,4 +91,8 @@ export class UserService {
   updateRole(pUser, pRole) {
     return this.http.post<{}>('http://' + this.host + '/progress/role', {user : pUser, role : pRole});
   }
+
+  saveProgress(pUser, pFlag) {
+    return this.http.post<{}>('http://' + this.host + '/progress/save', {user : pUser, flag : pFlag});
+  }
 }

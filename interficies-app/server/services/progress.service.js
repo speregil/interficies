@@ -183,4 +183,37 @@ service.updateRole = function(user, role, callback){
     });
 }
 
+/**
+ * Activa la bandera de progreso especificadel usuario que entra por parametro
+ * user Nombre de usuario que registra el progreso
+ * flag Bandera especifica que se desea activar
+ */
+service.activateFlag = function(user, flag, callback){
+    connection.connect();
+    User.find({username: user}, function(err, search){
+        if(err)
+            callback("Error en la base de datos");
+        else {
+            if(search[0]) {
+                Progress.find({userID: search[0]._id}, function(err, profile) {
+                    if(err){
+                        callback("No fue posible encontrar el perfil");
+                    }else{
+                        var userProgress = profile[0];
+                        userProgress[flag] = true;
+                        userProgress.save(function(err, prof, ver){
+                            connection.disconnect();
+                            if(err){
+                                callback("No fue posible actualizar el progreso");
+                            }else{
+                                callback(null);
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    });
+}
+
 module.exports = service;

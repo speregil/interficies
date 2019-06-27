@@ -69,4 +69,13 @@ controller.updateRole = function(user, role, callback) {
     });
 }
 
+/**
+ * Controla el servicio para activar las banderas de progreso de un usuario
+ */
+controller.activateFlag = function(user, flag, callback) {
+    service.activateFlag(user, flag, function(err){
+        callback(err);
+    });
+}
+
 module.exports = controller;

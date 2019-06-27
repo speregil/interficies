@@ -78,4 +78,17 @@ router.post('/role', function(req, res, next) {
     });
 });
 
+/**
+ * Activa la bandera de progreso que entra por parametro al usuario específicado
+ * params: user, flag. Encriptados en el cuerpo
+ */
+router.post('/save', function(req, res, next) {
+    controller.activateFlag(req.body.user, req.body.flag, function (err){
+        if(err)
+            res.json({status : 1, mensaje : err});
+        else
+            res.json({status : 0, mensaje : ""});
+    });
+});
+
 module.exports = router;
