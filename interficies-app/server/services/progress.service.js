@@ -26,6 +26,18 @@ service.createProgressProfile = function(userID, callback) {
     prof.userID = userID;
     prof.currentRol = "Ninguno";
     prof.level = "Iniciado";
+    prof.achivements = [];
+    prof.a1 = false;
+    prof.o= false;
+    prof.l= false;
+    prof.d= false;
+    prof.j1= false;
+    prof.f= false;
+    prof.i= false;
+    prof.a2= false;
+    prof.j2= false;
+    prof.p= false;
+    prof.j3= false;
 
     connection.connect();
     prof.save(function(err, prof, ver){

@@ -9,6 +9,9 @@ var ProgressSchema = new Schema({
     achivements: [String],
     // Progress Flags
     a1:Boolean,
+    o:Boolean,
+    l:Boolean,
+    d:Boolean,
     j1:Boolean,
     f:Boolean,
     i:Boolean,

@@ -26,6 +26,8 @@ import { PrimeraAnimacionComponent } from './principal/animaciones/primera.compo
 import { IntroFuturologoComponent } from './principal/animaciones/introFuturologo.component';
 import { IntroJuglarComponent } from './principal/animaciones/introJuglar.component';
 import { IntroOraculoComponent } from './principal/animaciones/introOraculo.component';
+import { IntroLaboratorioComponent } from './principal/animaciones/introLaboratorio.component';
+import { IntroDeliberatoriumComponent } from './principal/animaciones/introDeliberatorium.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/portada', pathMatch: 'full' },
@@ -40,6 +42,8 @@ const routes: Routes = [
   { path: 'remediaciones', component: RemediacionesComponent },
   { path: 'arqueologo', component: ArqueologoComponent, children: [
       { path: 'animaciones-oraculo', component: IntroOraculoComponent },
+      { path: 'animaciones-laboratorio', component: IntroLaboratorioComponent },
+      { path: 'animaciones-deliberatorium', component: IntroDeliberatoriumComponent  },
       { path: 'oraculo', component: OraculoComponent },
       { path: 'laboratorio', component: LaboratorioComponent },
       { path: 'deliberatorium', component: DeliberatoriumComponent }

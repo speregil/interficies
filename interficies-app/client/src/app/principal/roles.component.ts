@@ -40,9 +40,9 @@ export class RolesComponent implements LoginObserver {
       this.userService.getProgressProfile(user.username).subscribe(response => {
         if(response["status"] == 0) {
           var progress = response["progOb"];
-          this.intermedio = progress["a1"] || progress["j1"];
           this.experto =  progress["j2"];
-          this.arqueologo = progress["a1"];
+          this.arqueologo = progress["o"] && progress["l"] && progress["d"];
+          this.intermedio = this.arqueologo || progress["j1"];
           this.juglar1 = progress["j1"];
           this.interprete = progress["a1"] && progress["j1"] && progress["f"];
           this.juglar2 = progress["j2"];

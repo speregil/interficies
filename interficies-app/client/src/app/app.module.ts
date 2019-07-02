@@ -27,6 +27,8 @@ import { AppRoutingModule } from './/app-routing.module';
 import { PrimeraAnimacionComponent } from './principal/animaciones/primera.component';
 import { IntroFuturologoComponent } from './principal/animaciones/introFuturologo.component';
 import { IntroOraculoComponent } from './principal/animaciones/introOraculo.component';
+import { IntroLaboratorioComponent } from './principal/animaciones/introLaboratorio.component';
+import { IntroDeliberatoriumComponent } from './principal/animaciones/introDeliberatorium.component';
 import { IntroJuglarComponent } from './principal/animaciones/introJuglar.component';
 
 import { RegistroService } from './principal/registro/registro.service';
@@ -56,6 +58,8 @@ import { UserService } from './models/user.service';
     PrimeraAnimacionComponent,
     IntroFuturologoComponent,
     IntroOraculoComponent,
+    IntroLaboratorioComponent,
+    IntroDeliberatoriumComponent,
     IntroJuglarComponent
   ],
   imports: [
