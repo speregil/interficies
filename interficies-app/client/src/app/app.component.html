@@ -1,24 +1,25 @@
-<!-- Navbar (sit on top) -->
-<div class="w3-top">
-  <div class="w3-bar w3-white w3-wide w3-padding">
-    <a routerLink = "/portada">INTERFICIES</a>
-    <!-- Float links to the right. Hide them on small screens -->
-    <div class="w3-right">
-      <a routerLink ="/creditos" class="w3-bar-item w3-button">Creditos</a>
-      <a routerLink ="/instrucciones" class="w3-bar-item w3-button">Instrucciones</a>
-      <a *ngIf="isLogged()==false" routerLink="/registro" class="w3-bar-item w3-button">Registrarse</a>
-      <input *ngIf="isLogged()==false" type="button" class="w3-bar-item w3-button" value="Iniciar Sesión" (click)="login()"> 
-      <input *ngIf="isLogged()==false" [(ngModel)]="password" type="password"  class="w3-bar-item" placeholder="Contraseña">
-      <input *ngIf="isLogged()==false" [(ngModel)]="username" type="text"  class="w3-bar-item" placeholder="Correo">
-      <div *ngIf="isLogged()" class="w3-bar-item">
-        <span>Rol: {{getCurrentRol()}}</span>
-        <span>Nivel: {{getLevel()}}</span>
-        <span >Bienvenido {{getShownName()}}</span>
-        <input type="button" class="w3-bar-item w3-button" value="Salir" (click)="logout()">
-        <span><a routerLink ="/logros" class="w3-bar-item w3-button">Logros</a></span>     
-      </div>
-    </div>
-  </div>
-</div>
+
+  <ul> 
+    <li>INTERFICIES</li>
+    <li><input type="button" class="w3-bar-item w3-button" value="Home" (click)="goHome()"></li>
+ 
+    <span class="info">
+      <li><input *ngIf="isLogged()==false" type="button" class="w3-bar-item w3-button" value="Iniciar Sesión" (click)="login()"></li>
+      <li><input *ngIf="isLogged()==false" [(ngModel)]="username" type="text"  class="w3-bar-item" placeholder="Correo"></li> 
+      <li><input *ngIf="isLogged()==false" [(ngModel)]="password" type="password"  class="w3-bar-item" placeholder="Contraseña"></li>
+      <li><a *ngIf="isLogged()==false" routerLink="/registro" class="w3-bar-item w3-button">Registrarse</a></li>
+
+      <li><a routerLink ="/creditos" class="w3-bar-item w3-button">Creditos</a></li>
+      <li><a routerLink ="/instrucciones" class="w3-bar-item w3-button">Instrucciones</a></li>
+      
+      <span *ngIf="isLogged()" class="w3-bar-item">
+        <li><span >Bienvenido {{getShownName()}}</span></li>
+        <li><span>Rol: {{getCurrentRol()}}</span></li>
+        <li><span>Nivel: {{getLevel()}}</span></li>
+        <li><span><a routerLink ="/logros" class="w3-bar-item w3-button">Logros</a></span></li> 
+        <li><input type="button" class="w3-bar-item w3-button" value="Salir" (click)="logout()"></li>
+      </span>
+    </span>
+  </ul>
 
 <router-outlet></router-outlet>
