@@ -1,8 +1,8 @@
 <div class="main-content">
     <div class="comic-container">
-        <div *ngFor="let i of comicArray">
-            <img src="assets/static/comic/comic-{{i}}.jpeg" class="w3-image">
-        </div>
+        <img src="assets/static/comic/comic-{{currentComic}}.jpeg">
+        <button (click) = "onPrev()">prev</button>
+        <button (click) = "onSig()">sig</button>
         <button (click)="onContinue()">Continuar</button>
     </div>
 </div>

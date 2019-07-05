@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {Howl, Howler} from 'howler';
 import { UserService } from '../../models/user.service';
 
 @Component({
@@ -10,20 +11,46 @@ import { UserService } from '../../models/user.service';
 
 export class ComicComponent{
   
-  comicArray: Array<Number>;
+  currentComic = "0";
+  initComic = "0";
+  lastComic = "0";
+  bgSounds = new Array();
 
   constructor(private userService: UserService, private router: Router) {
-    var initComic = this.userService.getInitComic();
-    var lastComic = this.userService.getLastComic();
-    this.comicArray = this.range(Number.parseInt(initComic), Number.parseInt(lastComic));
+    this.initComic = this.userService.getInitComic();
+    this.lastComic = this.userService.getLastComic();
+    this.currentComic = this.initComic;
   }
 
-  range(start, end): Array<Number> {
-    var ans : Array<Number> = new Array();
-    for (let i = start; i <= end; i++) {
-      ans.push(i);
+  initBgSounds(){
+    var init = Number(this.initComic);
+    var last = Number(this.lastComic);
+
+    while(init <= last) {
+      var bgSound = new Howl({
+        src: ['/assets/static/comic-soundtrack/comic-' + init + '.wav'],
+        loop: true
+      });
+      this.bgSounds.push(bgSound);
     }
-    return ans;
+  }
+
+  onSig() {
+    var current = Number(this.currentComic);
+    var last = Number(this.lastComic);
+    current++;
+    if(current <= last) {
+      this.currentComic = current + "";
+    }
+  }
+
+  onPrev() {
+    var current = Number(this.currentComic);
+    var first = Number(this.initComic);
+    current--;
+    if(current >= first) {
+      this.currentComic = current + "";
+    }
   }
 
   onContinue() {
@@ -34,6 +61,7 @@ export class ComicComponent{
         break;
       }
       default : {
+        this.setRoute(1);
         break;
       }
     }
@@ -61,6 +89,14 @@ export class ComicComponent{
           this.setRoute(achivementNum);
         }
       }
+      else {
+        console.log("Por aqui pase");
+        this.setRoute(achivementNum);
+      }
+    }
+    else {
+      console.log("Por aqui pase");
+      this.setRoute(achivementNum);
     }
   }
 
