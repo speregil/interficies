@@ -27,17 +27,12 @@ service.createProgressProfile = function(userID, callback) {
     prof.currentRol = "Ninguno";
     prof.level = "Iniciado";
     prof.achivements = [];
-    prof.a1 = false;
-    prof.o= false;
-    prof.l= false;
+    prof.j = false;
+    prof.r= false;
     prof.d= false;
-    prof.j1= false;
     prof.f= false;
     prof.i= false;
-    prof.a2= false;
-    prof.j2= false;
-    prof.p= false;
-    prof.j3= false;
+    prof.l= false;
 
     connection.connect();
     prof.save(function(err, prof, ver){
@@ -202,6 +197,7 @@ service.updateRole = function(user, role, callback){
  */
 service.activateFlag = function(user, flag, callback){
     connection.connect();
+    console.log(flag);
     User.find({username: user}, function(err, search){
         if(err)
             callback("Error en la base de datos");

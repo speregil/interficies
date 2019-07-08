@@ -4,16 +4,25 @@ import { UserService } from '../../models/user.service';
 import { AppComponent } from '../../app.component';
 
 @Component({
-  selector: 'animacion-intro-deliberatorium',
-  templateUrl: './introDeliberatorium.component.html',
+  selector: 'animacion-intro-investigador',
+  templateUrl: './introInvestigador.component.html',
   styleUrls: ['./primera.component.css']
 })
 
-export class IntroDeliberatoriumComponent {
+export class IntroInvestigadorComponent {
   
-  achivement = 'Viste las animaciones: Deliberatorium';
+  achivement = 'Viste las animaciones: Investigador';
 
-  constructor(private userService: UserService,  private router: Router, private app: AppComponent) {}
+  constructor(private userService: UserService,  private router: Router, private app: AppComponent) {
+    var user = userService.getUserLoggedIn();
+    userService.updateRole(user.username, "Investigador").subscribe(response => {
+      if(response["status"] == 0) {
+        user.currentRol = "Investigador";
+        userService.setUserLoggedIn(user);
+        app.updateLogin();
+      }
+    });
+  }
 
   onContinue() {
     if(this.userService.isUserLogged()) {
@@ -25,21 +34,21 @@ export class IntroDeliberatoriumComponent {
             if(response["status"] == 0) {
               this.userService.localUpdateAchivemets(user, achivementID);
               alert('Logro conseguido: ' + this.achivement);
-              this.router.navigate(["deliberatorium"]);
+              this.router.navigate(["investigador"]);
             }
             else {
               alert('Problema con la base de datos: No fue posible desbloquear el logro');
-              this.router.navigate(["deliberatorium"]);
+              this.router.navigate(["investigador"]);
             }
           });
         }
         else {
-          this.router.navigate(["deliberatorium"]);
+          this.router.navigate(["investigador"]);
         }
       }
     }
     else {
-        this.router.navigate(["deliberatorium"]);
+        this.router.navigate(["investigador"]);
     }
   }
 }

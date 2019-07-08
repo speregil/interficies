@@ -8,17 +8,12 @@ var ProgressSchema = new Schema({
     level: { type: String, required: true },
     achivements: [String],
     // Progress Flags
-    a1:Boolean,
-    o:Boolean,
+    j:Boolean,
+    r:Boolean,
     l:Boolean,
     d:Boolean,
-    j1:Boolean,
     f:Boolean,
-    i:Boolean,
-    a2:Boolean,
-    j2:Boolean,
-    p:Boolean,
-    j3:Boolean
+    i:Boolean
 });
 
 module.exports = mongoose.model('Progress', ProgressSchema);

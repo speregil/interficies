@@ -12,12 +12,12 @@ import { InstruccionesComponent } from './principal/instrucciones/instrucciones.
 import { ComicComponent } from './principal/comic/comic.component';
 import { LogrosComponent } from './principal/logros/logros.component';
 import { RemediacionesComponent } from './remediaciones/remediaciones.component';
-import { ArqueologoComponent } from './arqueologo/arqueologo.component';
-import { OraculoComponent } from './arqueologo/oraculo.arqueologia';
 import { LaboratorioComponent } from './arqueologo/laboratorio.arqueologia';
 import { DeliberatoriumComponent } from './arqueologo/deliberatorium.arqueologia';
 import { JuglarComponent } from './juglar/juglar.component';
 import { MainFuturologoComponent } from './futurologo/mainFuturologo.component';
+import { InvestigadorComponent } from './investigador/investigador.component';
+import { InterpreteComponent } from './interprete/interprete.component';
 import { ExpansionesComponent } from './expansiones/expansiones.component';
 import { DebatesExpansiones } from './expansiones/debates/debates.expansiones';
 import { JuegoExpansiones } from './expansiones/juego/juego.expansiones';
@@ -30,6 +30,8 @@ import { IntroOraculoComponent } from './principal/animaciones/introOraculo.comp
 import { IntroLaboratorioComponent } from './principal/animaciones/introLaboratorio.component';
 import { IntroDeliberatoriumComponent } from './principal/animaciones/introDeliberatorium.component';
 import { IntroJuglarComponent } from './principal/animaciones/introJuglar.component';
+import { IntroInvestigadorComponent } from './principal/animaciones/introInvestigador.component';
+import { IntroInterpreteComponent } from './principal/animaciones/introInterprete.component';
 
 import { RegistroService } from './principal/registro/registro.service';
 import { UserService } from './models/user.service';
@@ -45,12 +47,12 @@ import { UserService } from './models/user.service';
     ComicComponent,
     LogrosComponent,
     RemediacionesComponent,
-    ArqueologoComponent,
-    OraculoComponent,
     LaboratorioComponent,
     DeliberatoriumComponent,
     JuglarComponent,
     MainFuturologoComponent,
+    InvestigadorComponent,
+    InterpreteComponent,
     ExpansionesComponent,
     DebatesExpansiones,
     JuegoExpansiones,
@@ -60,7 +62,9 @@ import { UserService } from './models/user.service';
     IntroOraculoComponent,
     IntroLaboratorioComponent,
     IntroDeliberatoriumComponent,
-    IntroJuglarComponent
+    IntroJuglarComponent,
+    IntroInvestigadorComponent,
+    IntroInterpreteComponent
   ],
   imports: [
     BrowserModule,

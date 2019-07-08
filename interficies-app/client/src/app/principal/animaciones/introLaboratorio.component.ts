@@ -25,21 +25,21 @@ export class IntroLaboratorioComponent {
             if(response["status"] == 0) {
               this.userService.localUpdateAchivemets(user, achivementID);
               alert('Logro conseguido: ' + this.achivement);
-              this.router.navigate(["arqueologo/laboratorio"]);
+              this.router.navigate(["laboratorio"]);
             }
             else {
               alert('Problema con la base de datos: No fue posible desbloquear el logro');
-              this.router.navigate(["arqueologo/laboratorio"]);
+              this.router.navigate(["laboratorio"]);
             }
           });
         }
         else {
-          this.router.navigate(["arqueologo/laboratorio"]);
+          this.router.navigate(["laboratorio"]);
         }
       }
     }
     else {
-        this.router.navigate(["arqueologo/laboratorio"]);
+        this.router.navigate(["laboratorio"]);
     }
   }
 }

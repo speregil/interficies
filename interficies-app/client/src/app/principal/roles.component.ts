@@ -16,12 +16,7 @@ export class RolesComponent implements LoginObserver {
   achivement = "Elegiste un rol";
 
   intermedio = false;
-  interprete = false;
-  arqueologo = false;
-  juglar1 = false;
   experto = false;
-  periodista = false;
-  juglar2 = false;
 
   constructor(private userService: UserService, private principal: AppComponent, private router: Router) {
     this.isLogged = this.userService.isUserLogged();
@@ -40,13 +35,8 @@ export class RolesComponent implements LoginObserver {
       this.userService.getProgressProfile(user.username).subscribe(response => {
         if(response["status"] == 0) {
           var progress = response["progOb"];
-          this.experto =  progress["j2"];
-          this.arqueologo = progress["o"] && progress["l"] && progress["d"];
-          this.intermedio = this.arqueologo || progress["j1"];
-          this.juglar1 = progress["j1"];
-          this.interprete = progress["a1"] && progress["j1"] && progress["f"];
-          this.juglar2 = progress["j2"];
-          this.periodista = progress["i"] && progress["a2"] && progress["j2"];
+          this.intermedio = progress["f"] && progress["j"];
+          this.experto =  progress["l"] && progress["d"];
         }
       });
     }
