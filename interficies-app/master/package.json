@@ -1,5 +1,5 @@
 {
-  "name": "interficies-client",
+  "name": "interficies-master",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "^0.13.0",
     "@angular/animations": "^6.1.0",
     "@angular/common": "^6.1.0",
     "@angular/compiler": "^6.1.0",
@@ -27,7 +28,6 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.13.9",
     "@angular/cli": "~6.1.5",
     "@angular/compiler-cli": "^7.2.6",
     "@angular/language-service": "^6.1.0",
