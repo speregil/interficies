@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PortadaComponent } from './principal/portada.component';
 import { RolesComponent } from './principal/roles.component';
-import { RegistroComponent } from './principal/registro/registro.component';
 import { CreditosComponent } from './principal/creditos/creditos.component';
 import { InstruccionesComponent } from './principal/instrucciones/instrucciones.component';
 import { ComicComponent } from './principal/comic/comic.component';
@@ -41,7 +40,6 @@ import { UserService } from './models/user.service';
     AppComponent,
     PortadaComponent,
     RolesComponent,
-    RegistroComponent,
     CreditosComponent,
     InstruccionesComponent,
     ComicComponent,

@@ -1,6 +1,6 @@
 <ul>
     <li><input [(ngModel)]="username" type="text" placeholder="Usuario"></li> 
     <li><input [(ngModel)]="password" type="password" placeholder="Contraseña"></li>
-    <li><input type="button" value="Iniciar Sesión"></li>
+    <li><input type="button" (click) = "login()" value="Iniciar Sesión"></li>
     <li><a routerLink="/registro">Registrarse</a></li>
 </ul>

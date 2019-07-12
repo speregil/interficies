@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { PortadaComponent } from './principal/portada.component';
-import { RegistroComponent } from './principal/registro/registro.component';
 import { RolesComponent } from './principal/roles.component';
 import { CreditosComponent } from './principal/creditos/creditos.component';
 import { InstruccionesComponent } from './principal/instrucciones/instrucciones.component';
@@ -34,7 +32,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/portada', pathMatch: 'full' },
   { path: 'portada', component: PortadaComponent },
   { path: 'interficies', component: AppComponent },
-  { path: 'registro', component: RegistroComponent },
   { path: 'roles', component: RolesComponent },
   { path: 'creditos', component: CreditosComponent },
   { path: 'instrucciones', component: InstruccionesComponent },

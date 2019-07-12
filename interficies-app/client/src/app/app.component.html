@@ -7,7 +7,6 @@
       <li><input *ngIf="isLogged()==false" type="button" class="w3-bar-item w3-button" value="Iniciar Sesión" (click)="login()"></li>
       <li><input *ngIf="isLogged()==false" [(ngModel)]="username" type="text"  class="w3-bar-item" placeholder="Correo"></li> 
       <li><input *ngIf="isLogged()==false" [(ngModel)]="password" type="password"  class="w3-bar-item" placeholder="Contraseña"></li>
-      <li><a *ngIf="isLogged()==false" routerLink="/registro" class="w3-bar-item w3-button">Registrarse</a></li>
 
       <li><a routerLink ="/creditos" class="w3-bar-item w3-button">Creditos</a></li>
       <li><a routerLink ="/instrucciones" class="w3-bar-item w3-button">Instrucciones</a></li>

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from "@angular/router";
+import { UserService } from '../services/user.service';
+import { User } from '../services/user.model';
 
 @Component({
   selector: 'registro',
@@ -6,4 +9,30 @@ import { Component } from '@angular/core';
   styleUrls: ['./registro.component.css']
 })
 
-export class RegistroComponent { }
+export class RegistroComponent {
+
+  username = "";
+  password = "";
+  shownName = "";
+  msn = "";
+
+  constructor(private service: UserService, private router: Router){}
+
+  register(){
+    this.service.register(this.username, this.password, this.shownName).subscribe(data => {
+      if(data['status'] > 0 )
+        this.msn = data['mensaje'];
+      else{
+        this.service.login(this.username, this.password).subscribe(d => {
+          var userModel = d["data"];
+          var user : User = new User(this.username, userModel["shownName"]);        
+          this.service.setUserLoggedIn(user);
+          this.username = "";
+          this.password = "";
+          this.shownName = "";
+          this.router.navigate(['principal']);
+        });
+      }
+    });
+  }
+ }
