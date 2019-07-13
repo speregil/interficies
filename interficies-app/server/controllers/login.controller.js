@@ -26,4 +26,10 @@ controller.login = function(req, callback){
     });
 }
 
+controller.getParticipants = function(callback){
+    service.getParticipants(function(err, participants){
+        callback(err, participants);
+    });
+}
+
 module.exports = controller;

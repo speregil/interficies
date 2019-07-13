@@ -38,4 +38,13 @@ router.post('/login', function(req, res, next) {
     });
 });
 
+/**
+ * Operacion para obtener la lista de todos los participantes en BD
+ */
+router.get('/participantes', function(req, res, next) {
+    controller.getParticipants(function(err, participants){
+        res.json({mensaje: err, list: participants});
+    });
+});
+
 module.exports = router;

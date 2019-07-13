@@ -1,0 +1,8 @@
+<div>
+    <h3>Registrar un nuevo participante</h3>
+    <input [(ngModel)]="username" type="text" placeholder="Usuario">
+    <input [(ngModel)]="password" type="password" placeholder="Clave">
+    <input [(ngModel)]="shownName" type="text" placeholder="Nombre a mostrar">
+    <p>{{msn}}</p>
+    <input type="button" (click) = "register()" value="Registrarse">
+</div>

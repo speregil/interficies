@@ -17,6 +17,10 @@ export class UserService {
         return this.http.post<{}>('http://' + this.host + '/register/', {user : pUser, password : pPassword, shownName : pName, admin: true});
     }
 
+    registerParticipant(pUser : string, pPassword : string, pName : String){
+        return this.http.post<{}>('http://' + this.host + '/register/', {user : pUser, password : pPassword, shownName : pName, admin: false});
+    }
+
     login(pUser : string, pPassword : string){
         return this.http.post<{}>('http://' + this.host + '/login/', {user : pUser, password : pPassword, admin: true});
     }

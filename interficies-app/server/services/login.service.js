@@ -83,4 +83,15 @@ service.login = function(user, password, admin, callback){
     });  
 }
 
+/**
+ * Retorna una lista de todos los participantes registrados en la base de datos
+ */
+service.getParticipants = function(callback){
+    connection.connect();
+    User.find({admin: false}, function(err, search){
+        connection.disconnect();
+        callback(err, search);
+    });
+}
+
 module.exports = service;
