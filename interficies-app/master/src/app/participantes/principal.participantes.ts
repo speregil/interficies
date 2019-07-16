@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ParticipantsService } from '../services/participants.service';
 
 @Component({
   selector: 'principal-participantes',
@@ -8,5 +9,23 @@ import { Component } from '@angular/core';
 
 export class PrincipalParticipantesComponent {
 
-    constructor(){}
+    participantes = new Array();
+    mensaje = "Cargando la lista";
+
+    constructor(private service: ParticipantsService){
+      this.getParticipantes();
+    }
+
+    getParticipantes() {
+      this.service.getParticipants().subscribe(data => {
+        this.participantes = data["list"];
+        this.mensaje = data['mensaje'];
+      });
+    }
+
+    emision(mensaje){
+      if(mensaje) {
+          this.getParticipantes();
+      }
+    }
 } 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ParticipantsService } from '../services/participants.service';
 import { User } from '../services/user.model';
 
@@ -10,15 +10,8 @@ import { User } from '../services/user.model';
 
 export class ListaParticipantesComponent {
 
-    participantes = new Array();
-    msn = "";
+    @Input() participantes : Array<User>;
+    @Input() msn: String;
 
-    constructor(private service: ParticipantsService){
-        this.service.getParticipants().subscribe(data => {
-            if(data["mensaje"])
-                this.msn = data["mensaje"];
-                
-            this.participantes = data["list"];
-        });
-    }
+    constructor(private service: ParticipantsService){}
 } 

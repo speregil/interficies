@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output} from '@angular/core';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -14,6 +14,8 @@ export class RegistroParticipantesComponent {
     shownName = "";
     msn = "";
 
+    @Output() emitter = new EventEmitter<string>();
+
     constructor(private service: UserService){}
 
     register(){
@@ -25,6 +27,7 @@ export class RegistroParticipantesComponent {
                 this.msn = "Registro Exitoso";
 
             this.clean();
+            this.emitter.emit("registro");
         });
     }
 
