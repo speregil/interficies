@@ -38,6 +38,15 @@ router.post('/login', function(req, res, next) {
     });
 });
 
+router.post('/unregister', function(req, res, next){
+    controller.unregister(req, function(err){
+        if(err)
+            res.json({status : 1, mensaje : err});
+        else
+            res.json({status : 0, mensaje: ""});
+    });
+});
+
 /**
  * Operacion para obtener la lista de todos los participantes en BD
  */

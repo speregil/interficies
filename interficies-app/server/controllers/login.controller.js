@@ -20,6 +20,11 @@ controller.register = function(req, callback){
     });
 }
 
+controller.unregister = function(req, callback){
+    service.unregister(req.body.user, function(err){
+        callback(err);
+    });
+}
 controller.login = function(req, callback){
     service.login(req.body.user, req.body.password, req.body.admin, function(err, isMatch, user){
         callback(err, isMatch, user);

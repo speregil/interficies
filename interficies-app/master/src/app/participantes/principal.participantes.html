@@ -1,4 +1,4 @@
 <a routerLink="/principal">Volver</a>
 <registro-participantes (emitter)="emision($event)"></registro-participantes>
 -----------------------------------------------------------------------------------------------------------
-<lista-participantes [participantes] = 'participantes' [msn] = 'mensaje'></lista-participantes>
+<lista-participantes [participantes] = 'participantes' [msn] = 'mensaje' (emitter)="emision($event)"></lista-participantes>

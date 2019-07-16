@@ -1,4 +1,4 @@
 <p>{{msn}}</p>
 <ul>
-    <li *ngFor="let p of participantes">{{p.shownName}}</li>    
+    <li *ngFor="let p of participantes"><span>{{p.shownName}}</span> <span><button (click) = "unregister(p.username)">X</button></span></li>    
 </ul>

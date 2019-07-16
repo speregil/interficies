@@ -6,10 +6,11 @@
  // Requerimientos
  //---------------------------------------------------------------------------------------------------
 
-var connection = require('./connection.service');   // Servicio de conexión con Mongo
-var bcrypt = require('bcrypt');                     // Libreria de encriptamiento
-var User = require('./models/user.model');          // Modelo del usuario
-var Progress = require('./progress.service');       // Modelo del progreso
+var connection = require('./connection.service');       // Servicio de conexión con Mongo
+var bcrypt = require('bcrypt');                         // Libreria de encriptamiento
+var User = require('./models/user.model');              // Modelo del usuario
+var Progress = require('./models/progress.model');      // Modelo del usuario
+var ProgressService = require('./progress.service');    // Servicio del progreso
 
 //-----------------------------------------------------------------------------------------------------
 // Servicio
@@ -38,7 +39,7 @@ service.register = function(username, password, shownName, admin, callback){
             }
             else{
                 if(!admin) {
-                    Progress.createProgressProfile(user._id, function(status, err, prof){
+                    ProgressService.createProgressProfile(user._id, function(status, err, prof){
                         connection.disconnect();
                         if(status > 0)
                             callback(1, err, user);
@@ -91,6 +92,52 @@ service.getParticipants = function(callback){
     User.find({admin: false}, function(err, search){
         connection.disconnect();
         callback(err, search);
+    });
+}
+
+service.unregister = function(user, callback) {
+    connection.connect();
+    User.find({username: user}, function(err, search){
+        if(err)
+            callback(err);
+        else {
+            if(search[0]) {
+                isDeleteable(search[0]._id, function(deleteable){
+                    if(deleteable) {
+                        User.findOneAndRemove({_id: search[0]._id}, (err) => {
+                            if(err)
+                                callback(err);
+                            else {
+                                Progress.findOneAndRemove({userID: search[0]._id}, (err) => {
+                                    if(err)
+                                        callback(err);
+                                    else
+                                        callback(null);
+                                });
+                            }
+                        });
+                    }
+                    else{
+                        callback("El usuario no puede ser borrado: Ya hay progreso registrado");
+                    }
+                });
+            }
+        }
+    });
+}
+
+/**
+ * Determina si el usuario que entra por parametro puede borrarse pues no tiene ningun progreso
+ * @param user Nombre de usuario que se desea verificar
+ */
+function isDeleteable(id, callback) {
+    connection.connect();
+    Progress.find({userID: id}, function(err, progress){
+        connection.disconnect();
+        if(progress[0])
+            callback(progress[0].currentRol == 'Ninguno'); 
+        else
+            callback(false);
     });
 }
 

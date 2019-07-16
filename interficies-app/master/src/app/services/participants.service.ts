@@ -14,4 +14,8 @@ export class ParticipantsService {
     getParticipants() {
         return this.http.get<{}>('http://' + this.host + '/participantes');
     }
+
+    unregisterParticipant(username) {
+        return this.http.post('http://' + this.host + '/unregister', {user: username});
+    }
 }

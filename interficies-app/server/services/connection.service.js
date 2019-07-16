@@ -22,9 +22,7 @@ service.connect = function(){
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'Error de conexion:'));
 
-    db.once('open', function() {
-         console.log("Conexion exitosa a Base de Datos");
-    });
+    db.once('open', function() {});
 
     return db;
 }
