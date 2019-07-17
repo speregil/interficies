@@ -1,0 +1,8 @@
+<p>Crear un nuevo grupo</p>
+<input type="text" [(ngModel)]="groupName" placeholder="Nombre"><button (click) = "createGroup()">Crear</button>
+<p>{{msn}}</p>
+------------------------------------------------------------------------------------------------------------------
+<h2>Mis grupos</h2>
+<ul>
+    <li *ngFor="let i of groupList">{{i.name}}</li>
+</ul>

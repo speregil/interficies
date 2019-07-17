@@ -24,4 +24,16 @@ controller.createGroup = function(groupName, masterName, callback) {
     });
 }
 
+controller.getGroups = function(masterName, callback) {
+    service.getGroups(masterName, function(err, groups){
+        callback(err, groups);
+    });
+}
+
+controller.asign = function(groupName, masterName, callback) {
+    service.asign(groupName, masterName, function(err){
+        callback(err);
+    });
+}
+
 module.exports = controller;

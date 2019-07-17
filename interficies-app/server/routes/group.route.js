@@ -21,4 +21,16 @@
      });
  });
 
+ router.post('/asign', function(req, res, next) {
+    controller.asign(req.body.groupName, req.body.userName, function(err){
+       res.json({mensaje : err});
+    });
+});
+
+router.get('/list/:mastername', function(req, res, next) {
+   controller.getGroups(req.params.mastername, function(err, groups){
+      res.json({mensaje : err, list: groups});
+   });
+});
+
  module.exports = router;

@@ -6,6 +6,7 @@ import { MasterRoutingModule } from './master-routing.module';
 
 import { UserService } from './services/user.service';
 import { ParticipantsService } from './services/participants.service';
+import { GroupService } from './services/groups.service';
 
 import { MasterComponent } from './master.component';
 import { PrincipalComponent } from './principal.component';
@@ -14,6 +15,7 @@ import { LoginComponent } from './registro/login.component';
 import { PrincipalParticipantesComponent } from './participantes/principal.participantes';
 import { RegistroParticipantesComponent } from './participantes/registro.participantes';
 import { ListaParticipantesComponent } from './participantes/lista.participantes';
+import { GroupComponent } from './grupos/grupos.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { ListaParticipantesComponent } from './participantes/lista.participantes
     LoginComponent,
     PrincipalParticipantesComponent,
     RegistroParticipantesComponent,
-    ListaParticipantesComponent 
+    ListaParticipantesComponent,
+    GroupComponent 
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { ListaParticipantesComponent } from './participantes/lista.participantes
   ],
   providers: [
     UserService,
-    ParticipantsService
+    ParticipantsService,
+    GroupService
   ],
   bootstrap: [ MasterComponent ]
 })
