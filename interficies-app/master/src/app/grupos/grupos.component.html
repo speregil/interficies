@@ -1,8 +1,21 @@
-<p>Crear un nuevo grupo</p>
+<a routerLink="/principal">Volver</a>
+<h2>Crear un nuevo grupo</h2>
 <input type="text" [(ngModel)]="groupName" placeholder="Nombre"><button (click) = "createGroup()">Crear</button>
 <p>{{msn}}</p>
 ------------------------------------------------------------------------------------------------------------------
-<h2>Mis grupos</h2>
-<ul>
-    <li *ngFor="let i of groupList">{{i.name}}</li>
-</ul>
+<h2>Manejar Grupos</h2>
+<p>{{msn2}}</p>
+<div>
+    <select>
+        <option [value]="group.name" *ngFor="let group of groupList">{{group.name}}</option>
+    </select>
+    <button>Eliminar</button>
+</div>
+
+<div>
+    <span>Participante</span>
+    <select>
+        <option [value]="group.name" *ngFor="let group of groupList">{{group.name}}</option>
+    </select>
+    <button>Asignar</button><button>Retirar</button>
+</div>

@@ -12,7 +12,9 @@ export class GroupComponent {
 
     groupName = "";
     groupList = [];
+    selectedGroup = "";
     msn = "";
+    msn2 = "";
 
     constructor(private service: GroupService, private user: UserService){
         this.getGroups();
@@ -20,9 +22,13 @@ export class GroupComponent {
 
     createGroup(){
         var master = this.user.getUserLoggedIn();
+        this.msn = "";
         if(this.groupName != ""){
             this.service.addGroup(this.groupName, master.username).subscribe(response => {
-                this.msn = response["mensaje"];
+                if(response["mensaje"])
+                    this.msn = response["mensaje"];
+                else
+                this.msn = "Registro Exitoso";
                 this.getGroups();
             });
         }
