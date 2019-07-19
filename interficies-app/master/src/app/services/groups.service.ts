@@ -18,4 +18,8 @@ export class GroupService {
     listGroups(masterName){
         return this.http.get('http://' + this.host + '/groups/list/' + masterName);
     }
+
+    listParticipants(groupName){
+        return this.http.get('http://' + this.host + '/groups/participants/' + groupName);
+    }
 }

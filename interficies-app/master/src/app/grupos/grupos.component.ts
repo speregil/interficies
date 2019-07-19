@@ -12,9 +12,11 @@ export class GroupComponent {
 
     groupName = "";
     groupList = [];
+    participantsList = [];
     selectedGroup = "";
     msn = "";
     msn2 = "";
+    msn3 = "Selecciona un grupo";
 
     constructor(private service: GroupService, private user: UserService){
         this.getGroups();
@@ -36,6 +38,22 @@ export class GroupComponent {
 
     getGroups(){
         var master = this.user.getUserLoggedIn();
-        this.service.listGroups(master.username).subscribe(response => this.groupList = response["list"]);
+        this.service.listGroups(master.username).subscribe(response => {
+            this.groupList = response["list"]
+            if(this.selectedGroup)
+                this.getParticipants();
+        });
+    }
+
+    onSelectChange(){
+        this.msn3 = "Cargando Lista de participantes";
+        this.getParticipants();
+    }
+
+    getParticipants(){
+        this.service.listParticipants(this.selectedGroup).subscribe(response => {
+            this.participantsList = response["list"]
+            this.msn3 = "";
+        });
     }
 } 

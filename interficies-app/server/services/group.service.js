@@ -59,6 +59,36 @@
     });
  }
 
+ service.getParticipants = function(groupName, callback){
+    participants = new Array();
+    check = 0;
+    connection.connect();
+    Group.find({name: groupName}, function(err, group){
+        if(err)
+            callback(err, []);
+        else if(group[0]){
+            pList = group[0].participants;
+            for ( participant of pList ) {
+                check++;
+                User.find({_id: participant}, function(err, user) {
+                    if(err)
+                        callback ("No fue posible recuperar a los participantes", []);
+                    else {
+                        participants.push(user[0]);
+                        check--;
+                        if(check <= 0) {
+                            connection.disconnect();
+                            callback(null, participants);
+                        }
+                    }
+                });
+            }
+        }
+        else
+            callback("El grupo no existe", []);
+    });
+ }
+
  service.asign = function(groupName, userName, callback){
     connection.connect();
     Group.find({name: groupName}, function(err, group){

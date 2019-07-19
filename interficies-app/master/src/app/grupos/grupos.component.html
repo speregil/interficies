@@ -6,16 +6,21 @@
 <h2>Manejar Grupos</h2>
 <p>{{msn2}}</p>
 <div>
-    <select>
+    <select [(ngModel)] = "selectedGroup" (change)="onSelectChange()">
         <option [value]="group.name" *ngFor="let group of groupList">{{group.name}}</option>
     </select>
     <button>Eliminar</button>
-</div>
 
-<div>
     <span>Participante</span>
     <select>
         <option [value]="group.name" *ngFor="let group of groupList">{{group.name}}</option>
     </select>
     <button>Asignar</button><button>Retirar</button>
+</div>
+
+<p>{{msn3}}</p>
+<div>
+    <ul>
+        <li *ngFor="let p of participantsList">{{p.shownName}}</li>
+    </ul>
 </div>

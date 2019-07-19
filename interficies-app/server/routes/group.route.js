@@ -33,4 +33,10 @@ router.get('/list/:mastername', function(req, res, next) {
    });
 });
 
+router.get('/participants/:groupname', function(req, res, next) {
+   controller.getParticipants(req.params.groupname, function(err, participants){
+      res.json({mensaje : err, list: participants});
+   });
+});
+
  module.exports = router;

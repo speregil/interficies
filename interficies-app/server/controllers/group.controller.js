@@ -30,6 +30,12 @@ controller.getGroups = function(masterName, callback) {
     });
 }
 
+controller.getParticipants = function(groupName, callback) {
+    service.getParticipants(groupName, function(err, participants){
+        callback(err, participants);
+    });
+}
+
 controller.asign = function(groupName, masterName, callback) {
     service.asign(groupName, masterName, function(err){
         callback(err);
