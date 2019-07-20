@@ -12,10 +12,10 @@
     <button>Eliminar</button>
 
     <span>Participante</span>
-    <select>
-        <option [value]="group.name" *ngFor="let group of groupList">{{group.name}}</option>
+    <select [(ngModel)] = "selectedParticipant">
+        <option [value]="p.username" *ngFor="let p of unasignedList">{{p.shownName}}</option>
     </select>
-    <button>Asignar</button><button>Retirar</button>
+    <button (click) = "asign()">Asignar</button><button>Retirar</button>
 </div>
 
 <p>{{msn3}}</p>

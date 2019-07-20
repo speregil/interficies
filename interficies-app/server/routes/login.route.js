@@ -56,4 +56,10 @@ router.get('/participantes', function(req, res, next) {
     });
 });
 
+router.get('/unasigned', function(req, res, next) {
+    controller.getUnasigned(function(err, participants){
+        res.json({mensaje: err, list: participants});
+    });
+});
+
 module.exports = router;

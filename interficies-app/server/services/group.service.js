@@ -95,17 +95,24 @@
         if(err)
             callback("Error en la base de datos");
         else if(group[0]){
-            User.find({username: userName}, function(err, user){
-                if(err)
+            User.find({username: userName}, function(error, user){
+                if(error)
                     callback("Error en la base de datos");
                 else if(user[0]){
                     group[0].participants.push(user[0]._id);
                     group[0].save(function(err, gr, ver){
-                        connection.disconnect();
                         if(err){
                             callback("No fue asignar al participantes");
                         }else{
-                            callback(null);
+                            user[0].asign = true;
+                            user[0].save(function(e, us, ver){
+                                connection.disconnect();
+                                if(e)
+                                    callback("Cuidado, usuario: " + user[0]._id + " desactualizado");
+                                else{
+                                    callback(null);
+                                }
+                            });
                         }
                     });
                 }

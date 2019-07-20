@@ -32,6 +32,7 @@ service.register = function(username, password, shownName, admin, callback){
         user.password = hash;
         user.shownName = shownName;
         user.admin = admin;
+        user.asign = false;
 
         user.save(function(err, user, ver){
             if(err){
@@ -95,6 +96,14 @@ service.getParticipants = function(callback){
     });
 }
 
+service.getUnasigned = function(callback){
+    connection.connect();
+    User.find({admin: false, asign: false}, function(err, search){
+        connection.disconnect();
+        callback(err, search);
+    });
+}
+
 service.unregister = function(user, callback) {
     connection.connect();
     User.find({username: user}, function(err, search){
@@ -109,6 +118,7 @@ service.unregister = function(user, callback) {
                                 callback(err);
                             else {
                                 Progress.findOneAndRemove({userID: search[0]._id}, (err) => {
+                                    connection.disconnect();
                                     if(err)
                                         callback(err);
                                     else

@@ -15,6 +15,10 @@ export class ParticipantsService {
         return this.http.get<{}>('http://' + this.host + '/participantes');
     }
 
+    listUnasigned() {
+        return this.http.get('http://' + this.host + '/unasigned');
+    }
+
     unregisterParticipant(username) {
         return this.http.post('http://' + this.host + '/unregister', {user: username});
     }

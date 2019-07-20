@@ -15,6 +15,10 @@ export class GroupService {
         return this.http.post('http://' + this.host + '/groups/new', {group: group, master: master});
     }
 
+    asign(group, user){
+        return this.http.post('http://' + this.host + '/groups/asign', {groupName: group, userName: user});
+    }
+
     listGroups(masterName){
         return this.http.get('http://' + this.host + '/groups/list/' + masterName);
     }

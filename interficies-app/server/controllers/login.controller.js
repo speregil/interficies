@@ -37,4 +37,10 @@ controller.getParticipants = function(callback){
     });
 }
 
+controller.getUnasigned = function(callback){
+    service.getUnasigned(function(err, participants){
+        callback(err, participants);
+    });
+}
+
 module.exports = controller;
