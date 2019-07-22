@@ -7,6 +7,7 @@ var ProgressSchema = new Schema({
     currentRol: { type: String, required: true },
     level: { type: String, required: true },
     achivements: [String],
+    avatar: {type: String, required: true},
     // Progress Flags
     j:Boolean,
     r:Boolean,

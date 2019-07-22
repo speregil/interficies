@@ -27,6 +27,7 @@ service.createProgressProfile = function(userID, callback) {
     prof.currentRol = "Ninguno";
     prof.level = "Iniciado";
     prof.achivements = [];
+    prof.avatar = "ninguno";
     prof.j = false;
     prof.r= false;
     prof.d= false;
@@ -179,6 +180,33 @@ service.updateRole = function(user, role, callback){
                             connection.disconnect();
                             if(err){
                                 callback("No fue posible cambiar el rol");
+                            }else{
+                                callback(null);
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    });
+}
+
+service.updateAvatar = function(user, avatar, callback){
+    connection.connect();
+    User.find({username: user}, function(err, search){
+        if(err)
+            callback("Error en la base de datos");
+        else {
+            if(search[0]) {
+                Progress.find({userID: search[0]._id}, function(err, profile) {
+                    if(err){
+                        callback("No fue posible encontrar el perfil");
+                    }else{
+                        profile[0].avatar = avatar;
+                        profile[0].save(function(err, prof, ver){
+                            connection.disconnect();
+                            if(err){
+                                callback("No fue posible cambiar el avatar");
                             }else{
                                 callback(null);
                             }

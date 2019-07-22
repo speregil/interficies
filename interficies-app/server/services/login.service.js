@@ -136,6 +136,29 @@ service.unregister = function(user, callback) {
     });
 }
 
+service.changePassword = function(user, password, callback){
+    connection.connect();
+    User.find({username: user}, function(err, search){
+        if(err)
+            callback("Error en la base de datos");
+        else {
+            if(search[0]){
+                bcrypt.hash(password, 10, function(err, hash) {
+                    search[0].password = hash;
+                    search[0].save(function(err, user, ver){
+                        if(err)
+                            callback("No fue posible actualizar la contraseña");
+                        else
+                            callback(null);
+                    });
+                });
+            }
+            else
+                callback("El usuario no existe");
+        }
+    });
+}
+
 /**
  * Determina si el usuario que entra por parametro puede borrarse pues no tiene ningun progreso
  * @param user Nombre de usuario que se desea verificar

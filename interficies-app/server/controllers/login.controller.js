@@ -43,4 +43,10 @@ controller.getUnasigned = function(callback){
     });
 }
 
+controller.changePassword = function(user, password, callback){
+    service.changePassword(user, password, function(err){
+        callback(err);
+    });
+}
+
 module.exports = controller;

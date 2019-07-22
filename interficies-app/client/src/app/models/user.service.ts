@@ -92,6 +92,10 @@ export class UserService {
     return this.http.post<{}>('http://' + this.host + '/progress/role', {user : pUser, role : pRole});
   }
 
+  changePassword(pUser, newPass) {
+    return this.http.post<{}>('http://' + this.host + '/changepass', {username : pUser, password : newPass});
+  }
+
   saveProgress(pUser, pFlag) {
     return this.http.post<{}>('http://' + this.host + '/progress/save', {user : pUser, flag : pFlag});
   }

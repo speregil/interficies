@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PortadaComponent } from './principal/portada.component';
 import { RolesComponent } from './principal/roles.component';
 import { CreditosComponent } from './principal/creditos/creditos.component';
+import { AjustesComponent } from './principal/registro/ajustes.component';
 import { InstruccionesComponent } from './principal/instrucciones/instrucciones.component';
 import { ComicComponent } from './principal/comic/comic.component';
 import { LogrosComponent } from './principal/logros/logros.component';
@@ -31,6 +32,7 @@ import { IntroInterpreteComponent } from './principal/animaciones/introInterpret
 const routes: Routes = [
   { path: '', redirectTo: '/portada', pathMatch: 'full' },
   { path: 'portada', component: PortadaComponent },
+  { path: 'ajustes', component: AjustesComponent },
   { path: 'interficies', component: AppComponent },
   { path: 'roles', component: RolesComponent },
   { path: 'creditos', component: CreditosComponent },

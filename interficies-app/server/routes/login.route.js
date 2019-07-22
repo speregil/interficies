@@ -62,4 +62,10 @@ router.get('/unasigned', function(req, res, next) {
     });
 });
 
+router.post('/changepass', function(req, res, next) {
+    controller.changePassword(req.body.username, req.body.password, function(err){
+        res.json({mensaje: err});
+    });
+});
+
 module.exports = router;

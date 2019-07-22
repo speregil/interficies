@@ -69,6 +69,12 @@ controller.updateRole = function(user, role, callback) {
     });
 }
 
+controller.updateAvatar = function(user, avatar, callback){
+    service.updateAvatar(user, avatar, function(err){
+        callback(err);
+    });
+}
+
 /**
  * Controla el servicio para activar las banderas de progreso de un usuario
  */
