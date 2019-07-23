@@ -218,6 +218,26 @@ service.updateAvatar = function(user, avatar, callback){
     });
 }
 
+service.getAvatar = function(user, callback){
+    connection.connect();
+    User.find({username: user}, function(err, search){
+        if(err)
+            callback("Error en la base de datos", null);
+        else {
+            if(search[0]) {
+                Progress.find({userID: search[0]._id}, function(err, profile) {
+                    connection.disconnect();
+                    if(err){
+                        callback("No fue posible encontrar el perfil", null);
+                    }else{
+                        callback(null, profile[0].avatar);
+                    }
+                });
+            }
+        }
+    });
+}
+
 /**
  * Activa la bandera de progreso especificadel usuario que entra por parametro
  * user Nombre de usuario que registra el progreso

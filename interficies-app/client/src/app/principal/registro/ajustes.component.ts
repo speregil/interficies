@@ -8,13 +8,30 @@ import { UserService } from '../../models/user.service';
 })
 export class AjustesComponent {
 
-    constructor(private userService: UserService){}
+    constructor(private userService: UserService){
+        var user = this.userService.getUserLoggedIn();
+        this.msn2 = 'Cargando datos...';
+        this.userService.getAvatar(user.username).subscribe(response => {
+            if(response["avatar"]) {
+                this.msn2 = '';
+                var seg = response["avatar"].split('-');
+                if(seg[0] == 'chico')
+                    this.changeAvatar('boy');
+                else if(seg[0] == 'chica')
+                    this.changeAvatar('girl');
+            }
+            else {
+                this.msn2 = 'No se ha seleccionado un avatar';
+            }
+        });
+    }
 
     password = "";
     confirmacion = "";
     girlSelected = "";
     boySelected = "";
     msn = "";
+    msn2 = "";
 
     changePassword(){
         if(this.password){
@@ -35,11 +52,38 @@ export class AjustesComponent {
     }
 
     onClickAvatar(option){
+        this.msn2 = "cambiando...";
         var user = this.userService.getUserLoggedIn();
         if(option == 'girl'){
             this.userService.updateAvatar(user.username, 'chica-basico').subscribe(response => {
-
+                this.msn2 = "";
+                if(response["mensaje"])
+                    this.msn2 = response["mensaje"];
+                else {
+                    this.changeAvatar(option);
+                }
             });
+        }
+        else {
+            this.userService.updateAvatar(user.username, 'chico-basico').subscribe(response => {
+                this.msn2 = "";
+                if(response["mensaje"])
+                    this.msn2 = response["mensaje"];
+                else {
+                    this.changeAvatar(option);
+                }
+            });
+        }
+    }
+
+    private changeAvatar(option){
+        if(option == 'girl'){
+            this.girlSelected = "selected";
+            this.boySelected = "";
+        }
+        else {
+            this.girlSelected = "";
+            this.boySelected = "selected";
         }
     }
 }

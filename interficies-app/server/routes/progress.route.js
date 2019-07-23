@@ -84,6 +84,12 @@ router.post('/avatar', function(req, res, next) {
     });
 });
 
+router.get('/getavatar/:username', function(req, res, next) {
+    controller.getAvatar(req.params.username, function (err, actualAvatar){
+        res.json({mensaje : err, avatar: actualAvatar});
+    });
+});
+
 /**
  * Activa la bandera de progreso que entra por parametro al usuario específicado
  * params: user, flag. Encriptados en el cuerpo

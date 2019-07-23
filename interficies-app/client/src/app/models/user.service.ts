@@ -85,7 +85,6 @@ export class UserService {
   localUpdateAchivemets(user, id) {
     user.achivements.push(id);
     localStorage.setItem('currentUser', JSON.stringify(user));
-    console.log(JSON.parse(localStorage.getItem('currentUser')));
   }
 
   updateRole(pUser, pRole) {
@@ -94,6 +93,10 @@ export class UserService {
 
   updateAvatar(pUser, pAvatar){
     return this.http.post<{}>('http://' + this.host + '/progress/avatar', {username : pUser, avatar : pAvatar});
+  }
+
+  getAvatar(pUser){
+    return this.http.get<{}>('http://' + this.host + '/progress/getavatar/' + pUser);
   }
 
   changePassword(pUser, newPass) {
