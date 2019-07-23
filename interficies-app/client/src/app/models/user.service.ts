@@ -92,6 +92,10 @@ export class UserService {
     return this.http.post<{}>('http://' + this.host + '/progress/role', {user : pUser, role : pRole});
   }
 
+  updateAvatar(pUser, pAvatar){
+    return this.http.post<{}>('http://' + this.host + '/progress/avatar', {username : pUser, avatar : pAvatar});
+  }
+
   changePassword(pUser, newPass) {
     return this.http.post<{}>('http://' + this.host + '/changepass', {username : pUser, password : newPass});
   }

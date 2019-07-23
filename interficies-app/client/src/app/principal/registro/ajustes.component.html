@@ -1,6 +1,14 @@
 <h1>Ajustes</h1>
 <div>
     <h2>Cambio de contraseña</h2>
-    <input type="password" [(ngModel)]="password"><input type="button" value="Cambiar" (click)="changePassword()">
+    <label>Nueva clave</label><input type="password" [(ngModel)]="password">
+    <label>Confirmación</label><input type="password" [(ngModel)]="confirmacion">
+    <input type="button" value="Cambiar" (click)="changePassword()">
     <p>{{msn}}</p>
+</div>
+<p>-----------------------------------------------------------------------------------------------------------</p>
+<div>
+    <h2>Cambio de Avatar</h2>
+    <img src="assets/static/avatar/chica-basico.png" [ngClass] = "girlSelected" (click)="onClickAvatar('girl')">
+    <img src="assets/static/avatar/chico-basico.png" [ngClass] = "boySelected" (click)="onClickAvatar('boy')">
 </div>
