@@ -1,21 +1,2 @@
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #ffffff;
-  }
-  
-li {
-    float: left;
-    border-right:1px solid #bbbb99;
-  }
-  
-li:last-child {
-    border-right: none;
-  }
-
-
-.info {
-    float:right;
-}
+.header {width: 100%; margin: 0px; height: 60px; padding: 3px; background-color: rgba(150, 150, 150, 0.2);}
+.home { width: 10%; height: auto; margin-left: 2%; margin-right: 15%; margin-top: 25px; font-size: large}

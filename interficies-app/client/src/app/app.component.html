@@ -1,25 +1,21 @@
-
-  <ul> 
-    <li>INTERFICIES</li>
-    <li><input type="button" class="w3-bar-item w3-button" value="Home" (click)="goHome()"></li>
+<div class='header'>
+  <button class="main-button home" (click)="goHome()">Inicio</button>
  
-    <span class="info">
-      <li><input *ngIf="isLogged()==false" type="button" class="w3-bar-item w3-button" value="Iniciar Sesión" (click)="login()"></li>
-      <li><input *ngIf="isLogged()==false" [(ngModel)]="username" type="text"  class="w3-bar-item" placeholder="Correo"></li> 
-      <li><input *ngIf="isLogged()==false" [(ngModel)]="password" type="password"  class="w3-bar-item" placeholder="Contraseña"></li>
+  <input *ngIf="isLogged()==false" [(ngModel)]="username" type="text"  class="w3-bar-item" placeholder="Correo">
+  <input *ngIf="isLogged()==false" [(ngModel)]="password" type="password"  class="w3-bar-item" placeholder="Contraseña">
+  <input *ngIf="isLogged()==false" type="button" class="w3-bar-item w3-button" value="Iniciar Sesión" (click)="login()">
 
-      <li><a routerLink ="/creditos" class="w3-bar-item w3-button">Creditos</a></li>
-      <li><a routerLink ="/instrucciones" class="w3-bar-item w3-button">Instrucciones</a></li>
-      
-      <span *ngIf="isLogged()" class="w3-bar-item">
-        <li><span >Bienvenido {{getShownName()}}</span></li>
-        <li><span>Rol: {{getCurrentRol()}}</span></li>
-        <li><span>Nivel: {{getLevel()}}</span></li>
-        <li><span><a routerLink ="/logros" class="w3-bar-item w3-button">Logros</a></span></li>
-        <li><a routerLink="/ajustes">Ajustes</a> 
-        <li><input type="button" class="w3-bar-item w3-button" value="Salir" (click)="logout()"></li>
-      </span>
-    </span>
-  </ul>
+  <span *ngIf="isLogged()" class="w3-bar-item">
+    <span >Bienvenido {{getShownName()}}</span>
+    <span>Rol: {{getCurrentRol()}}</span>
+    <span>Nivel: {{getLevel()}}</span>
+    <span><a routerLink ="/logros" class="w3-bar-item w3-button">Logros</a></span>
+    <a routerLink="/ajustes">Ajustes</a> 
+    <input type="button" class="w3-bar-item w3-button" value="Salir" (click)="logout()">
+  </span>
+
+  <a routerLink ="/creditos" class="w3-bar-item w3-button">Creditos</a>
+  <a routerLink ="/instrucciones" class="w3-bar-item w3-button">Instrucciones</a>
+</div>
 
 <router-outlet></router-outlet>
