@@ -1,1 +1,9 @@
 #portada{ background-image: url("../../assets/static/bg_portada.png"); min-height: 100vh }
+
+.portada-continuar { width: 15%; border: 2px solid white; border-radius: 15px; background-color: transparent; margin-left: 45%; margin-top: 80vh }
+.portada-continuar:hover { color: cyan; border-color: cyan }
+.portada-continuar:active{ color: black; border-color: black }
+.portada-continuar a { color: white; font-size: xx-large; font-style: bold }
+.portada-continuar a:link { text-decoration: none }
+.portada-continuar a:visited { color:white; text-decoration: none }
+.portada-continuar a:hover { color: cyan }

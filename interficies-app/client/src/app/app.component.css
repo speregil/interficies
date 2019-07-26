@@ -1,8 +1,8 @@
-.header {width: 100%; margin: 0px; height: 60px; padding: 3px; background-color: rgba(150, 150, 150, 0.2) }
+.header {width: 100%; margin: 0px; height: 60px; padding: 3px; background-image: radial-gradient(rgba(11, 96, 157, 0.4), rgba(255, 255, 255, 0.4)); position: -webkit-sticky; position: sticky; top: 0 }
 
 .home { width: 10%; height: auto; margin-left: 2%; margin-right: 10%; margin-top: 25px; font-size: large }
 
-.header-form { width: 10%; height: 50%; margin-right: 1%; margin-top: 25px; padding-left: 5px; background-color: #1b2c70; color: white; font-size: large; border: 0 }
+.header-form { width: 10%; height: 50%; margin-right: 1%; margin-top: 25px; padding-left: 5px; background-color: #29ABE2; color: white; font-size: large; border: 0 }
 .header-form::placeholder { color: white; opacity: 0.8; font-size: small }
 
 .header-option { color: white; margin-left: 2%; margin-right: 2% }
