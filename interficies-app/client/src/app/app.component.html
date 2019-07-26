@@ -1,21 +1,23 @@
 <div class='header'>
   <button class="main-button home" (click)="goHome()">Inicio</button>
  
-  <input *ngIf="isLogged()==false" [(ngModel)]="username" type="text"  class="w3-bar-item" placeholder="Correo">
-  <input *ngIf="isLogged()==false" [(ngModel)]="password" type="password"  class="w3-bar-item" placeholder="Contraseña">
-  <input *ngIf="isLogged()==false" type="button" class="w3-bar-item w3-button" value="Iniciar Sesión" (click)="login()">
+  <input *ngIf="isLogged()==false" [(ngModel)]="username" type="text"  class="header-form" placeholder="Usuario">
+  <input *ngIf="isLogged()==false" [(ngModel)]="password" type="password"  class="header-form" placeholder="Contraseña">
+  <button *ngIf="isLogged()==false" class="main-button" (click)="login()">></button>
 
-  <span *ngIf="isLogged()" class="w3-bar-item">
-    <span >Bienvenido {{getShownName()}}</span>
-    <span>Rol: {{getCurrentRol()}}</span>
-    <span>Nivel: {{getLevel()}}</span>
-    <span><a routerLink ="/logros" class="w3-bar-item w3-button">Logros</a></span>
-    <a routerLink="/ajustes">Ajustes</a> 
-    <input type="button" class="w3-bar-item w3-button" value="Salir" (click)="logout()">
+  <span *ngIf="isLogged()">
+    <span class="header-name">{{getShownName()}}</span>
+    <span class="header-info">Rol: {{getCurrentRol()}}</span>
+    <span class="header-info">Nivel: {{getLevel()}}</span>
+    <a routerLink ="/logros" class="header-option">Logros</a>
+    <a routerLink="/ajustes" class="header-option">Ajustes</a> 
+    <button class="main-button" (click)="logout()">X</button>
   </span>
 
-  <a routerLink ="/creditos" class="w3-bar-item w3-button">Creditos</a>
-  <a routerLink ="/instrucciones" class="w3-bar-item w3-button">Instrucciones</a>
+  <span class="header-nav">
+    <a routerLink ="/creditos" class="header-option">Creditos</a>
+    <a routerLink ="/instrucciones" class="header-option">Instrucciones</a>
+  </span>
 </div>
 
 <router-outlet></router-outlet>

@@ -1,2 +1,17 @@
-.header {width: 100%; margin: 0px; height: 60px; padding: 3px; background-color: rgba(150, 150, 150, 0.2);}
-.home { width: 10%; height: auto; margin-left: 2%; margin-right: 15%; margin-top: 25px; font-size: large}
+.header {width: 100%; margin: 0px; height: 60px; padding: 3px; background-color: rgba(150, 150, 150, 0.2) }
+
+.home { width: 10%; height: auto; margin-left: 2%; margin-right: 10%; margin-top: 25px; font-size: large }
+
+.header-form { width: 10%; height: 50%; margin-right: 1%; margin-top: 25px; padding-left: 5px; background-color: #1b2c70; color: white; font-size: large; border: 0 }
+.header-form::placeholder { color: white; opacity: 0.8; font-size: small }
+
+.header-option { color: white; margin-left: 2%; margin-right: 2% }
+.header-option:link { font-size: x-large; font-style: bold; color:white; text-decoration: none }
+.header-option:visited { font-size: x-large; font-style: bold; color:white; text-decoration: none }
+.header-option:hover { color: cyan }
+
+.header-name { color: white; margin-left: 2%; margin-right: 2%; font-size: x-large; font-style: bold }
+
+.header-info { color: white; margin-left: 3%; margin-right: 3%; font-size: large }
+
+.header-nav { margin-left: 13% }

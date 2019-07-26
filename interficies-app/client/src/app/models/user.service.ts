@@ -13,7 +13,10 @@ export class UserService {
   host = 'localhost:3100';
 
   constructor( private http: HttpClient ) { 
-    this.isUserLoggedIn = false;
+    if(localStorage.getItem('currentUser'))
+      this.isUserLoggedIn = true;
+    else
+      this.isUserLoggedIn = false;
     this.currentInitComic = 1;
     this.currentLastComic = 1;
     this.getAchivementList().subscribe(response => this.achivementList = response['list']);

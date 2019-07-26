@@ -28,9 +28,7 @@ export class AppComponent {
 
   constructor(private registro: RegistroService, private userService: UserService, private router: Router){
     this.loginObservers = new Array();
-    if(this.isLogged()) {
-      this.updateLogin();
-    }
+    this.updateLogin();
   }
 
 //-------------------------------------------------------------------------------------------------------------------------------
@@ -77,8 +75,10 @@ export class AppComponent {
   updateLogin() {
     this.loggedUser = this.userService.getUserLoggedIn();
 
-    this.username = "";
-    this.password = "";
+    if(this.loggedUser) {
+      this.username = "";
+      this.password = "";
+    }
   }
 
   /**
