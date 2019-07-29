@@ -15,13 +15,19 @@ export class IntroFuturologoComponent {
 
   constructor(private userService: UserService,  private router: Router, private app: AppComponent) {
     var user = userService.getUserLoggedIn();
-    userService.updateRole(user.username, "Futurólogo").subscribe(response => {
+    var nAvatar = user.currentGender + '-vidente';
+    console.log(nAvatar);
+    
+    userService.updateAvatar(user.username, nAvatar).subscribe(response => {});
+
+    userService.updateRole(user.username, "Vidente").subscribe(response => {
       if(response["status"] == 0) {
-        user.currentRol = "Futurólogo";
+        user.currentRol = "Vidente";
         userService.setUserLoggedIn(user);
         app.updateLogin();
       }
     });
+    
   }
 
   onContinue() {

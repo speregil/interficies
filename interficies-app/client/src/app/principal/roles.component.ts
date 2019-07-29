@@ -3,6 +3,7 @@ import { AppComponent } from '../app.component';
 import { Router } from "@angular/router";
 import { UserService } from '../models/user.service';
 import { LoginObserver } from '../models/loginObserver.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'roles',
@@ -14,12 +15,13 @@ export class RolesComponent implements LoginObserver {
 
   isLogged : boolean;
   achivement = "Elegiste un rol";
-  currentRol = 'none';
+  currentRol = 'cargando';
+  currentText = "";
 
   intermedio = false;
   experto = false;
 
-  constructor(private userService: UserService, private principal: AppComponent, private router: Router) {
+  constructor(private userService: UserService, private principal: AppComponent, private router: Router, private http: HttpClient) {
     this.isLogged = this.userService.isUserLogged();
     this.principal.addLoginObserver(this);
     this.showRoleProgress();
@@ -29,6 +31,7 @@ export class RolesComponent implements LoginObserver {
   notifyLogin(logged: boolean): void {
     this.isLogged = logged;
     this.showRoleProgress();
+    this.getCurrentRol();
   }
 
   showRoleProgress() {
@@ -45,13 +48,20 @@ export class RolesComponent implements LoginObserver {
   }
 
   getCurrentRol() {
-    var user = this.userService.getUserLoggedIn();
-    this.userService.getAvatar(user.username).subscribe(response => {
-      if(response['mensaje'])
-        this.currentRol = 'none';
-      else
-        this.currentRol = response['avatar'];
-    });
+    if(this.isLogged){
+      var user = this.userService.getUserLoggedIn();
+      this.userService.getAvatar(user.username).subscribe(response => {
+        console.log(response['mensaje']);
+        if(response['mensaje'])
+          this.currentRol = 'none';
+        else {
+          var resp = response['avatar'].split('-');
+          this.currentRol = response['avatar'];
+          user.currentGender = resp[0];
+          this.http.get('assets/static/avatar/' + resp[1] + '.txt', {responseType: 'text'}).subscribe(data => this.currentText = data);
+        }
+      });
+    }
   }
 
   onContinue( route ) {

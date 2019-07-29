@@ -1,32 +1,32 @@
-<div *ngIf="isLogged">
+<div *ngIf="isLogged" class="grid-container">
 
-  <div class="rol-container">
+  <div class="rol-container grid-item">
     <img src="assets/static/avatar/{{currentRol}}.png">
-    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+    <p>{{currentText}}</p>
   </div>
-    
+  
+  <div class="grid-item">
     <div>
-      <div>
-        <button (click) = "onContinue('animaciones-futurologo')">Futurólogo</button>
-        <button (click) = "onContinue('animaciones-juglar')">Juglar</button>
-      </div>
+      <button (click) = "onContinue('animaciones-futurologo')">Vidente</button>
+      <button (click) = "onContinue('animaciones-juglar')">Juglar</button>
     </div>
 
     <div *ngIf="intermedio == true">
-      <div>
-        <button (click) = "onContinue('animaciones-laboratorio')">Laboratorio</button>
-        <button (click) = "onContinue('animaciones-deliberatorium')">Deliberatorium</button>
-      </div>
+      <button (click) = "onContinue('animaciones-laboratorio')">Laboratorio</button>
+      <button (click) = "onContinue('animaciones-deliberatorium')">Deliberatorium</button>
     </div>
 
     <div *ngIf="experto == true">
-      <div>
-        <button (click) = "onContinue('animaciones-investigador')">Reportero</button>
-        <button (click) = "onContinue('animaciones-interprete')">Interprete</button>
-      </div>
+      <button (click) = "onContinue('animaciones-investigador')">Reportero</button>
+      <button (click) = "onContinue('animaciones-interprete')">Critico</button>
     </div>
   </div>
 
-  <div *ngIf="isLogged == false" class="warning">
-    <p>Para continuar con la experiencia, es necesario que inicies sesión</p>
+  <div class="grid-item">
+    Collectables
   </div>
+</div>
+
+<div *ngIf="isLogged == false" class="warning">
+  <p>Para continuar con la experiencia, es necesario que inicies sesión</p>
+</div>

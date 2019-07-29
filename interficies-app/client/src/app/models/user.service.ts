@@ -27,11 +27,16 @@ export class UserService {
   }
 
   getAchivementID(text:string) {
-    for(var achivement of this.achivementList) {
-      if(achivement['text'] === text)
-        return achivement['_id'];
+    try{
+      for(var achivement of this.achivementList) {
+        if(achivement['text'] === text)
+          return achivement['_id'];
+      }
+      return null;
     }
-    return null;
+    catch(error) {
+      return null;
+    }
   }
 
   setUserLoggedIn(user:User) {

@@ -15,6 +15,7 @@ export class AjustesComponent {
             if(response["avatar"]) {
                 this.msn2 = '';
                 var seg = response["avatar"].split('-');
+                user.currentGender = seg[0];
                 if(seg[0] == 'chico')
                     this.changeAvatar('boy');
                 else if(seg[0] == 'chica')
@@ -61,6 +62,7 @@ export class AjustesComponent {
                     this.msn2 = response["mensaje"];
                 else {
                     this.changeAvatar(option);
+                    user.currentGender = 'chica';
                 }
             });
         }
@@ -71,6 +73,7 @@ export class AjustesComponent {
                     this.msn2 = response["mensaje"];
                 else {
                     this.changeAvatar(option);
+                    user.currentGender = 'chico';
                 }
             });
         }

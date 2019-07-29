@@ -3,6 +3,7 @@ export class User {
     username: string;
     shownName: string;
     currentRol: string;
+    currentGender: string;
     level: string;
     achivements: [];
 
@@ -13,5 +14,6 @@ export class User {
         this.currentRol = r;
         this.level = l;
         this.achivements = a;
+        this.currentGender = 'chico';
     }
 }
