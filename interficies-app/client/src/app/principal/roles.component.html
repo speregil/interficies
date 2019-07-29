@@ -1,8 +1,11 @@
-<div class="main-container">
-  <div *ngIf="isLogged">
-    <p>Debes elegir un rol:</p>
+<div *ngIf="isLogged">
+
+  <div class="rol-container">
+    <img src="assets/static/avatar/{{currentRol}}.png">
+    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+  </div>
+    
     <div>
-      <p>Principiante</p>
       <div>
         <button (click) = "onContinue('animaciones-futurologo')">Futurólogo</button>
         <button (click) = "onContinue('animaciones-juglar')">Juglar</button>
@@ -10,7 +13,6 @@
     </div>
 
     <div *ngIf="intermedio == true">
-      <p>Intermedio</p>
       <div>
         <button (click) = "onContinue('animaciones-laboratorio')">Laboratorio</button>
         <button (click) = "onContinue('animaciones-deliberatorium')">Deliberatorium</button>
@@ -18,7 +20,6 @@
     </div>
 
     <div *ngIf="experto == true">
-      <p>Experto</p>
       <div>
         <button (click) = "onContinue('animaciones-investigador')">Reportero</button>
         <button (click) = "onContinue('animaciones-interprete')">Interprete</button>
@@ -26,7 +27,6 @@
     </div>
   </div>
 
-  <div *ngIf="isLogged == false">
+  <div *ngIf="isLogged == false" class="warning">
     <p>Para continuar con la experiencia, es necesario que inicies sesión</p>
   </div>
-</div>

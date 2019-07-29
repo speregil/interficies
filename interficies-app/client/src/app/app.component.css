@@ -1,4 +1,4 @@
-.header {width: 100%; margin: 0px; height: 60px; padding: 3px; background-image: radial-gradient(rgba(11, 96, 157, 0.4), rgba(255, 255, 255, 0.4)); position: -webkit-sticky; position: sticky; top: 0 }
+.header {width: 100%; margin: 0px; height: 60px; padding: 3px; background-image: radial-gradient(rgba(11, 96, 157, 0.4), rgba(255, 255, 255, 0.4)); position: -webkit-sticky; position: sticky; top: 0; z-index: 3 }
 
 .home { width: 10%; height: auto; margin-left: 2%; margin-right: 10%; margin-top: 25px; font-size: large }
 

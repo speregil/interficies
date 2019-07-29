@@ -14,6 +14,7 @@ export class RolesComponent implements LoginObserver {
 
   isLogged : boolean;
   achivement = "Elegiste un rol";
+  currentRol = 'none';
 
   intermedio = false;
   experto = false;
@@ -22,6 +23,7 @@ export class RolesComponent implements LoginObserver {
     this.isLogged = this.userService.isUserLogged();
     this.principal.addLoginObserver(this);
     this.showRoleProgress();
+    this.getCurrentRol();
   }
 
   notifyLogin(logged: boolean): void {
@@ -40,6 +42,16 @@ export class RolesComponent implements LoginObserver {
         }
       });
     }
+  }
+
+  getCurrentRol() {
+    var user = this.userService.getUserLoggedIn();
+    this.userService.getAvatar(user.username).subscribe(response => {
+      if(response['mensaje'])
+        this.currentRol = 'none';
+      else
+        this.currentRol = response['avatar'];
+    });
   }
 
   onContinue( route ) {
