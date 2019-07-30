@@ -1,4 +1,8 @@
-<div class="main-container">
-    <h3>Oráculo</h3>
-    <button (click) = "onContinue()">Continuar</button>
+<p class="vidente-reto">{{retoActual}}</p>
+<img class="vidente-oraculo" src="assets/static/oraculo.gif" (click) = "onOracleClick()">
+<div class="vidente-opciones">
+    <button (click) = "onContinue()">Retos Básicos</button>
+    <button (click) = "onContinue()">Retos del Master</button>
+    <button (click) = "onContinue()">Otro Reto</button>
+    <button (click) = "onContinue()">Volver</button>
 </div>

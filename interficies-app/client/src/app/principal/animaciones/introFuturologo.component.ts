@@ -5,7 +5,7 @@ import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'animacion-instro-futurologo',
-  templateUrl: './primera.component.html',
+  templateUrl: './introFuturologo.component.html',
   styleUrls: ['./primera.component.css']
 })
 
