@@ -47,6 +47,7 @@ export class AppComponent {
         this.userService.getProgressProfile(userModel["username"]).subscribe(progress => {
           var progressModel = progress["progOb"];
           var user : User = new User(this.username, userModel["shownName"], progressModel["currentRol"], progressModel["level"], progressModel["achivements"]);        
+          user.currentGender = progressModel["avatar"].split('-')[0];
           this.userService.setUserLoggedIn(user);
           this.loggedUser = this.userService.getUserLoggedIn();
 

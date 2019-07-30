@@ -50,17 +50,8 @@ export class RolesComponent implements LoginObserver {
   getCurrentRol() {
     if(this.isLogged){
       var user = this.userService.getUserLoggedIn();
-      this.userService.getAvatar(user.username).subscribe(response => {
-        console.log(response['mensaje']);
-        if(response['mensaje'])
-          this.currentRol = 'none';
-        else {
-          var resp = response['avatar'].split('-');
-          this.currentRol = response['avatar'];
-          user.currentGender = resp[0];
-          this.http.get('assets/static/avatar/' + resp[1] + '.txt', {responseType: 'text'}).subscribe(data => this.currentText = data);
-        }
-      });
+      this.currentRol = user.currentGender + '-' + user.currentRol.toLowerCase();
+      this.http.get('assets/static/avatar/' + user.currentRol.toLowerCase() + '.txt', {responseType: 'text'}).subscribe(data => this.currentText = data);
     }
   }
 

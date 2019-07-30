@@ -33,6 +33,7 @@ service.register = function(username, password, shownName, admin, callback){
         user.shownName = shownName;
         user.admin = admin;
         user.asign = false;
+        user.avatar = 'none';
 
         user.save(function(err, user, ver){
             if(err){

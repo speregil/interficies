@@ -16,7 +16,6 @@ export class IntroFuturologoComponent {
   constructor(private userService: UserService,  private router: Router, private app: AppComponent) {
     var user = userService.getUserLoggedIn();
     var nAvatar = user.currentGender + '-vidente';
-    console.log(nAvatar);
     
     userService.updateAvatar(user.username, nAvatar).subscribe(response => {});
 

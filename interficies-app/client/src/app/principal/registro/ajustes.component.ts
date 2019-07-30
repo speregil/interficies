@@ -63,6 +63,7 @@ export class AjustesComponent {
                 else {
                     this.changeAvatar(option);
                     user.currentGender = 'chica';
+                    this.userService.setUserLoggedIn(user);
                 }
             });
         }
@@ -74,6 +75,7 @@ export class AjustesComponent {
                 else {
                     this.changeAvatar(option);
                     user.currentGender = 'chico';
+                    this.userService.setUserLoggedIn(user);
                 }
             });
         }
