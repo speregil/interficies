@@ -114,4 +114,13 @@ export class UserService {
   saveProgress(pUser, pFlag) {
     return this.http.post<{}>('http://' + this.host + '/progress/save', {user : pUser, flag : pFlag});
   }
+
+  addChallenge(pUser, pType, pText) {
+    return this.http.post<{}>('http://' + this.host + '/challenges/add', {user : pUser, type : pType, text : pText});
+  }
+
+  getChallenges(pUser) {
+    console.log('http://' + this.host + '/challenges/list/' + pUser);
+    return this.http.get<{}>('http://' + this.host + '/challenges/list/' + pUser);
+  }
 }

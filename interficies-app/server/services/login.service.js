@@ -25,7 +25,7 @@ var service = {};
  * shownName Nombre del usuario que se muestra en la aplicación
  */
 service.register = function(username, password, shownName, admin, callback){
-    connection.connect();
+    var db = connection.connect();
     var user = new User();
     bcrypt.hash(password, 10, function(err, hash) {
         user.username = username;
@@ -42,15 +42,17 @@ service.register = function(username, password, shownName, admin, callback){
             else{
                 if(!admin) {
                     ProgressService.createProgressProfile(user._id, function(status, err, prof){
-                        connection.disconnect();
+                        connection.disconnect(db);
                         if(status > 0)
                             callback(1, err, user);
                         else
                             callback(0, null, user);
                     });
                 }
-                else
+                else {
+                    connection.disconnect(db);
                     callback(0, null, user);
+                }
             }
         });
     });
@@ -64,9 +66,9 @@ service.register = function(username, password, shownName, admin, callback){
  * admin Si tiene o no permisos de admin
  */
 service.login = function(user, password, admin, callback){
-    connection.connect();
+    var db = connection.connect();
     User.find({username: user}, function(err, search){
-        connection.disconnect();
+        connection.disconnect(db);
         if(search[0]){
             bcrypt.compare(password, search[0].password, function(err, res) {
                 if(res) {
@@ -90,23 +92,23 @@ service.login = function(user, password, admin, callback){
  * Retorna una lista de todos los participantes registrados en la base de datos
  */
 service.getParticipants = function(callback){
-    connection.connect();
+    var db = connection.connect();
     User.find({admin: false}, function(err, search){
-        connection.disconnect();
+        connection.disconnect(db);
         callback(err, search);
     });
 }
 
 service.getUnasigned = function(callback){
-    connection.connect();
+    var db = connection.connect();
     User.find({admin: false, asign: false}, function(err, search){
-        connection.disconnect();
+        connection.disconnect(db);
         callback(err, search);
     });
 }
 
 service.unregister = function(user, callback) {
-    connection.connect();
+    var db = connection.connect();
     User.find({username: user}, function(err, search){
         if(err)
             callback(err);
@@ -119,7 +121,7 @@ service.unregister = function(user, callback) {
                                 callback(err);
                             else {
                                 Progress.findOneAndRemove({userID: search[0]._id}, (err) => {
-                                    connection.disconnect();
+                                    connection.disconnect(db);
                                     if(err)
                                         callback(err);
                                     else
@@ -138,7 +140,7 @@ service.unregister = function(user, callback) {
 }
 
 service.changePassword = function(user, password, callback){
-    connection.connect();
+    var db = connection.connect();
     User.find({username: user}, function(err, search){
         if(err)
             callback("Error en la base de datos");
@@ -147,6 +149,7 @@ service.changePassword = function(user, password, callback){
                 bcrypt.hash(password, 10, function(err, hash) {
                     search[0].password = hash;
                     search[0].save(function(err, user, ver){
+                        connection.disconnect(db);
                         if(err)
                             callback("No fue posible actualizar la contraseña");
                         else
@@ -165,9 +168,9 @@ service.changePassword = function(user, password, callback){
  * @param user Nombre de usuario que se desea verificar
  */
 function isDeleteable(id, callback) {
-    connection.connect();
+    var db = connection.connect();
     Progress.find({userID: id}, function(err, progress){
-        connection.disconnect();
+        connection.disconnect(db);
         if(progress[0])
             callback(progress[0].currentRol == 'Ninguno'); 
         else

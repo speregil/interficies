@@ -7,19 +7,30 @@
   
   <div class="grid-item">
     <div>
-      <button (click) = "onContinue('animaciones-futurologo')">Vidente</button>
-      <button (click) = "onContinue('animaciones-juglar')">Juglar</button>
+      <button (click) = "onContinue('animaciones-futurologo')" class="rol-button">Vidente</button>
+      <button (click) = "onContinue('animaciones-juglar')" class="rol-button">Juglar</button>
     </div>
 
     <div *ngIf="intermedio == true">
-      <button (click) = "onContinue('animaciones-laboratorio')">Laboratorio</button>
-      <button (click) = "onContinue('animaciones-deliberatorium')">Deliberatorium</button>
+      <button (click) = "onContinue('animaciones-laboratorio')" class="rol-button">Laboratorio</button>
+      <button (click) = "onContinue('animaciones-deliberatorium')" class="rol-button">Deliberatorium</button>
     </div>
 
     <div *ngIf="experto == true">
-      <button (click) = "onContinue('animaciones-investigador')">Reportero</button>
-      <button (click) = "onContinue('animaciones-interprete')">Critico</button>
+      <button (click) = "onContinue('animaciones-investigador')" class="rol-button">Reportero</button>
+      <button (click) = "onContinue('animaciones-interprete')" class="rol-button">Critico</button>
     </div>
+  </div>
+
+  <div class="grid-item">
+    <h1>Tus Retos</h1>
+    <p>{{msnRetos}}</p>
+    <div>
+      <ul>
+        <li *ngFor="let r of retos"><button class="reto-button" (click) = "onChallenge(r.text)">{{r.type}}</button></li>
+      </ul>
+    </div>
+    <p>{{txtReto}}</p>
   </div>
 
   <div class="grid-item">

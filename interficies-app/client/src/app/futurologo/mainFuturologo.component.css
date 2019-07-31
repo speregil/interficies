@@ -1,6 +1,8 @@
-.vidente-reto { text-align: center; font-size: x-large; margin-top: 150px }
+.vidente-reto { text-align: center; font-size: x-large; margin-top: 130px }
 
-.vidente-oraculo { display: block; border: 2px solid cyan; width: 20%; margin-right: 10%; margin-top: 10px; margin-left: 40% }
+.vidente-oraculo { display: block; width: 25%; margin-top: 10px; margin-left: 38% }
+.vidente-oraculo:hover { border: 2px solid white }
+.vidente-oraculo:active { border: 2px solid cyan }
 
 .vidente-opciones { margin-top: 120px; margin-left: 24% }
 .vidente-opciones button { font-size: larger; color: white; border: 2px solid white; border-radius: 15px; background-color: transparent; margin-left: 5%; margin-right: 5% }

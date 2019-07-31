@@ -17,7 +17,7 @@
  var service = {};
 
  service.createGroup = function(groupName, masterName, callback){
-    connection.connect();
+    var db = connection.connect();
     var group = new Group();
     group.name = groupName;
     User.find({username: masterName}, function(err, search){
@@ -27,7 +27,7 @@
             group.master = search[0]._id;
             group.participants = new Array();
             group.save(function(err, data, ver){
-                connection.disconnect();
+                connection.disconnect(db);
                 if(err){
                     callback(err['errmsg'], null);
                 }
@@ -42,27 +42,30 @@
  }
 
  service.getGroups = function(masterName, callback){
-    connection.connect();
+    var db = connection.connect();
     User.find({username: masterName, admin: true}, function(err, master){
         if(err)
             callback("Error en la base de datos", []);
         else if(master[0]){
             Group.find({master: master[0]._id}, function(err, list){
+                connection.disconnect(db);
                 if(err)
                     callback(err, []);
                 else
                     callback(null, list);
             });
         }
-        else
+        else {
             callback("Error: El maestro no existe", []);
+            connection.disconnect(db);
+        }
     });
  }
 
  service.getParticipants = function(groupName, callback){
     participants = new Array();
     check = 0;
-    connection.connect();
+    var db = connection.connect();
     Group.find({name: groupName}, function(err, group){
         if(err)
             callback(err, []);
@@ -77,23 +80,27 @@
                         participants.push(user[0]);
                         check--;
                         if(check <= 0) {
-                            connection.disconnect();
+                            connection.disconnect(db);
                             callback(null, participants);
                         }
                     }
                 });
             }
         }
-        else
+        else {
+            connection.disconnect(db);
             callback("El grupo no existe", []);
+        }
     });
  }
 
  service.asign = function(groupName, userName, callback){
-    connection.connect();
+    var db  = connection.connect();
     Group.find({name: groupName}, function(err, group){
-        if(err)
+        if(err){
+            connection.disconnect(db);
             callback("Error en la base de datos");
+        }
         else if(group[0]){
             User.find({username: userName}, function(error, user){
                 if(error)
@@ -106,7 +113,7 @@
                         }else{
                             user[0].asign = true;
                             user[0].save(function(e, us, ver){
-                                connection.disconnect();
+                                connection.disconnect(db);
                                 if(e)
                                     callback("Cuidado, usuario: " + user[0]._id + " desactualizado");
                                 else{
@@ -116,12 +123,16 @@
                         }
                     });
                 }
-                else
+                else{
+                    connection.disconnect(db);
                     callback("Error: El usuario no existe");
+                }
             });
         }
-        else
+        else {
+            connection.disconnect(db);
             callback("Error: El grupo no existe");
+        }
     });
  }
  

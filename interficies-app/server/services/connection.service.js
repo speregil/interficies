@@ -30,8 +30,8 @@ service.connect = function(){
 /**
  * Elimina la conexión actual de mongoose
  */
-service.disconnect = function(){
-    mongoose.disconnect();
+service.disconnect = function( db ){
+    db.close();
 }
 
 module.exports = service;

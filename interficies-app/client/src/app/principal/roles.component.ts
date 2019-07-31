@@ -14,24 +14,43 @@ import { HttpClient } from '@angular/common/http';
 export class RolesComponent implements LoginObserver {
 
   isLogged : boolean;
+
+  // Visor del avatar
   achivement = "Elegiste un rol";
   currentRol = 'cargando';
   currentText = "";
 
+  // Sección de navegación
   intermedio = false;
   experto = false;
+
+  // Sección de retos
+  msnRetos = "Cargando...";
+  txtReto = "";
+  retos = [];
+
+  // Sección de colecciones
 
   constructor(private userService: UserService, private principal: AppComponent, private router: Router, private http: HttpClient) {
     this.isLogged = this.userService.isUserLogged();
     this.principal.addLoginObserver(this);
     this.showRoleProgress();
     this.getCurrentRol();
+    this.getChallenges();
   }
 
   notifyLogin(logged: boolean): void {
     this.isLogged = logged;
     this.showRoleProgress();
     this.getCurrentRol();
+  }
+
+  getCurrentRol() {
+    if(this.isLogged){
+      var user = this.userService.getUserLoggedIn();
+      this.currentRol = user.currentGender + '-' + user.currentRol.toLowerCase();
+      this.http.get('assets/static/avatar/' + user.currentRol.toLowerCase() + '.txt', {responseType: 'text'}).subscribe(data => this.currentText = data);
+    }
   }
 
   showRoleProgress() {
@@ -44,14 +63,6 @@ export class RolesComponent implements LoginObserver {
           this.experto =  progress["l"] && progress["d"];
         }
       });
-    }
-  }
-
-  getCurrentRol() {
-    if(this.isLogged){
-      var user = this.userService.getUserLoggedIn();
-      this.currentRol = user.currentGender + '-' + user.currentRol.toLowerCase();
-      this.http.get('assets/static/avatar/' + user.currentRol.toLowerCase() + '.txt', {responseType: 'text'}).subscribe(data => this.currentText = data);
     }
   }
 
@@ -82,5 +93,24 @@ export class RolesComponent implements LoginObserver {
     else {
         this.router.navigate([route]);
     }
+  }
+
+  getChallenges() {
+    if(this.isLogged) {
+      var user = this.userService.getUserLoggedIn();
+      this.userService.getChallenges(user.username).subscribe(response => {
+        console.log(response);
+        if(response['mensaje'])
+          this.msnRetos = response['mensaje'];
+        else {
+          this.msnRetos = '';
+          this.retos = response['list'];
+        }
+      });
+    }
+  }
+
+  onChallenge( text ) {
+    this.txtReto = text;
   }
 }

@@ -35,9 +35,9 @@ service.createProgressProfile = function(userID, callback) {
     prof.i= false;
     prof.l= false;
 
-    connection.connect();
+    var db = connection.connect();
     prof.save(function(err, prof, ver){
-        connection.disconnect();
+        connection.disconnect(db);
         if(err){
             callback(1, err['errmsg'], prof);
         }
@@ -51,14 +51,14 @@ service.createProgressProfile = function(userID, callback) {
  * user Nombre de usuario cuyo perfil de progreso se desea recuperar
  */
 service.getProfile = function(user, callback) {
-    connection.connect();
+    var db = connection.connect();
     User.find({username: user}, function(err, search){
         if(err)
             callback(1, "Error en la base de datos", null);
         else {
             if(search[0]) {
                 Progress.find({userID: search[0]._id}, function(err, profile) {
-                    connection.disconnect();
+                    connection.disconnect(db);
                     if(err)
                         callback(1, err['errmsg'], null);
                     else {
@@ -82,7 +82,7 @@ service.getProfile = function(user, callback) {
  * user Nombre de usuario cuyos logros se desean recuperar
  */
 service.getAchivements = function(user, callback) {
-    connection.connect();
+    var db = connection.connect();
     var achivementList = [];
     var check = 0;
     User.find({username: user}, function(err, search){
@@ -101,7 +101,7 @@ service.getAchivements = function(user, callback) {
                                 achivementList.push(object[0]);
                                 check--;
                                 if(check <= 0) {
-                                    connection.disconnect();
+                                    connection.disconnect(db);
                                     callback(null, achivementList);
                                 }
                             }
@@ -117,9 +117,9 @@ service.getAchivements = function(user, callback) {
  * Retorna una lista con todos los logros registrados en la base de datos
  */
 service.getAchivementList = function(callback) {
-    connection.connect();
+    var db = connection.connect();
     Achivement.find({}, function(err, response){
-        connection.disconnect();
+        connection.disconnect(db);
         if(err)
             callback(err, []);
         else
@@ -133,7 +133,7 @@ service.getAchivementList = function(callback) {
  * achivementID ID de la base de datos del logro que se desea agregar
  */
 service.addAchivement = function (user, achivementID, callback) {
-    connection.connect();
+    var db = connection.connect();
     User.find({username: user}, function(err, search){
         if(err)
             callback("Error en la base de datos");
@@ -145,7 +145,7 @@ service.addAchivement = function (user, achivementID, callback) {
                         }else{
                             profile[0].achivements.push(achivementID);
                             profile[0].save(function(err, prof, ver){
-                                connection.disconnect();
+                                connection.disconnect(db);
                                 if(err){
                                     callback("No fue posible asignar el logro");
                                 }else{
@@ -165,7 +165,7 @@ service.addAchivement = function (user, achivementID, callback) {
  * role Texto del nuevo rol
  */
 service.updateRole = function(user, role, callback){
-    connection.connect();
+    var db = connection.connect();
     User.find({username: user}, function(err, search){
         if(err)
             callback("Error en la base de datos");
@@ -177,7 +177,7 @@ service.updateRole = function(user, role, callback){
                     }else{
                         profile[0].currentRol = role;
                         profile[0].save(function(err, prof, ver){
-                            connection.disconnect();
+                            connection.disconnect(db);
                             if(err){
                                 callback("No fue posible cambiar el rol");
                             }else{
@@ -192,7 +192,7 @@ service.updateRole = function(user, role, callback){
 }
 
 service.updateAvatar = function(user, avatar, callback){
-    connection.connect();
+    var db = connection.connect();
     User.find({username: user}, function(err, search){
         if(err)
             callback("Error en la base de datos");
@@ -204,7 +204,7 @@ service.updateAvatar = function(user, avatar, callback){
                     }else{
                         profile[0].avatar = avatar;
                         profile[0].save(function(err, prof, ver){
-                            connection.disconnect();
+                            connection.disconnect(db);
                             if(err){
                                 callback("No fue posible cambiar el avatar");
                             }else{
@@ -219,14 +219,14 @@ service.updateAvatar = function(user, avatar, callback){
 }
 
 service.getAvatar = function(user, callback){
-    connection.connect();
+    var db =  connection.connect();
     User.find({username: user}, function(err, search){
         if(err)
             callback("Error en la base de datos", null);
         else {
             if(search[0]) {
                 Progress.find({userID: search[0]._id}, function(err, profile) {
-                    connection.disconnect();
+                    connection.disconnect(db);
                     if(err){
                         callback("No fue posible encontrar el perfil", null);
                     }else{
@@ -244,9 +244,8 @@ service.getAvatar = function(user, callback){
  * flag Bandera especifica que se desea activar
  */
 service.activateFlag = function(user, flag, callback){
-    connection.connect();
-    console.log(flag);
-    User.find({username: user}, function(err, search){
+    var db = connection.connect();
+        User.find({username: user}, function(err, search){
         if(err)
             callback("Error en la base de datos");
         else {
@@ -258,7 +257,7 @@ service.activateFlag = function(user, flag, callback){
                         var userProgress = profile[0];
                         userProgress[flag] = true;
                         userProgress.save(function(err, prof, ver){
-                            connection.disconnect();
+                            connection.disconnect(db);
                             if(err){
                                 callback("No fue posible actualizar el progreso");
                             }else{
