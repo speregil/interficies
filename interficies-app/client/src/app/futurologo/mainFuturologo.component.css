@@ -1,3 +1,4 @@
+.vidente-container { background-image: url("../../assets/static/oraculo/fondo-oraculo.jpg"); width: 100%; height: auto }
 .vidente-reto { text-align: center; font-size: x-large; margin-top: 130px }
 
 .vidente-oraculo { display: block; width: 25%; margin-top: 10px; margin-left: 38% }

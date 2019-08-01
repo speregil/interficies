@@ -1,4 +1,4 @@
-#portada{ background-image: url("../../assets/static/bg_portada.png"); min-height: 100vh }
+#portada{ min-height: 100vh }
 
 .portada-continuar { width: 15%; border: 2px solid white; border-radius: 15px; background-color: transparent; margin-left: 45%; margin-top: 80vh }
 .portada-continuar:hover { color: cyan; border-color: cyan }
