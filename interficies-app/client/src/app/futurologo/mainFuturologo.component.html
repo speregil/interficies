@@ -1,10 +1,9 @@
 <div class='vidente-container'>
-<p class="vidente-reto">{{retoActual}}</p>
-<img class="vidente-oraculo" src="assets/static/oraculo/oraculo.gif" (click) = "onOracleClick()">
-<div class="vidente-opciones">
-    <button (click) = "onContinue()">Retos Básicos</button>
-    <button (click) = "onContinue()">Retos del Master</button>
-    <button (click) = "onContinue()">Otro Reto</button>
-    <button (click) = "onContinue()">Volver</button>
-</div>
+    <p class="vidente-reto">{{retoActual}}</p>
+    <img class="vidente-oraculo" src="assets/static/oraculo/oraculo.gif" (click) = "onOracleClick()">
+    <div class="vidente-opciones">
+        <button  class="{{poolBasico}}" (click) = "changePool('basico')">Retos Básicos</button>
+        <button  *ngIf = "masterAble" class="{{poolMaster}}" (click) = "changePool('master')">Retos del Master</button>
+        <button  class="vidente-button" (click) = "onContinue()">Volver</button>
+    </div>
 </div>

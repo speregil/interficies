@@ -35,6 +35,7 @@ import { IntroInterpreteComponent } from './principal/animaciones/introInterpret
 
 import { RegistroService } from './principal/registro/registro.service';
 import { UserService } from './models/user.service';
+import { ChallengesService } from './models/challenges.service';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { UserService } from './models/user.service';
   ],
   providers: [
     RegistroService,
-    UserService
+    UserService,
+    ChallengesService
   ],
   bootstrap: [AppComponent]
 })

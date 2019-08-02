@@ -7,7 +7,8 @@
  //-------------------------------------------------------------------------------------
 
  var express = require('express');                                   // Libreria base del Express
- var controller = require('../controllers/challenge.controller');        // Controlador del API
+ var controller = require('../controllers/challenge.controller');
+ var master = require('../controllers/masterChal.controller');         // Controlador del API
  
  //--------------------------------------------------------------------------------------
  // Enrutamientos
@@ -21,8 +22,20 @@
      });
  });
 
+ router.post('/create', function(req, res, next) {
+    master.createChallenge(req.body.master, req.body.type, req.body.text, function(err){
+       res.json({mensaje : err });
+    });
+});
+
  router.get('/list/:user', function(req, res, next) {
     controller.getChallenges(req.params.user, function(err, challenges){
+        res.json({mensaje : err, list : challenges});
+    });
+});
+
+router.get('/master/list/:type', function(req, res, next) {
+    master.getChallenges(req.params.type, function(err, challenges){
         res.json({mensaje : err, list : challenges});
     });
 });
