@@ -8,7 +8,7 @@ export class UserService {
   private isUserLoggedIn;
   private currentInitComic;
   private currentLastComic;
-  private achivementList;
+ 
   
   host = 'localhost:3100';
 
@@ -19,24 +19,6 @@ export class UserService {
       this.isUserLoggedIn = false;
     this.currentInitComic = 1;
     this.currentLastComic = 1;
-    this.getAchivementList().subscribe(response => this.achivementList = response['list']);
-  }
-
-  getAchivementList() {
-    return this.http.get<{}>('http://' + this.host + '/progress/list');
-  }
-
-  getAchivementID(text:string) {
-    try{
-      for(var achivement of this.achivementList) {
-        if(achivement['text'] === text)
-          return achivement['_id'];
-      }
-      return null;
-    }
-    catch(error) {
-      return null;
-    }
   }
 
   setUserLoggedIn(user:User) {
@@ -81,17 +63,22 @@ export class UserService {
     return this.http.get<{}>('http://' + this.host + '/progress/achivements/' + user);
   }
 
-  setAchivement(pUser: string, achivement: string) {
-    return this.http.post<{}>('http://' + this.host + '/progress/achivement', {user : pUser, achivementID : achivement});
+  setAchivement(pUser, pText, pPoints) {
+    return this.http.post<{}>('http://' + this.host + '/progress/achivement', {user : pUser, text : pText, points: pPoints});
   }
 
-  checkUserAchivements(user, id) : boolean {
+  checkUserAchivements(user, text) : boolean {
     var achivements = user.achivements;
-    return achivements.includes(id);
+    for( var achivement of achivements) {
+      if(achivement.text == text)
+        return false;
+    }
+    return true;
   }
 
-  localUpdateAchivemets(user, id) {
-    user.achivements.push(id);
+  localUpdateAchivemets(user, pText, pPoints) {
+    var achivement = { text: pText, points : pPoints }
+    user.achivements.push(achivement);
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
@@ -120,7 +107,6 @@ export class UserService {
   }
 
   getChallenges(pUser) {
-    console.log('http://' + this.host + '/challenges/list/' + pUser);
     return this.http.get<{}>('http://' + this.host + '/challenges/list/' + pUser);
   }
 }

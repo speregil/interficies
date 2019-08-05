@@ -28,18 +28,6 @@ router.get('/profile/:username', function(req, res, next) {
 });
 
 /**
- * Retorna una lista con todos los logros registrados en la base de datos
- */
-router.get('/list', function(req, res, next){
-    controller.getAchivementList(function(err, achivements){
-        if(err)
-            res.json({status : 1, mensaje : err, list : []});
-        else
-            res.json({status : 0, mensaje: "", list : achivements});
-    });
-});
-
-/**
  * Returna una lista de objetos con la información de todos los logros conseguidos por el usuario cuyo
  * username entra por parametro
  */
@@ -57,7 +45,7 @@ router.get('/achivements/:username', function(req, res, next) {
  * params: username, achivementID. Encriptados en el cuerpo
  */
 router.post('/achivement', function(req, res, next) {
-    controller.addAchivement(req.body.user, req.body.achivementID, function (err) {
+    controller.addAchivement(req.body.user, req.body.text, req.body.points, function (err) {
         if(err)
             res.json({status : 1, mensaje : err});
         else
