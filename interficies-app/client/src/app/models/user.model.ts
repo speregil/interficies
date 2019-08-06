@@ -8,12 +8,12 @@ export class User {
     achivements: [];
 
     
-    constructor ( u : string, n : string, r : string, l : string, a: []) {
+    constructor ( u : string, n : string, r : string, l : string) {
         this.username = u;
         this.shownName = n;
         this.currentRol = r;
         this.level = l;
-        this.achivements = a;
+        this.achivements = [];
         this.currentGender = 'chico';
     }
 }

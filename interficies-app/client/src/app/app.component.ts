@@ -46,15 +46,17 @@ export class AppComponent {
         var userModel = data["data"];
         this.userService.getProgressProfile(userModel["username"]).subscribe(progress => {
           var progressModel = progress["progOb"];
-          var user : User = new User(this.username, userModel["shownName"], progressModel["currentRol"], progressModel["level"], progressModel["achivements"]);        
+          var user : User = new User(this.username, userModel["shownName"], progressModel["currentRol"], progressModel["level"]);        
           user.currentGender = progressModel["avatar"].split('-')[0];
-          this.userService.setUserLoggedIn(user);
-          this.loggedUser = this.userService.getUserLoggedIn();
+          this.userService.getAchivements(this.username).subscribe(response => {
+            user.achivements = response["list"];
+            this.userService.setUserLoggedIn(user);
+            this.loggedUser = this.userService.getUserLoggedIn();
+            this.username = "";
+            this.password = "";
 
-          this.username = "";
-          this.password = "";
-
-          this.notifyLogin(true);  //Notifica que hubo un login a todos los observadores
+            this.notifyLogin(true);  //Notifica que hubo un login a todos los observadores
+          });
         });
       }     
     });

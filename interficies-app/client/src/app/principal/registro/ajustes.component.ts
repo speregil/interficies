@@ -8,6 +8,8 @@ import { UserService } from '../../models/user.service';
 })
 export class AjustesComponent {
 
+    achivement = { text: "Has seleccionado tu avatar", points: 5 };
+
     constructor(private userService: UserService){
         var user = this.userService.getUserLoggedIn();
         this.msn2 = 'Cargando datos...';
@@ -64,6 +66,7 @@ export class AjustesComponent {
                     this.changeAvatar(option);
                     user.currentGender = 'chica';
                     this.userService.setUserLoggedIn(user);
+                    this.setAchivement(user);
                 }
             });
         }
@@ -76,7 +79,21 @@ export class AjustesComponent {
                     this.changeAvatar(option);
                     user.currentGender = 'chico';
                     this.userService.setUserLoggedIn(user);
+                    this.setAchivement(user);
                 }
+            });
+        }
+    }
+
+    private setAchivement( user ){
+        if(this.userService.checkUserAchivements(user, this.achivement.text)){
+            this.userService.setAchivement(user.username, this.achivement.text, this.achivement.points).subscribe(response => {
+              if(response['mensaje'])
+                alert(response['mensaje']);
+              else {
+                this.userService.localUpdateAchivemets(user, this.achivement.text, this.achivement.points);
+                alert('Logro desbloqueado: ' + this.achivement.text);
+              }
             });
         }
     }

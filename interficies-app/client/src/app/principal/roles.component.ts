@@ -16,7 +16,7 @@ export class RolesComponent implements LoginObserver {
   isLogged : boolean;
 
   // Visor del avatar
-  achivement = "Elegiste un rol";
+  achivement = { text: "Has leído la primera parte del Cómic", points: 20 };
   currentRol = 'cargando';
   currentText = "";
 
@@ -37,6 +37,7 @@ export class RolesComponent implements LoginObserver {
     this.showRoleProgress();
     this.getCurrentRol();
     this.getChallenges();
+  
   }
 
   notifyLogin(logged: boolean): void {
@@ -63,13 +64,22 @@ export class RolesComponent implements LoginObserver {
           this.experto =  progress["l"] && progress["d"];
         }
       });
+
+      if(this.userService.checkUserAchivements(user, this.achivement.text)){
+        this.userService.setAchivement(user.username, this.achivement.text, this.achivement.points).subscribe(response => {
+          if(response['mensaje'])
+            alert(response['mensaje']);
+          else {
+            this.userService.localUpdateAchivemets(user, this.achivement.text, this.achivement.points);
+            alert('Logro desbloqueado: ' + this.achivement.text);
+          }
+        });
+      }
     }
   }
 
   onContinue( route ) {
-    
-    
-        this.router.navigate([route]);
+    this.router.navigate([route]);
   }
 
   getChallenges() {
