@@ -36,8 +36,8 @@ controller.getProgress = function(user, callback) {
 /**
  * Controla la asignación del logro al usuario que entran por parámetro
  */
-controller.addAchivement = function(user, achivementID, callback) {
-    service.addAchivement(user, achivementID, function (err){
+controller.addAchivement = function(user, text, points, callback) {
+    service.addAchivement(user, text, points, function (err){
         callback(err);
     });
 }

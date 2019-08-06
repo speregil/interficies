@@ -26,7 +26,6 @@ service.createProgressProfile = function(userID, callback) {
     prof.userID = userID;
     prof.currentRol = "Ninguno";
     prof.level = "Iniciado";
-    prof.achivements = [];
     prof.avatar = "ninguno";
     prof.j = false;
     prof.r= false;
@@ -83,77 +82,59 @@ service.getProfile = function(user, callback) {
  */
 service.getAchivements = function(user, callback) {
     var db = connection.connect();
-    var achivementList = [];
-    var check = 0;
     User.find({username: user}, function(err, search){
-        if(err)
+        if(err){
+            connection.disconnect(db);
             callback("Error en la base de datos", []);
+        }
         else {
             if(search[0]) {
-                Progress.find({userID: search[0]._id}, function(err, profile) {
-                    var achivements = profile[0].achivements;
-                    for ( achivement of achivements ) {
-                        check++;
-                        Achivement.find({_id: achivement}, function(err, object) {
-                            if(err)
-                                callback ("No fue posible recuperar todos los logros", []);
-                            else {
-                                achivementList.push(object[0]);
-                                check--;
-                                if(check <= 0) {
-                                    connection.disconnect(db);
-                                    callback(null, achivementList);
-                                }
-                            }
-                        });
+                Achivement.find({userID: search[0]._id}, function(err, achivements) {
+                    connection.disconnect(db);
+                    if(err)
+                        callback ("No fue posible recuperar todos los logros", []);
+                    else {
+                        callback(null, achivements);
                     }
                 });
+            }
+            else {
+                connection.disconnect(db);
+                callback("El usuario solicitado no exites", []);
             }
         }
     });
 }
 
 /**
- * Retorna una lista con todos los logros registrados en la base de datos
- */
-service.getAchivementList = function(callback) {
-    var db = connection.connect();
-    Achivement.find({}, function(err, response){
-        connection.disconnect(db);
-        if(err)
-            callback(err, []);
-        else
-            callback(null, response);
-    })
-}
-
-/**
- * Asigna el achivmete cuyo id entra por parametro al usuario cuyo username entra por parametro
+ * Asigna el achivement cuyo id entra por parametro al usuario cuyo username entra por parametro
  * user Nombre de usuario al que se le desea agregar el nuevo logro
  * achivementID ID de la base de datos del logro que se desea agregar
  */
-service.addAchivement = function (user, achivementID, callback) {
+service.addAchivement = function (user, text, points, callback) {
     var db = connection.connect();
     User.find({username: user}, function(err, search){
-        if(err)
+        if(err){
+            connection.disconnect(db);
             callback("Error en la base de datos");
+        }
         else {
             if(search[0]) {
-                Progress.find({userID: search[0]._id}, function(err, profile) {
-                        if(err){
-                            callback("No fue posible encontrar el perfil");
-                        }else{
-                            profile[0].achivements.push(achivementID);
-                            profile[0].save(function(err, prof, ver){
-                                connection.disconnect(db);
-                                if(err){
-                                    callback("No fue posible asignar el logro");
-                                }else{
-                                    callback(null);
-                                }
-                            });
-                        }
+                var achivement = new Achivement();
+                achivement.userID = search[0]._id;
+                achivement.text = text;
+                achivement.points = points;
+                achivement.save(function(err, object, ver){
+                    connection.disconnect(db);
+                    if(err)
+                        callback("No fue posible guardar el logro");
+                    else   
+                        callback(null);
                 });
+            }
+            else {
+                connection.disconnect(db);
+                callback("No fue posible encontrar al usuario solicitado");
             }
         }
     });
