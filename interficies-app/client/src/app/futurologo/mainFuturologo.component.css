@@ -1,6 +1,11 @@
 .vidente-container { background-image: url("../../assets/static/oraculo/fondo-oraculo.jpg"); border: 1px solid black; height: 100vh;}
 .vidente-reto { text-align: center; font-size: x-large; margin-top: 130px }
 
+.vidente-aceptar { margin-left: 65%; font-size: larger; color: white; border: 2px solid white; border-radius: 15px; background-color: transparent }
+.vidente-aceptar:hover{ color: cyan; border-color: cyan }
+.vidente-aceptar:active{ color: black; border-color: black }
+.vidente-aceptar-texto{ font-size: larger; margin-left: 3px }
+
 .vidente-oraculo { display: block; width: 25%; margin-top: 10px; margin-left: 38% }
 .vidente-oraculo:hover { border: 2px solid white }
 .vidente-oraculo:active { border: 2px solid cyan }

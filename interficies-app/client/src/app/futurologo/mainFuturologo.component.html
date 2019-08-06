@@ -1,8 +1,9 @@
 <div class='vidente-container'>
     <p class="vidente-reto">{{retoActual}}</p>
     <img class="vidente-oraculo" src="assets/static/oraculo/oraculo.gif" (click) = "onOracleClick()">
+    <button *ngIf = "acceptAble" class="vidente-aceptar" (click) = 'onAccept()'>Aceptar Reto</button><span class="vidente-aceptar-texto">{{msnAceptar}}</span>
     <div class="vidente-opciones">
-        <button  class="{{poolBasico}}" (click) = "changePool('basico')">Retos Básicos</button>
+        <button  *ngIf = "basicAble" class="{{poolBasico}}" (click) = "changePool('basico')">Retos Básicos</button>
         <button  *ngIf = "masterAble" class="{{poolMaster}}" (click) = "changePool('master')">Retos del Master</button>
         <button  class="vidente-button" (click) = "onContinue()">Volver</button>
     </div>

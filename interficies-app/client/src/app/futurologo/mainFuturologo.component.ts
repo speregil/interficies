@@ -14,8 +14,11 @@ export class MainFuturologoComponent {
   masterChallenges = [];
 
   retoActual = "";
+  msnAceptar = "";
   basico = true;
+  basicAble = true;
   masterAble = false;
+  acceptAble = false;
 
   poolBasico = "selected";
   poolMaster = "vidente-button";
@@ -31,9 +34,9 @@ export class MainFuturologoComponent {
   }
   
   onOracleClick() {
-    console.log(this.basico)
     if(this.userService.isUserLogged()) {
       this.retoActual = "Procesando...";
+      this.acceptAble = false;
       if(this.basico)
         this.getBasicChallenge();
       else
@@ -42,29 +45,36 @@ export class MainFuturologoComponent {
   }
 
   getBasicChallenge(){
-    var user = this.userService.getUserLoggedIn();
     this.http.get('assets/static/oraculo/config.json', {responseType: 'json'}).subscribe(data => {
       var len = parseInt(data["num"]);
       var i = Math.floor(Math.random() * len) + 1;
       this.http.get('assets/static/oraculo/oraculo' + i + '.txt', {responseType: 'text'}).subscribe(txt => {
-        this.retoActual = txt;
-        this.userService.addChallenge(user.username, 'oraculo', txt).subscribe(response => {
-          if(response['mensaje'])
-            alert(response['mensaje']);
-          });
-        });
+        this.retoActual = txt
+        this.acceptAble = true;
+      });
     });
   }
 
   getMasterChallenge(){
-    var user = this.userService.getUserLoggedIn();
     var i = Math.floor(Math.random() * this.masterChallenges.length);
-    var challenge = this.masterChallenges[i]
+    var challenge = this.masterChallenges[i];
     this.retoActual = challenge.text;
-    this.userService.addChallenge(user.username, 'oraculo', challenge.text).subscribe(response => {
-      if(response['mensaje'])
-        alert(response['mensaje']);
-    });
+    this.acceptAble = true;
+  }
+
+  onAccept() {
+    if(this.basicAble) {
+      var user = this.userService.getUserLoggedIn();
+      this.userService.addChallenge(user.username, 'oraculo', this.retoActual).subscribe(response => {
+        if(response['mensaje'])
+          this.msnAceptar = response['mensaje'];
+        else {
+          this.msnAceptar = 'Reto Aceptado';
+          this.basicAble = false;
+          this.masterAble = false;
+        }
+      });
+    }
   }
 
   changePool(nPool){
