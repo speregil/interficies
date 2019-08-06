@@ -1,6 +1,7 @@
-<div class="comic-container">
-    <img src="assets/static/comic/comic-{{currentComic}}.jpeg">
+<div class="comic-container" #top>
+    <img src="assets/static/comic/comic-{{currentComic}}.jpg">
 </div>
 <span class="comic-prev"><button (click) = "onPrev()">&#8810;</button></span>
-<span class="comic-sig"><button (click) = "onSig()">&#8811;</button></span>
+<span class="comic-sig"><button (click) = "onSig(top)">&#8811;</button></span>
 <button (click)="onContinue()" class="comic-continuar">Continuar</button>
+<a href='#top'>top</a>

@@ -67,7 +67,7 @@ export class ComicComponent implements OnDestroy {
   /**
    * Cambia la pagina actual a la siguiente en la secuencia y enciende el sonido correspondiente
    */
-  onSig() {
+  onSig($element) {
     var current = Number(this.currentComic);
     var last = Number(this.lastComic);
     current++;
@@ -75,6 +75,8 @@ export class ComicComponent implements OnDestroy {
       this.currentComic = current + "";
       this.playSound();
     }
+    console.log($element);
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
   /**
@@ -112,36 +114,9 @@ export class ComicComponent implements OnDestroy {
    * @param achivementNum Version del logro que se va aasignar
    */
   setAchivement(achivementNum) {
-    if(this.userService.isUserLogged()) {
-      var user = this.userService.getUserLoggedIn();
-      var achivementText = "Leiste el cómic " + achivementNum;
-      var achivementID = this.userService.getAchivementID(achivementText);
-      if(achivementID) {
-        if(!this.userService.checkUserAchivements(user, achivementID)) {
-          this.userService.setAchivement(user.username, achivementID).subscribe(response => {
-            if(response["status"] == 0) {
-              this.userService.localUpdateAchivemets(user, achivementID);
-              alert('Logro conseguido: ' + achivementText);
-              this.setRoute(achivementNum);
-            }
-            else
-              alert('Problema con la base de datos: No fue posible desbloquear el logro');
-              this.setRoute(achivementNum);
-          });
-        }
-        else {
-          this.setRoute(achivementNum);
-        }
-      }
-      else {
-        console.log("Por aqui pase");
-        this.setRoute(achivementNum);
-      }
-    }
-    else {
-      console.log("Por aqui pase");
+    
       this.setRoute(achivementNum);
-    }
+    
   }
 
   /**
@@ -159,6 +134,11 @@ export class ComicComponent implements OnDestroy {
     this.router.navigate([routeName]);
   }
   
+  scrollToElement($element): void {
+    console.log($element);
+    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+  }
+
   /**
    * Detiene todos los sonidos antes de destruir el componente
    */
