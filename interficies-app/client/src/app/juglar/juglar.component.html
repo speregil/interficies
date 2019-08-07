@@ -1,4 +1,15 @@
-<div class="main-container">
-    <h3>Juglar</h3>
-    <button (click) = "onContinue()">Continuar</button>
+<div class='juglar-container'>
+    <p class="juglar-reto">{{retoActual}}</p>
+    <div class='juglar-folders'>
+        <img class="juglar-folder" src="assets/static/juglar/folder.png" >
+        <img class="juglar-folder" src="assets/static/juglar/folder.png" >
+        <img class="juglar-folder" src="assets/static/juglar/folder.png" >
+        <img class="juglar-folder" src="assets/static/juglar/folder.png" >
+    </div>
+    <button *ngIf = "acceptAble" class="juglar-aceptar" (click) = 'onAccept()'>Aceptar Reto</button><span class="juglar-aceptar-texto">{{msnAceptar}}</span>
+    <div class="juglar-opciones">
+        <button  *ngIf = "basicAble" class="{{poolBasico}}" (click) = "changePool('basico')">Retos Básicos</button>
+        <button  *ngIf = "masterAble" class="{{poolMaster}}" (click) = "changePool('master')">Retos del Master</button>
+        <button  class="juglar-button" (click) = "onContinue()">Volver</button>
+    </div>
 </div>

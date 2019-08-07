@@ -10,8 +10,6 @@ import { AppComponent } from '../../app.component';
 })
 
 export class IntroJuglarComponent {
-  
-  achivement = 'Viste las animaciones: Juglar';
 
   constructor(private userService: UserService,  private router: Router, private app: AppComponent) {
     var user = userService.getUserLoggedIn();
@@ -24,9 +22,7 @@ export class IntroJuglarComponent {
     });
   }
 
-  onContinue() {
-      
-        this.router.navigate(["juglar"]);
-    
+  onContinue() {  
+    this.router.navigate(["juglar"]);
   }
 }

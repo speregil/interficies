@@ -1,4 +1,4 @@
-@font-face { font-family: "principal"; src: url("assets/static/fonts/TCCEB.TTF") }
+@font-face { font-family: "principal"; src: url("./assets/static/fonts/TCCEB.TTF") }
 
 body { font-family: 'principal', Arial, sans-serif; font-weight:normal; font-style:normal; color: white; background-image: url("./assets/static/background.jpg"); margin: 0%; padding: 0%}
 
