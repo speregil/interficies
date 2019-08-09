@@ -1,10 +1,10 @@
 <div class='juglar-container'>
     <p class="juglar-reto">{{retoActual}}</p>
     <div class='juglar-folders'>
-        <img class="juglar-folder" src="assets/static/juglar/folder.png" >
-        <img class="juglar-folder" src="assets/static/juglar/folder.png" >
-        <img class="juglar-folder" src="assets/static/juglar/folder.png" >
-        <img class="juglar-folder" src="assets/static/juglar/folder.png" >
+        <img class="juglar-folder" src="assets/static/juglar/folder.png" (click) = "onFolderClick('holtzman')" >
+        <img class="juglar-folder" src="assets/static/juglar/folder.png" (click) = "onFolderClick('jessica')" >
+        <img class="juglar-folder" src="assets/static/juglar/folder.png" (click) = "onFolderClick('lucas')" >
+        <img class="juglar-folder" src="assets/static/juglar/folder.png" (click) = "onFolderClick('ninos')" >
     </div>
     <button *ngIf = "acceptAble" class="juglar-aceptar" (click) = 'onAccept()'>Aceptar Reto</button><span class="juglar-aceptar-texto">{{msnAceptar}}</span>
     <div class="juglar-opciones">
