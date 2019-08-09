@@ -16,6 +16,7 @@ import { PrincipalParticipantesComponent } from './participantes/principal.parti
 import { RegistroParticipantesComponent } from './participantes/registro.participantes';
 import { ListaParticipantesComponent } from './participantes/lista.participantes';
 import { GroupComponent } from './grupos/grupos.component';
+import { ExpansionesComponent } from './expansiones/expansiones.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { GroupComponent } from './grupos/grupos.component';
     PrincipalParticipantesComponent,
     RegistroParticipantesComponent,
     ListaParticipantesComponent,
-    GroupComponent 
+    GroupComponent,
+    ExpansionesComponent 
   ],
   imports: [
     BrowserModule,
