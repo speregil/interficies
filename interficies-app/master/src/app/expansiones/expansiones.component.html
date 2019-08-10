@@ -1,25 +1,24 @@
 <div>
     <span>Grupo</span>
-    <select>
-        <option>Grupo 1</option>
+    <select [(ngModel)] = "selectedGroup" (change)="onSelectChange()">
+        <option [value]="group.name" *ngFor="let group of groupList">{{group.name}}</option>
     </select>
 
     <span>Participante</span>
-    <select>
-        <option>Participante 1</option>
-        <option>Participante 2</option>
+    <select [(ngModel)] = "selectedParticipant" (change)="onParticipantChange()">
+        <option [value]="p.username" *ngFor="let p of participantsList">{{p.shownName}}</option>
     </select>
 </div>
+
+<p>{{msn}}</p>
 <div class="grid-container" >
     <div class="grid-item">
         <ul>
-            <li>Oraculo</li>
-            <li>Juglar</li>
-            <li>Arqueologo</li>
+            <li *ngFor = 'let c of challengesList'><span (click) = 'onChallengeClick(c.text)'>{{c.type}}</span></li>
         </ul>
     </div>
     <div class="grid-item">
-        <p>Escribe una novela basado en el mundo del juego, gana un nobel y conviertete en multimillonario</p>
+        <p>{{challengeText}}</p>
         <select>
             <option>1</option>
             <option>2</option>

@@ -22,4 +22,8 @@ export class ParticipantsService {
     unregisterParticipant(username) {
         return this.http.post('http://' + this.host + '/unregister', {user: username});
     }
+
+    getParticipantChallenges(username) {
+        return this.http.get('http://' + this.host + '/challenges/list/' + username);
+    }
 }
