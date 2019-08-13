@@ -1,17 +1,24 @@
-.header {width: 100%; margin: 0px; height: 60px; padding: 3px; background-image: url("../assets/static/barra_superior.png"); position: -webkit-sticky; position: sticky; top: 0; z-index: 3 }
+.header {width: 100%; margin: 0px; height: 60px; padding: 3px; display: grid; grid-template-columns: 20% auto auto; background-image: url("../assets/static/barra_superior.png"); position: -webkit-sticky; position: sticky; top: 0; z-index: 3 }
 
-.home { width: 5%; height: auto; margin-left: 2%; margin-right: 10%; margin-top: 25px; font-size: large }
+.home { width: 50%; margin: auto; font-size: large }
 
-.header-form { width: 10%; height: 50%; margin-right: 1%; margin-top: 25px; padding-left: 5px; background-color: rgba(41, 171, 226, 0.15); color: white; font-size: large; border: 0 }
-.header-form::placeholder { color: white; opacity: 0.8; font-size: small }
+.header-nav { display: grid; grid-template-columns: 50% 50% }
+.header-nav a { margin: auto }
+.header-nav a:link { font-size: x-large; font-style: bold; color:white; text-decoration: none }
+.header-nav a:visited { font-size: x-large; font-style: bold; color:white; text-decoration: none }
+.header-nav a:hover { color: cyan }
 
-.header-option { color: white; margin-left: 2%; margin-right: 2% }
-.header-option:link { font-size: x-large; font-style: bold; color:white; text-decoration: none }
-.header-option:visited { font-size: x-large; font-style: bold; color:white; text-decoration: none }
-.header-option:hover { color: cyan }
+.header-login { display: grid; grid-template-columns: 40% 40% auto }
+.header-go { width: 20%; height: 50%; margin-top: 10%;} 
+.header-form { width: 70%; height: 70%; margin-top: 2%; background-color: rgba(41, 171, 226, 0.15); color: white; font-size: large; border: 0 }
+.header-form::placeholder { color: white; opacity: 0.8; font-size: large; padding-left: 3px }
 
-.header-name { color: white; margin-left: 2%; margin-right: 2%; font-size: x-large; font-style: bold }
+.header-data{ display: grid; grid-template-columns: 60% auto }
+.header-name { width: 100%; display: grid; grid-template-columns: auto auto auto }
+.header-info { color: white; margin: auto; font-size: x-large }
+.header-options { width: 100%; display: grid; grid-template-columns: auto auto auto}
+.header-option { width: 25%; margin: auto }
+.header-option img { width: 100% }
+.header-close { width: 25%; margin: auto; cursor: pointer }
 
-.header-info { color: white; margin-left: 3%; margin-right: 3%; font-size: x-large }
 
-.header-nav { margin-left: 13% }

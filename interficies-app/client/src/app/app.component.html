@@ -1,22 +1,29 @@
 <div class='header'>
   <button class="main-button home" (click)="goHome()">Inicio</button>
- 
-  <input *ngIf="isLogged()==false" [(ngModel)]="username" type="text"  class="header-form" placeholder="Usuario">
-  <input *ngIf="isLogged()==false" [(ngModel)]="password" type="password"  class="header-form" placeholder="Contraseña">
-  <button *ngIf="isLogged()==false" class="main-button" (click)="login()">></button>
-
-  <span *ngIf="isLogged()">
-    <span class="header-name">{{getShownName()}}</span>
-    <span class="header-info">Rol: {{getCurrentRol()}}</span>
-    <span class="header-info">Nivel: {{getLevel()}}</span>
-    <a routerLink ="/logros" class="header-option">Logros</a>
-    <a routerLink="/ajustes" class="header-option">Ajustes</a> 
-    <button class="main-button" (click)="logout()">X</button>
+  
+  <span class="header-nav">
+    <a routerLink ="/creditos">Creditos</a>
+    <a routerLink ="/instrucciones">Instrucciones</a>
   </span>
 
-  <span class="header-nav">
-    <a routerLink ="/creditos" class="header-option">Creditos</a>
-    <a routerLink ="/instrucciones" class="header-option">Instrucciones</a>
+  <span class="header-login" *ngIf="isLogged()==false">
+    <input [(ngModel)]="username" type="text"  class="header-form" placeholder="Usuario">
+    <input [(ngModel)]="password" type="password"  class="header-form" placeholder="Contraseña">
+    <button class="main-button header-go" (click)="login()">></button>
+  </span>
+
+  <span *ngIf="isLogged()" class="header-data">
+    <span class='header-name'>
+      <span class="header-info">{{getShownName()}}</span>
+      <span class="header-info">Rol: {{getCurrentRol()}}</span>
+      <span class="header-info">Nivel: {{getLevel()}}</span>
+    </span>
+
+    <span class="header-options">
+      <a routerLink ="/logros" class="header-option"><img src="../assets/static/iconos/logros.png"></a>
+      <a routerLink="/ajustes" class="header-option"><img src="../assets/static/iconos/config.png"></a> 
+      <img class="header-close" (click)="logout()" src="../assets/static/iconos/cerrar.png">
+    </span>
   </span>
 </div>
 
