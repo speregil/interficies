@@ -28,6 +28,12 @@
     });
 });
 
+router.post('/grade', function(req, res, next){
+    controller.gradeChallenge(req.body.id, req.body.points, function(err){
+        res.json({mensaje : err});
+    });
+});
+
  router.get('/list/:user', function(req, res, next) {
     controller.getChallenges(req.params.user, function(err, challenges){
         res.json({mensaje : err, list : challenges});
