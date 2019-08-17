@@ -30,4 +30,10 @@ controller.getChallenges = function(user, callback){
     });
 }
 
+controller.gradeChallenge = function(id, points, callback) {
+    service.gradeChallange(id, points, function(err){
+        callback(err);
+    });
+}
+
 module.exports = controller;

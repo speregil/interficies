@@ -26,6 +26,7 @@
             chal.user = participant[0]._id;
             chal.type = pType;
             chal.text =  pText;
+            chal.points = -1;
             chal.save(function(err, data, ver){
                 connection.disconnect(db);
                 if(err){
@@ -52,6 +53,30 @@
                 else
                     callback(null, list);
             });
+        }
+    });
+ }
+
+ service.gradeChallange = function(challangeID, points, callback){
+    var db = connection.connect();
+    Challenge.find({_id: challangeID}, function(err, challenge){
+        if(err){
+            connection.disconnect(db);
+            callback("Error en la base de datos");
+        }
+        else if(challenge[0]){
+            challenge[0].points = points;
+            challenge[0].save(function(err, data, ver){
+                connection.disconnect(db);
+                if(err)
+                    callback("No fue posible actualizar el desafio");
+                else
+                    callback(null);
+            });
+        }
+        else{
+            connection.disconnect(db);
+            callback("No existe ese desafio");
         }
     });
  }
