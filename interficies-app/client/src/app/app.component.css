@@ -2,7 +2,7 @@
 
 .home { width: 50%; margin: auto; font-size: large }
 
-.header-nav { display: grid; grid-template-columns: 50% 50% }
+.header-nav { display: grid; grid-template-columns: 50% 50%; grid-column-gap: 15% }
 .header-nav a { margin: auto }
 .header-nav a:link { font-size: x-large; font-style: bold; color:white; text-decoration: none }
 .header-nav a:visited { font-size: x-large; font-style: bold; color:white; text-decoration: none }

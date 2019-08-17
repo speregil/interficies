@@ -14,7 +14,7 @@ export class PrimeraAnimacionComponent {
 
   onContinue() {
     this.userService.setInitComic("1");
-    this.userService.setLastComic("19");
+    this.userService.setLastComic("16");
     this.router.navigate(['comic']);
   }
 }
