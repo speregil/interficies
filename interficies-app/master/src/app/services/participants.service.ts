@@ -26,4 +26,8 @@ export class ParticipantsService {
     getParticipantChallenges(username) {
         return this.http.get('http://' + this.host + '/challenges/list/' + username);
     }
+
+    gradeChallenge(challenge, grade){
+        return this.http.post('http://' + this.host + '/challenges/grade', {id: challenge, points: grade});
+    }
 }

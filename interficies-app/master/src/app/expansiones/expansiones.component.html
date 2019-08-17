@@ -14,33 +14,17 @@
 <div class="grid-container" >
     <div class="grid-item">
         <ul>
-            <li *ngFor = 'let c of challengesList'><span (click) = 'onChallengeClick(c.text)'>{{c.type}}</span></li>
+            <li *ngFor = 'let c of challengesList'><span (click) = 'onChallengeClick(c.text, c._id, c.points)'>{{c.type}}</span></li>
         </ul>
     </div>
-    <div class="grid-item">
+    <div class="grid-item" *ngIf='isSelected'>
         <p>{{challengeText}}</p>
-        <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
+        <p>{{msn2}}</p>
+        <select [(ngModel)] = "selectedGrade">
             <option>10</option>
-            <option>11</option>
-            <option>12</option>
-            <option>13</option>
-            <option>14</option>
             <option>15</option>
-            <option>16</option>
-            <option>17</option>
-            <option>18</option>
-            <option>19</option>
             <option>20</option>
         </select>
-        <button>OK</button>
+        <button (click)='onGrade()'>OK</button>
     </div>
 </div>
