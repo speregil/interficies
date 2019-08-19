@@ -10,13 +10,10 @@ import { AppComponent } from '../../app.component';
 })
 
 export class IntroLaboratorioComponent {
-  
-  achivement = 'Viste las animaciones: Laboratorio';
 
   constructor(private userService: UserService,  private router: Router, private app: AppComponent) {}
 
   onContinue() {
-    
-        this.router.navigate(["laboratorio"]);
+    this.router.navigate(["laboratorio"]);
   }
 }

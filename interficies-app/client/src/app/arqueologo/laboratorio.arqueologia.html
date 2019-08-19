@@ -1,4 +1,32 @@
-<div class="main-container">
-    <h3>Laboratorio</h3>
-    <button (click) = "onContinue()">Menu Principal</button>
+<div class='{{currentCursor}}'>
+    <div>
+        <table class='lab-tabla'>
+            <tr>
+                <td><img class='{{currentColors[0]}}' (click)='onImageClick(0)' src='assets/static/laboratorio/lab-1.jpg'></td>
+                <td><img class='{{currentColors[1]}}' (click)='onImageClick(1)' src='assets/static/laboratorio/lab-2.jpg'></td>
+                <td><img class='{{currentColors[2]}}' (click)='onImageClick(2)' src='assets/static/laboratorio/lab-3.jpg'></td>
+                <td><img class='{{currentColors[3]}}' (click)='onImageClick(3)' src='assets/static/laboratorio/lab-1.jpg'></td>
+            </tr>
+            <tr>
+                <td><img class='{{currentColors[4]}}' (click)='onImageClick(4)' src='assets/static/laboratorio/lab-2.jpg'></td>
+                <td><img class='{{currentColors[5]}}' (click)='onImageClick(5)' src='assets/static/laboratorio/lab-3.jpg'></td>
+                <td><img class='{{currentColors[6]}}' (click)='onImageClick(6)' src='assets/static/laboratorio/lab-1.jpg'></td>
+                <td><img class='{{currentColors[7]}}' (click)='onImageClick(7)' src='assets/static/laboratorio/lab-2.jpg'></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class='lab-resaltadores'>
+        <div></div>
+        <img src='assets/static/laboratorio/azul.png' (click)="onResaltador('A')">
+        <img src='assets/static/laboratorio/rojo.png' (click)="onResaltador('R')">
+        <img src='assets/static/laboratorio/verde.png' (click)="onResaltador('V')">
+        <div></div>
+    </div>
+
+    <div class='lab-opciones'>
+        <button class='main-button'>Terminar</button>
+        <button class='main-button'>Reiniciar</button>
+        <button class='main-button'>Volver</button>
+    </div>
 </div>
