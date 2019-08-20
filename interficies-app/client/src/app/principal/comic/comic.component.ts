@@ -36,7 +36,7 @@ export class ComicComponent implements OnDestroy {
 
     while(init <= last) {
       var bgSound = new Howl({
-        src: ['/assets/static/comic-soundtrack/comic-' + init + '.wav'], // Los sonidos deben ser .wav y seguir el formato especifico
+        src: ['/assets/static/comic-soundtrack/comic-' + init + '.mp3'], // Los sonidos deben ser .wav y seguir el formato especifico
         loop: true
       });
       this.bgSounds.push(bgSound);

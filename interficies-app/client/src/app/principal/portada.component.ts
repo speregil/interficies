@@ -17,7 +17,7 @@ export class PortadaComponent implements OnInit, OnDestroy {
   
     ngOnInit() {
       this.bgSound.play();
-      this.bgSound.loop()
+      this.bgSound.loop();
       Howler.volume(0.5);
     }
 
