@@ -1,5 +1,5 @@
 <div class='header'>
-  <button class="main-button home" (click)="goHome()">Inicio</button>
+  <img src="../assets/static/iconos/normal/home.png" class="home" (click) = "goHome()"/>
   
   <span class="header-nav">
     <a routerLink ="/creditos">Creditos</a>
@@ -9,7 +9,7 @@
   <span class="header-login" *ngIf="isLogged()==false">
     <input [(ngModel)]="username" type="text"  class="header-form" placeholder="Usuario">
     <input [(ngModel)]="password" type="password"  class="header-form" placeholder="Contraseña">
-    <button class="main-button header-go" (click)="login()">></button>
+    <img src="../assets/static/iconos/normal/continuar.png" class="header-go" (click) = "login()"/>
   </span>
 
   <span *ngIf="isLogged()" class="header-data">
@@ -20,9 +20,9 @@
     </span>
 
     <span class="header-options">
-      <a routerLink ="/logros" class="header-option"><img src="../assets/static/iconos/logros.png"></a>
-      <a routerLink="/ajustes" class="header-option"><img src="../assets/static/iconos/config.png"></a> 
-      <img class="header-close" (click)="logout()" src="../assets/static/iconos/cerrar.png">
+      <a routerLink ="/logros" class="header-option"><img src="../assets/static/iconos/normal/logros.png"></a>
+      <a routerLink="/ajustes" class="header-option"><img src="../assets/static/iconos/normal/config.png"></a> 
+      <img class="header-close" (click)="logout()" src="../assets/static/iconos/normal/cerrar.png">
     </span>
   </span>
 </div>
