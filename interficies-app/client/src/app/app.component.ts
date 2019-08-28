@@ -88,10 +88,12 @@ export class AppComponent {
    * Termina la sesión de un usuario y notifica el proceso a todos los observadores registrados
    */
   logout(){
-    this.userService.setUserLoggedOut();
-    this.loggedUser = null;
+    if(confirm("¿Desea salir de la aplicación?")) {
+      this.userService.setUserLoggedOut();
+      this.loggedUser = null;
 
-    this.notifyLogin(false);
+      this.notifyLogin(false);
+    }
   }
 
   /**

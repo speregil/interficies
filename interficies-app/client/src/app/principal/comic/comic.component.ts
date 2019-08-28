@@ -80,9 +80,38 @@ export class ComicComponent implements OnDestroy {
    * @param achivementNum Version del logro que se va aasignar
    */
   setAchivement(achivementNum) {
-    
+    var text = '';
+    var points = 0;
+    var currentUser = this.userService.getUserLoggedIn();
+    if(currentUser) {
+      if(achivementNum == 1) {
+          text = 'Has leído la primera parte del Cómic';
+          points = 20;
+          this.saveAchivement(currentUser, text, points, 1);
+      }
+      else {
+        this.setRoute(1);
+      }
+    }
+    else
       this.setRoute(achivementNum);
-    
+  }
+
+  saveAchivement(user, text, points, achivementNum){
+    if(this.userService.checkUserAchivements(user, text)){
+      this.userService.setAchivement(user.username, text, points).subscribe(response => {
+        if(response['status'] > 0) {
+          alert(response['mensaje']);
+          this.setRoute(achivementNum);
+        }
+        else {
+          alert("Logro obtenido: " + text);
+          this.setRoute(achivementNum);
+        }
+      });  
+    }
+    else
+    this.setRoute(achivementNum);
   }
 
   /**

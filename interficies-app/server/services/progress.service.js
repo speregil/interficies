@@ -52,8 +52,10 @@ service.createProgressProfile = function(userID, callback) {
 service.getProfile = function(user, callback) {
     var db = connection.connect();
     User.find({username: user}, function(err, search){
-        if(err)
+        if(err) {
+            connection.disconnect(db);
             callback(1, "Error en la base de datos", null);
+        }
         else {
             if(search[0]) {
                 Progress.find({userID: search[0]._id}, function(err, profile) {
@@ -70,6 +72,7 @@ service.getProfile = function(user, callback) {
                 });
             }
             else {
+                connection.disconnect(db);
                 callback(1, "El usuario no existe", null);
             }
         }
@@ -116,7 +119,7 @@ service.addAchivement = function (user, text, points, callback) {
     User.find({username: user}, function(err, search){
         if(err){
             connection.disconnect(db);
-            callback("Error en la base de datos");
+            callback("Error en la base de datos: " + err);
         }
         else {
             if(search[0]) {

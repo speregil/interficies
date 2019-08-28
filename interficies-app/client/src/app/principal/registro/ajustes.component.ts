@@ -6,6 +6,7 @@ import { UserService } from '../../models/user.service';
   templateUrl: './ajustes.component.html',
   styleUrls: ['./registro.component.css']
 })
+
 export class AjustesComponent {
 
     achivement = { text: "Has seleccionado tu avatar", points: 5 };
@@ -37,51 +38,59 @@ export class AjustesComponent {
     msn2 = "";
 
     changePassword(){
-        if(this.password){
-            if(this.confirmacion && (this.confirmacion == this.password)) {
-                var user = this.userService.getUserLoggedIn();
-                this.userService.changePassword(user.username, this.password).subscribe(response => {
-                    if(response["mensaje"])
-                        this.msn = response["mensaje"];
-                    else
-                        this.msn = "Cambio exitoso";
-                });
+        if(confirm("¿Desea cambiar su clave?")) {
+            if(this.password){
+                if(this.confirmacion && (this.confirmacion == this.password)) {
+                    this.msn = "Cambiando...";
+                    var user = this.userService.getUserLoggedIn();
+                    this.userService.changePassword(user.username, this.password).subscribe(response => {
+                        if(response["mensaje"])
+                            this.msn = response["mensaje"];
+                        else {
+                            this.msn = "Cambio exitoso";
+                            this.password = "";
+                            this.confirmacion = "";
+                        }
+                    });
+                }
+                else
+                    this.msn = "Las claves no coinciden";
             }
             else
-                this.msn = "Las claves no coinciden";
+                this.msn = "Escribe una nueva clave";
         }
-        else
-            this.msn = "Escribe una nueva clave";
     }
 
     onClickAvatar(option){
-        this.msn2 = "cambiando...";
-        var user = this.userService.getUserLoggedIn();
-        if(option == 'girl'){
-            this.userService.updateAvatar(user.username, 'chica-basico').subscribe(response => {
-                this.msn2 = "";
-                if(response["mensaje"])
-                    this.msn2 = response["mensaje"];
-                else {
-                    this.changeAvatar(option);
-                    user.currentGender = 'chica';
-                    this.userService.setUserLoggedIn(user);
-                    this.setAchivement(user);
-                }
-            });
-        }
-        else {
-            this.userService.updateAvatar(user.username, 'chico-basico').subscribe(response => {
-                this.msn2 = "";
-                if(response["mensaje"])
-                    this.msn2 = response["mensaje"];
-                else {
-                    this.changeAvatar(option);
-                    user.currentGender = 'chico';
-                    this.userService.setUserLoggedIn(user);
-                    this.setAchivement(user);
-                }
-            });
+        if(confirm("¿Desea cambiar su avatar?")) {
+            this.msn2 = "cambiando...";
+            var user = this.userService.getUserLoggedIn();
+            if(option == 'girl'){
+                this.userService.updateAvatar(user.username, 'chica-basico').subscribe(response => {
+                    this.msn2 = "";
+                    if(response["mensaje"])
+                        this.msn2 = response["mensaje"];
+                    else {
+                        this.changeAvatar(option);
+                        user.currentGender = 'chica';
+                        this.userService.setUserLoggedIn(user);
+                        this.setAchivement(user);
+                    }
+                });
+            }
+            else {
+                this.userService.updateAvatar(user.username, 'chico-basico').subscribe(response => {
+                    this.msn2 = "";
+                    if(response["mensaje"])
+                        this.msn2 = response["mensaje"];
+                    else {
+                        this.changeAvatar(option);
+                        user.currentGender = 'chico';
+                        this.userService.setUserLoggedIn(user);
+                        this.setAchivement(user);
+                    }
+                });
+            }
         }
     }
 
