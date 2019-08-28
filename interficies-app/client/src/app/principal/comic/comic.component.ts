@@ -17,51 +17,20 @@ export class ComicComponent implements OnDestroy {
   currentComic = "0";             // Indice que identifica la pagina que se esta mostrando
   initComic = "0";                // Indice que identifica la primera pagina de la secuencia
   lastComic = "0";                // Indice que identifica la ultima pagina de la secuencia
-  bgSounds = new Array<Howl>();   // Arreglo de todos los sonidos asociados a la secuencia actual de paginas
+  currentBg = "";
+  bgSound = null;
 
   constructor(private userService: UserService, private router: Router){
     this.initComic = this.userService.getInitComic();
     this.lastComic = this.userService.getLastComic();
     this.currentComic = this.initComic;
-    this.initBgSounds();
-    this.playSound();
-  }
-
-  /**
-   * Inicializa el arreglo de sonidos basandose en las paginas inicial y final de la secuencia actual
-   */
-  initBgSounds(){
-    var init = Number(this.initComic);
-    var last = Number(this.lastComic);
-
-    while(init <= last) {
-      var bgSound = new Howl({
-        src: ['/assets/static/comic-soundtrack/comic-' + init + '.mp3'], // Los sonidos deben ser .wav y seguir el formato especifico
-        loop: true
-      });
-      this.bgSounds.push(bgSound);
-      init++;
-    }
-  }
-
-  /**
-   * Enciende el sonido asociado con la pagina actual y apaga todos los demas
-   */
-  playSound() {
-    this.stopSounds();
-    var current = Number(this.currentComic);
-    var snd = this.bgSounds[current-1];
-    snd.play();
-    snd.loop();
+    this.currentBg = this.userService.getComicBg();
+    this.bgSound = new Howl({
+      src: ['/assets/static/comic-soundtrack/' + this.currentBg + '.mp3'],
+      loop: true
+    });
     Howler.volume(0.5);
-  }
-
-  /**
-   * Apaga todos los sonidos en la lista actual
-   */
-  stopSounds() {
-    for(var snd of this.bgSounds)
-      snd.stop();
+    this.bgSound.play();
   }
 
   /**
@@ -73,9 +42,7 @@ export class ComicComponent implements OnDestroy {
     current++;
     if(current <= last) {
       this.currentComic = current + "";
-      this.playSound();
     }
-    console.log($element);
     $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
@@ -88,7 +55,6 @@ export class ComicComponent implements OnDestroy {
     current--;
     if(current >= first) {
       this.currentComic = current + "";
-      this.playSound();
     }
   }
 
@@ -133,16 +99,11 @@ export class ComicComponent implements OnDestroy {
     }
     this.router.navigate([routeName]);
   }
-  
-  scrollToElement($element): void {
-    console.log($element);
-    $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-  }
 
   /**
    * Detiene todos los sonidos antes de destruir el componente
    */
   ngOnDestroy() { 
-    this.stopSounds();
+    this.bgSound.stop();
   }
 }

@@ -1,16 +1,12 @@
 .comic-container { margin-left: 10%; background-color: transparent }
 .comic-container img { height: auto; width: 90% }
 
-.comic-prev { background-color: transparent; margin-left: 30%; }
-.comic-prev button { font-size: 16px; color: white; border: 2px solid white; background-color: transparent; width: 15% }
-.comic-prev button:hover{ color: cyan; border-color: cyan }
-.comic-prev button:active{ color: black; border-color: black }
+.comic-prev { background-color: transparent; margin-left: 40% }
+.comic-prev:hover{ filter: grayscale(100%); -webkit-filter: grayscale(100%) }
 
 .comic-sig { background-color: transparent; margin-left: 12% }
-.comic-sig button { font-size: 16px; color: white; border: 2px solid white; background-color: transparent; width: 15% }
-.comic-sig button:hover{ color: cyan; border-color: cyan }
-.comic-sig button:active{ color: black; border-color: black }
+.comic-sig:hover{ filter: grayscale(100%); -webkit-filter: grayscale(100%) }
 
-.comic-continuar { font-size: 16px; color: white; border: 2px solid white; background-color: transparent; display: block; width: 30%; margin-left: 38% }
+.comic-continuar { font-size: 16px; color: white; border: 2px solid white; background-color: transparent; display: block; width: 30%; margin-left: 35% }
 .comic-continuar:hover{ color: cyan; border-color: cyan }
 .comic-continuar:active{ color: black; border-color: black }

@@ -8,6 +8,7 @@ export class UserService {
   private isUserLoggedIn;
   private currentInitComic;
   private currentLastComic;
+  private currentComicBg;
  
   
   host = 'localhost:3100';
@@ -53,6 +54,14 @@ export class UserService {
 
   setLastComic(init: string) {
     this.currentLastComic = init;
+  }
+
+  setComicBg(bg: string) {
+    this.currentComicBg = bg;
+  }
+
+  getComicBg() {
+    return this.currentComicBg;
   }
 
   getProgressProfile(user: string) {

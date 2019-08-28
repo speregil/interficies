@@ -1,7 +1,7 @@
 .header {width: 100%; margin: 0px; height: 60px; padding: 3px; display: grid; grid-template-columns: 5% 10% auto; background-image: url("../assets/static/barra_superior.png"); position: -webkit-sticky; position: sticky; top: 0; z-index: 3 }
 
 .home { width: 60%; margin: auto; cursor: pointer }
-.home:hover { filter: invert(100%); -webkit-filter: grayscale(100%); cursor: pointer }
+.home:hover { filter: grayscale(100%); -webkit-filter: grayscale(100%); cursor: pointer }
 
 .header-nav { display: grid; grid-template-columns: 50% 50%; grid-column-gap: 15% }
 .header-nav a { margin: auto }
@@ -11,7 +11,7 @@
 
 .header-login { display: grid; grid-template-columns: auto auto 10%; margin-left: 100px }
 .header-go { width: 30%; margin: auto; cursor: pointer }
-.header-go:hover { filter: invert(100%); -webkit-filter: grayscale(100%) } 
+.header-go:hover { filter: grayscale(100%); -webkit-filter: grayscale(100%) } 
 .header-form {  width: 95%; margin: 5px; padding-left: 10px; background-color: rgba(41, 171, 226, 0.15); color: white; font-size: x-large; border: 0 }
 .header-form::placeholder { color: white; opacity: 0.8; font-size: x-large }
 
@@ -21,7 +21,7 @@
 .header-options { width: 100%; display: grid; grid-template-columns: auto auto auto}
 .header-option { width: 25%; margin: auto }
 .header-option img { width: 100% }
-.header-option img:hover { width: 100%; filter: invert(100%); -webkit-filter: grayscale(100%);}
+.header-option img:hover { width: 100%; filter: grayscale(100%); -webkit-filter: grayscale(100%);}
 .header-close { width: 25%; margin: auto; cursor: pointer }
-.header-close:hover { filter: invert(100%); -webkit-filter: grayscale(100%) } 
+.header-close:hover { filter: grayscale(100%); -webkit-filter: grayscale(100%) } 
 
