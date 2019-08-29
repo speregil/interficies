@@ -178,12 +178,15 @@ service.updateRole = function(user, role, callback){
 service.updateAvatar = function(user, avatar, callback){
     var db = connection.connect();
     User.find({username: user}, function(err, search){
-        if(err)
+        if(err){
+            connection.disconnect(db);
             callback("Error en la base de datos");
+        }
         else {
             if(search[0]) {
                 Progress.find({userID: search[0]._id}, function(err, profile) {
                     if(err){
+                        connection.disconnect(db);
                         callback("No fue posible encontrar el perfil");
                     }else{
                         profile[0].avatar = avatar;
@@ -197,6 +200,40 @@ service.updateAvatar = function(user, avatar, callback){
                         });
                     }
                 });
+            }
+        }
+    });
+}
+
+service.updateLevel = function(user, level, callback){
+    var db = connection.connect();
+    User.find({username: user}, function(err, search){
+        if(err){
+            connection.disconnect(db);
+            callback("Error en la base de datos");
+        }
+        else {
+            if(search[0]) {
+                Progress.find({userID: search[0]._id}, function(err, profile) {
+                    if(err){
+                        connection.disconnect(db);
+                        callback("No fue posible encontrar el perfil");
+                    }else{
+                        profile[0].level = level;
+                        profile[0].save(function(err, prof, ver){
+                            connection.disconnect(db);
+                            if(err){
+                                callback("No fue posible cambiar el nivel");
+                            }else{
+                                callback(null);
+                            }
+                        });
+                    }
+                });
+            }
+            else {
+                connection.disconnect(db);
+                callback("No fue posible encontrar el usuario");
             }
         }
     });

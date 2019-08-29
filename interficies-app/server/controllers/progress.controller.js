@@ -75,6 +75,12 @@ controller.updateAvatar = function(user, avatar, callback){
     });
 }
 
+controller.updateLevel = function(user, level, callback){
+    service.updateLevel(user, level, function(error){
+        callback(error);
+    });
+}
+
 controller.getAvatar = function(user, callback){
     service.getAvatar(user, function(err, avatar){
         callback(err, avatar);

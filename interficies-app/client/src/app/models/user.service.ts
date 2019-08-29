@@ -91,12 +91,38 @@ export class UserService {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
+  checkLevel(user) {
+    var achivements = user.achivements;
+    var puntos = 0;
+    for(var achivement of achivements) {
+      puntos += Number.parseInt(achivement["points"]);
+    }
+
+    if(puntos >= 50 && puntos < 100 ){
+      this.updateLevel(user, 'Practicante 1');
+    }
+    else if(puntos >= 100 && puntos < 150){
+      this.updateLevel(user, 'Practicante 2');
+    }
+    else if(puntos >= 150 && puntos < 200){
+      this.updateLevel(user, 'Experto');
+    }
+    else if (puntos >= 200){
+      this.updateLevel(user, 'Magis');
+    }
+  }
+
   updateRole(pUser, pRole) {
     return this.http.post<{}>('http://' + this.host + '/progress/role', {user : pUser, role : pRole});
   }
 
   updateAvatar(pUser, pAvatar){
     return this.http.post<{}>('http://' + this.host + '/progress/avatar', {username : pUser, avatar : pAvatar});
+  }
+
+  updateLevel(user, plevel){
+    user.level = plevel;
+    return this.http.post<{}>('http://' + this.host + '/progress/level', {username : user, level : plevel});
   }
 
   getAvatar(pUser){

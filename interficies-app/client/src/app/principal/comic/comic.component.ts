@@ -102,6 +102,8 @@ export class ComicComponent implements OnDestroy {
       this.userService.setAchivement(user.username, text, points).subscribe(response => {
         if(response['status'] > 0) {
           alert(response['mensaje']);
+          this.userService.localUpdateAchivemets(user, text, points);
+          this.userService.checkLevel(user);
           this.setRoute(achivementNum);
         }
         else {

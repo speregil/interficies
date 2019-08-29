@@ -72,6 +72,12 @@ router.post('/avatar', function(req, res, next) {
     });
 });
 
+router.post('/level', function(req, res, next){
+    controller.updateLevel(req.body.username, req.body.level, function(err){
+        res.json({mensaje : err});
+    });
+});
+
 router.get('/getavatar/:username', function(req, res, next) {
     controller.getAvatar(req.params.username, function (err, actualAvatar){
         res.json({mensaje : err, avatar: actualAvatar});
