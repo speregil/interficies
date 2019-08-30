@@ -30,4 +30,8 @@ export class ParticipantsService {
     gradeChallenge(challenge, grade){
         return this.http.post('http://' + this.host + '/challenges/grade', {id: challenge, points: grade});
     }
+
+    addNotification(user, text){
+        return this.http.post('http://' + this.host + '/notifications/new', {username: user, mensaje: text});
+    }
 }

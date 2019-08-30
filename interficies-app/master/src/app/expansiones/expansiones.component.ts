@@ -85,8 +85,10 @@ export class ExpansionesComponent {
     this.participants.gradeChallenge(this.challengeID, this.selectedGrade).subscribe(response => {
       if(response['mensaje'])
         this.msn = response['mensaje'];
-      else
-        this.msn = '';
+      else {
+        this.msn = 'Notificando...';
+        this.participants.addNotification(this.selectedParticipant, "Nuevo logro contenido").subscribe(response => this.msn = '');
+      }
     });
   }
 }

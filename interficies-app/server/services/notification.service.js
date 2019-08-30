@@ -24,18 +24,15 @@
             callback("Error en la base de datos");
         }
         else if(user[0]){
-            console.log("Usuario encontrado");
             var notification = new Notification();
             notification.user = user[0]._id;
             notification.mensaje = mensaje;
             notification.save(function(err, data, ver){
                 connection.disconnect(db);
                 if(err){
-                    console.log(err);
                     callback(err['errmsg']);
                 }
                 else{
-                    console.log("Exito");
                     callback(null);
                 }
             });
@@ -43,6 +40,25 @@
         else {
             connection.disconnect(db);
             callback("No fue posible encontrar al usuario");
+        }
+    });
+ }
+
+ service.getNotifications = function(usuario, callback){
+    var db = connection.connect();
+    User.find({username: usuario, admin: false}, function(err, find){
+        if(err){
+            connection.disconnect(db);
+            callback("Error en la base de datos");
+        }
+        else if(find[0]){
+            Notification.find({user : find[0]._id}, function(err, list){
+                connection.disconnect(db);
+                if(err)
+                    callback(err, []);
+                else
+                    callback(null, list);
+            });
         }
     });
  }

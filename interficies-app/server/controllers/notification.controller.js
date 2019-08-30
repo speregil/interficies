@@ -24,4 +24,10 @@ controller.addNotification = function(user, mensaje, callback) {
     });
 }
 
+controller.getNotifications = function(username, callback) {
+    service.getNotifications(username, function(err, list){
+        callback(err, list);
+    });
+}
+
 module.exports = controller;

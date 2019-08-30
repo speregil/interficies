@@ -52,9 +52,11 @@ export class AppComponent {
             user.achivements = response["list"];
             this.userService.setUserLoggedIn(user);
             this.loggedUser = this.userService.getUserLoggedIn();
+            this.checkNotifications(this.username);
             this.username = "";
             this.password = "";
 
+            
             this.notifyLogin(true);  //Notifica que hubo un login a todos los observadores
           });
         });
@@ -94,6 +96,26 @@ export class AppComponent {
 
       this.notifyLogin(false);
     }
+  }
+
+  checkNotifications(username){
+    this.userService.getNotifications(username).subscribe(response => {
+      if(response['mensaje']){
+        console.log(response['mensaje']);
+      }
+      else{
+        var mensaje = "";
+        var notifications = response['list'];
+        if(notifications.length > 0) {
+          console.log(notifications.length);
+          for(var notification of notifications){
+            console.log(notification['mensaje']);
+            mensaje += notification['mensaje'] + "\n";
+          }
+          alert(mensaje);
+        }
+      }
+    });
   }
 
   /**

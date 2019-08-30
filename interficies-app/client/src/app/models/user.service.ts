@@ -144,4 +144,8 @@ export class UserService {
   getChallenges(pUser) {
     return this.http.get<{}>('http://' + this.host + '/challenges/list/' + pUser);
   }
+
+  getNotifications(pUser){
+    return this.http.get<{}>('http://' + this.host + '/notifications/list/' + pUser);
+  }
 }
