@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { UserService } from '../models/user.service';
 import { ChallengesService } from '../models/challenges.service';
 import { HttpClient } from '@angular/common/http';
+import {Howl, Howler} from 'howler';
 
 @Component({
   selector: 'juglar',
@@ -13,6 +14,7 @@ export class JuglarComponent {
   
   masterChallenges = [];
 
+  perfilActual = "";
   retoActual = "";
   msnAceptar = "";
   basico = true;
@@ -23,6 +25,10 @@ export class JuglarComponent {
   poolBasico = "selected";
   poolMaster = "juglar-button";
 
+  bgSound = new Howl({
+    src: ['/assets/static/mosca.mp3'],
+    loop: true
+});
 
 
   constructor(private userService: UserService, private router: Router, private http: HttpClient, private challenges: ChallengesService) {
@@ -32,6 +38,12 @@ export class JuglarComponent {
         this.masterAble = true;
       }
     });
+  }
+
+  ngOnInit() {
+    this.bgSound.play();
+    this.bgSound.loop();
+    Howler.volume(0.5);
   }
 
   onFolderClick( folder ) {
@@ -46,6 +58,11 @@ export class JuglarComponent {
   }
 
   getBasicChallenge( folder ){
+    
+    this.http.get('assets/static/juglar/' + folder + '/' + folder + '.txt', {responseType: 'text'}).subscribe(perfil => {
+        this.perfilActual = perfil;
+    });
+
     this.http.get('assets/static/juglar/config.json', {responseType: 'json'}).subscribe(data => {
       var len = parseInt(data["num"]);
       var i = Math.floor(Math.random() * len) + 1;
