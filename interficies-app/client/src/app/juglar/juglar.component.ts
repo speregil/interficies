@@ -46,6 +46,10 @@ export class JuglarComponent {
     Howler.volume(0.5);
   }
 
+  ngOnStop(){
+    this.bgSound.stop();
+  }
+
   onFolderClick( folder ) {
     if(this.userService.isUserLogged()) {
       this.retoActual = "Procesando...";
