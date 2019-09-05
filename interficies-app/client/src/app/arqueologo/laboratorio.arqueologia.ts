@@ -38,7 +38,7 @@ export class LaboratorioComponent {
     }
 
     for(var num of randNums){
-      var imgSource = source + '/' + source + num + '.png';
+      var imgSource = source + '/' + source + '-' + num;
       randImages.push(imgSource);
     }
     return randImages;
