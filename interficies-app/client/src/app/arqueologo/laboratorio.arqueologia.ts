@@ -65,6 +65,36 @@ export class LaboratorioComponent {
     this.currentColors[pos] = 'img-' + color[1];
   }
 
+  validate(){
+    var mistakes = 0;
+    var correct = 0;
+    for(var i = 0; i < this.currentImages.length; i++){
+      var image = this.currentImages[i].split('/');
+      var source = image[0];
+      var color = this.currentColors[i];
+
+      if(source == 'Gabriella' && color == 'img-Acontainer')
+        correct++;
+      else if(source == 'MyC' && color == 'img-Rcontainer')
+        correct++;
+      else if(source == 'Golpe' && color == 'img-Vcontainer')
+        correct++;
+      else
+        mistakes++; 
+    }
+
+    if(mistakes > 0)
+      alert("Hay " + mistakes + " datos que no coinciden. Vuelva a intentar");
+    else
+      alert("Correcto");
+  }
+
+  reset(){
+    for(var i = 0; i < 9; i++){
+      this.currentColors[i] = 'img-container';
+    }
+  }
+
   onContinue() {
     if(this.userService.isUserLogged()) {
       var user = this.userService.getUserLoggedIn();
