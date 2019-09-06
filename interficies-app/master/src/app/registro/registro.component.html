@@ -1,8 +1,10 @@
-<div>
-    <h3>Registro</h3>
-    <input [(ngModel)]="username" type="text" placeholder="Usuario">
-    <input [(ngModel)]="password" type="password" placeholder="Clave">
-    <input [(ngModel)]="shownName" type="text" placeholder="Nombre a mostrar">
+<div class="form-container">
+    <label>Usuario</label><input class="main-text" [(ngModel)]="username" type="text">
+    <label>Nombre</label><input class="main-text" [(ngModel)]="shownName" type="text">
+    <label>Clave</label><input class="main-text" [(ngModel)]="password" type="password">
+    <label>Confirmar Clave</label><input class="main-text" [(ngModel)]="confirm" type="password">
+</div>
+<div class="option-container">
     <p>{{msn}}</p>
-    <input type="button" (click) = "register()" value="Registrarse">
+    <input type="button" (click) = "register()" value="Registrarse" class="main-button">
 </div>

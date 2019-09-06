@@ -1,6 +1,8 @@
-<ul>
-    <li><input [(ngModel)]="username" type="text" placeholder="Usuario"></li> 
-    <li><input [(ngModel)]="password" type="password" placeholder="Contraseña"></li>
-    <li><input type="button" (click) = "login()" value="Iniciar Sesión"></li>
-    <li><a routerLink="/registro">Registrarse</a></li>
-</ul>
+<div class="form-container">
+    <label>Usuario</label><input class="main-text" [(ngModel)]="username" type="text">
+    <label>Contraseña</label><input class="main-text" [(ngModel)]="password" type="password">
+<div>
+<div class="option-container">
+    <input type="button" (click) = "login()" value="Iniciar Sesión" class="main-button">
+    <a routerLink="/registro"><button class="main-button">Registrarse</button></a>
+</div>
