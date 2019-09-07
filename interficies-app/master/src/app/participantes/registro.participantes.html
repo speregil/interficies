@@ -1,8 +1,11 @@
-<div>
-    <h3>Registrar un nuevo participante</h3>
-    <input [(ngModel)]="username" type="text" placeholder="Usuario">
-    <input [(ngModel)]="password" type="password" placeholder="Clave">
-    <input [(ngModel)]="shownName" type="text" placeholder="Nombre a mostrar">
+<div class='register-container'>
+    <img src='./assets/static/agregar.png'><br>
+    <div class='form-container'>
+        <span>Usuario</span><input class='main-text' [(ngModel)]="username" type="text">
+        <span>Nombre</span><input class='main-text' [(ngModel)]="shownName" type="text">
+        <span>Clave</span><input class='main-text' [(ngModel)]="password" type="password">
+        <span>Confirmar Clave</span><input class='main-text' [(ngModel)]="confirm" type="password">
+    </div>
     <p>{{msn}}</p>
-    <input type="button" (click) = "register()" value="Registrarse">
+    <input type="button" class='main-button' (click) = "register()" value="Registrar">
 </div>

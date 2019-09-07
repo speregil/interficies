@@ -1,4 +1,6 @@
-<p>{{msn}}</p>
-<ul>
-    <li *ngFor="let p of participantes"><span>{{p.shownName}}</span> <span><button (click) = "unregister(p.username)">X</button></span></li>    
-</ul>
+<div class='register-container'>
+    <p>{{msn}}</p>
+    <ul class='participant-list'>
+        <li *ngFor="let p of participantes"><span>{{p.shownName}}</span><img src='./assets/static/basura.png' (click) = "unregister(p.username)"></li>    
+    </ul>
+</div>

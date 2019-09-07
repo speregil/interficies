@@ -11,6 +11,7 @@ export class RegistroParticipantesComponent {
 
     username = "";
     password = "";
+    confirm = "";
     shownName = "";
     msn = "";
 
@@ -20,15 +21,19 @@ export class RegistroParticipantesComponent {
 
     register(){
         this.msn = "";
-        this.service.registerParticipant(this.username, this.password, this.shownName).subscribe(data => {
-            if(data['status'] > 0 )
-                this.msn = data['mensaje'];
-            else
-                this.msn = "Registro Exitoso";
+        if(this.password == this.confirm){
+            this.service.registerParticipant(this.username, this.password, this.shownName).subscribe(data => {
+                if(data['status'] > 0 )
+                    this.msn = data['mensaje'];
+                else
+                    this.msn = "Registro Exitoso";
 
-            this.clean();
-            this.emitter.emit("registro");
-        });
+                this.clean();
+                this.emitter.emit("registro");
+            });
+        }
+        else
+            this.msn = 'Las claves no coinciden';
     }
 
     clean() {

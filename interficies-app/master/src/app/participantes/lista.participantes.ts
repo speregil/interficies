@@ -18,10 +18,12 @@ export class ListaParticipantesComponent {
     constructor(private service: ParticipantsService){}
 
     unregister(username){
-      this.service.unregisterParticipant(username).subscribe(data => {
-        if(data["mensaje"])
-          alert(data["mensaje"]);
-        this.emitter.emit("delete");
-      });
+      if(confirm('Desea eliminar este usuario')){
+        this.service.unregisterParticipant(username).subscribe(data => {
+          if(data["mensaje"])
+            alert(data["mensaje"]);
+          this.emitter.emit("delete");
+        });
+      }
     }
 } 
