@@ -24,6 +24,12 @@ controller.createGroup = function(groupName, masterName, callback) {
     });
 }
 
+controller.removeGroup = function(groupName, masterName, callback) {
+    service.removeGroup(groupName, masterName, function(err){
+        callback(err);
+    });
+}
+
 controller.getGroups = function(masterName, callback) {
     service.getGroups(masterName, function(err, groups){
         callback(err, groups);
@@ -38,6 +44,12 @@ controller.getParticipants = function(groupName, callback) {
 
 controller.asign = function(groupName, masterName, callback) {
     service.asign(groupName, masterName, function(err){
+        callback(err);
+    });
+}
+
+controller.unasign = function(groupName, userName, callback) {
+    service.unasign(groupName, userName, function(err){
         callback(err);
     });
 }

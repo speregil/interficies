@@ -41,6 +41,27 @@
     });
  }
 
+ service.removeGroup = function(groupName, masterName, callback){
+    var db = connection.connect();
+    User.find({username: masterName}, function(err, master){
+        if(err){
+            connection.disconnect(db);
+            callback("Error en la base de datos");
+        }
+        else if(master[0]){
+            Group.findOneAndDelete({name: groupName, master: master[0]._id}, function(e, search){
+                connection.disconnect(db);
+                if(e)
+                    callback("Error en la base de datos");
+                else
+                    callback(null);
+            });
+        }
+        else
+            callback("El maestro indicado no existe");
+    });
+}
+
  service.getGroups = function(masterName, callback){
     var db = connection.connect();
     User.find({username: masterName, admin: true}, function(err, master){
@@ -112,6 +133,53 @@
                             callback("No fue asignar al participantes");
                         }else{
                             user[0].asign = true;
+                            user[0].save(function(e, us, ver){
+                                connection.disconnect(db);
+                                if(e)
+                                    callback("Cuidado, usuario: " + user[0]._id + " desactualizado");
+                                else{
+                                    callback(null);
+                                }
+                            });
+                        }
+                    });
+                }
+                else{
+                    connection.disconnect(db);
+                    callback("Error: El usuario no existe");
+                }
+            });
+        }
+        else {
+            connection.disconnect(db);
+            callback("Error: El grupo no existe");
+        }
+    });
+ }
+
+ service.unasign = function(groupName, userName, callback){
+    var db  = connection.connect();
+    Group.find({name: groupName}, function(err, group){
+        if(err){
+            connection.disconnect(db);
+            callback("Error en la base de datos");
+        }
+        else if(group[0]){
+            User.find({username: userName}, function(error, user){
+                if(error){
+                    connection.disconnect(db);
+                    callback("Error en la base de datos");
+                }
+                else if(user[0]){
+                    var participants = group[0].participants;
+                    participants.splice(participants.indexOf(user[0]._id),1);
+                    group[0].participants = participants;
+                    group[0].save(function(err, gr, ver){
+                        if(err){
+                            connection.disconnect(db);
+                            callback("No fue asignar al participantes");
+                        }else{
+                            user[0].asign = false;
                             user[0].save(function(e, us, ver){
                                 connection.disconnect(db);
                                 if(e)

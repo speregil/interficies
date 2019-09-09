@@ -15,8 +15,16 @@ export class GroupService {
         return this.http.post('http://' + this.host + '/groups/new', {group: group, master: master});
     }
 
+    removeGroup(group, master){
+        return this.http.post('http://' + this.host + '/groups/remove', {group: group, master: master});
+    }
+
     asign(group, user){
         return this.http.post('http://' + this.host + '/groups/asign', {groupName: group, userName: user});
+    }
+
+    unasign(group, user){
+        return this.http.post('http://' + this.host + '/groups/unasign', {groupName: group, userName: user});
     }
 
     listGroups(masterName){

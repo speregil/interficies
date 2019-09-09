@@ -38,6 +38,7 @@ export class GroupComponent {
                 else
                 this.msn = "Registro Exitoso";
                 this.msn3 = "Selecciona un grupo";
+                this.groupName = "";
                 this.getGroups();
             });
         }
@@ -54,6 +55,7 @@ export class GroupComponent {
 
     onSelectChange(){
         this.msn3 = "Cargando Lista de participantes";
+        this.participantsList = [];
         this.getParticipants();
     }
 
@@ -71,20 +73,62 @@ export class GroupComponent {
     }
 
     asign(){
-        this.msn2 = "Asignando";
-        if(this.selectedGroup && this.selectedParticipant){
-            this.service.asign(this.selectedGroup, this.selectedParticipant).subscribe(response =>{
-                if(response["mensaje"])
-                    this.msn2 = response["mensaje"];
-                else{
-                    this.msn2 = "";
-                    this.onSelectChange();
-                    this.getUnasigned();
-                }
-            });
+        if(confirm("¿Desea asignar el participante al grupo?")){
+            this.msn2 = "Asignando";
+            if(this.selectedGroup && this.selectedParticipant){
+                this.service.asign(this.selectedGroup, this.selectedParticipant).subscribe(response =>{
+                    if(response["mensaje"])
+                        this.msn2 = response["mensaje"];
+                    else{
+                        this.msn2 = "";
+                        this.onSelectChange();
+                        this.getUnasigned();
+                    }
+                });
+            }
+            else {
+                this.msn2 = "Selecciona un grupo y un participante sin asignar";
+            }
         }
-        else {
-            this.msn2 = "Selecciona un grupo y un participante sin asignar";
+    }
+
+    unasign( username ){
+        if(confirm("¿Desea eliminar al participante del grupo?")){
+            this.msn2 = "Eliminando";
+            if(this.selectedGroup){
+                this.service.unasign(this.selectedGroup, username).subscribe(response =>{
+                    if(response["mensaje"])
+                        this.msn2 = response["mensaje"];
+                    else{
+                        this.msn2 = "";
+                        this.onSelectChange();
+                        this.getUnasigned();
+                    }
+                });
+            }
+            else {
+                this.msn2 = "Selecciona un grupo";
+            }
+        }
+    }
+
+    removeGroup(){
+        if(this.selectedGroup && confirm("¿Desea eliminar este grupo?")){
+            if(this.participantsList.length > 0){
+                this.msn2 = "No es posible eliminar el grupo, tiene participantes asignados";
+            }
+            else{
+                this.msn2 = "Eliminando";
+                var master = this.user.getUserLoggedIn();
+                this.service.removeGroup(this.selectedGroup, master.username).subscribe(response =>{
+                    if(response["mensaje"])
+                        this.msn2 = response["mensaje"];
+                    else{
+                        this.msn2 = "";
+                        this.getGroups();
+                    }
+                });
+            }
         }
     }
 } 

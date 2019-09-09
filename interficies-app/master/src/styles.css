@@ -7,3 +7,5 @@ body { font-family: 'principal', Arial, sans-serif; font-weight:normal; font-siz
 .main-button:active{ color: black; border-color: black; }
 
 .main-text {  width: 95%; margin: 5px; padding-left: 10px; background-color: rgba(3, 82, 89, 0.4); color: white; font-size: x-large; border: 0 }
+
+.main-select { margin: 5px; padding-left: 10px; background-color: rgba(3, 82, 89, 0.4); color: white; font-size: x-large; border: 0 }

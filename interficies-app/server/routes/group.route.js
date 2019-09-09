@@ -21,10 +21,22 @@
      });
  });
 
+ router.post('/remove', function(req, res, next) {
+   controller.removeGroup(req.body.group, req.body.master, function(err, resp){
+      res.json({mensaje : err});
+   });
+});
+
  router.post('/asign', function(req, res, next) {
     controller.asign(req.body.groupName, req.body.userName, function(err){
        res.json({mensaje : err});
     });
+});
+
+router.post('/unasign', function(req, res, next) {
+   controller.unasign(req.body.groupName, req.body.userName, function(err){
+      res.json({mensaje : err});
+   });
 });
 
 router.get('/list/:mastername', function(req, res, next) {
