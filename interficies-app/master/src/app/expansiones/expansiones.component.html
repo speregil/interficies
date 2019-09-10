@@ -1,11 +1,13 @@
-<div>
-    <span>Grupo</span>
-    <select [(ngModel)] = "selectedGroup" (change)="onSelectChange()">
+<a routerLink="/principal"><img src='./assets/static/volver.png' class='img-volver'></a>
+
+<div class="select-container">
+    <label>Grupo</label>
+    <select class="main-select" [(ngModel)] = "selectedGroup" (change)="onSelectChange()">
         <option [value]="group.name" *ngFor="let group of groupList">{{group.name}}</option>
     </select>
 
-    <span>Participante</span>
-    <select [(ngModel)] = "selectedParticipant" (change)="onParticipantChange()">
+    <label>Participante</label>
+    <select class="main-select" [(ngModel)] = "selectedParticipant" (change)="onParticipantChange()">
         <option [value]="p.username" *ngFor="let p of participantsList">{{p.shownName}}</option>
     </select>
 </div>
@@ -20,11 +22,11 @@
     <div class="grid-item" *ngIf='isSelected'>
         <p>{{challengeText}}</p>
         <p>{{msn2}}</p>
-        <select [(ngModel)] = "selectedGrade">
+        <select class="main-select" [(ngModel)] = "selectedGrade">
             <option>10</option>
             <option>15</option>
             <option>20</option>
         </select>
-        <button (click)='onGrade()'>OK</button>
+        <button class="main-button" (click)='onGrade()'>OK</button>
     </div>
 </div>
