@@ -7,18 +7,20 @@
   
   <div class="grid-item">
     <div>
-      <button (click) = "onContinue('animaciones-futurologo')" class="rol-button">Vidente</button>
-      <button (click) = "onContinue('animaciones-juglar')" class="rol-button">Juglar</button>
+      <div (click) = "onContinue('animaciones-futurologo')" class="rol-button"><img src="assets/static/iconos/experiencia.png"><label>Vidente</label></div>
+      <div (click) = "onContinue('animaciones-juglar')" class="rol-button"><img src="assets/static/iconos/experiencia.png"><label>Juglar</label></div>
     </div>
 
     <div *ngIf="intermedio == true">
-      <button (click) = "onContinue('animaciones-laboratorio')" class="rol-button">Laboratorio</button>
-      <button (click) = "onContinue('animaciones-deliberatorium')" class="rol-button">Deliberatorium</button>
+      <div (click) = "onContinue('animaciones-laboratorio')" class="rol-button"><img src="assets/static/iconos/experiencia.png"><label>Laboratorio</label></div>
     </div>
 
     <div *ngIf="experto == true">
-      <button (click) = "onContinue('animaciones-investigador')" class="rol-button">Reportero</button>
-      <button (click) = "onContinue('animaciones-interprete')" class="rol-button">Critico</button>
+      <div (click) = "onContinue('animaciones-investigador')" class="rol-button"><img src="assets/static/iconos/experiencia.png"><label>Reportero</label></div>
+    </div>
+
+    <div *ngIf="experto == true">
+      <div (click) = "onContinue('animaciones-interprete')" class="rol-button"><img src="assets/static/iconos/experiencia.png"><label>Crítico</label></div>
     </div>
   </div>
 
@@ -34,8 +36,9 @@
   </div>
 
   <div class="grid-item">
-    Collectables
+    <h1>Tu Colección</h1>
   </div>
+
 </div>
 
 <div *ngIf="isLogged == false" class="warning">
