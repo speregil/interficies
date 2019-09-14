@@ -1,6 +1,6 @@
-#portada{ min-height: 100vh; background-image: url('../../assets/static/portada.png') }
+#portada{ min-height: 90vh; background-image: url('../../assets/static/portada.png') }
 
-.portada-continuar { border: 2px solid white; border-radius: 15px; background-color: transparent; margin-left: 45%; margin-top: 30vh }
+.portada-continuar { border: 2px solid white; border-radius: 15px; background-color: transparent; margin-left: 56%; margin-top: 28vh }
 .portada-continuar:hover { color: cyan; border-color: cyan }
 .portada-continuar:active{ color: black; border-color: black }
 .portada-continuar a { color: white; font-size: 62px; font-style: bold }
