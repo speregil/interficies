@@ -74,7 +74,6 @@ export class RolesComponent implements LoginObserver {
     if(this.isLogged) {
       var user = this.userService.getUserLoggedIn();
       this.userService.getChallenges(user.username).subscribe(response => {
-        console.log(response);
         if(response['mensaje'])
           this.msnRetos = response['mensaje'];
         else {
