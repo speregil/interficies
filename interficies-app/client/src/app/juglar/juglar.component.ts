@@ -43,7 +43,7 @@ export class JuglarComponent {
   ngOnInit() {
     this.bgSound.play();
     this.bgSound.loop();
-    Howler.volume(0.5);
+    Howler.volume(1);
   }
 
   ngOnStop(){

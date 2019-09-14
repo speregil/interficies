@@ -1,6 +1,8 @@
 <div class='juglar-container'>
-    <p class="juglar-reto">{{perfilActual}}</p>
-    <p class="juglar-reto">{{retoActual}}</p>
+    <div class="juglar-reto" *ngIf='perfilActual != ""'>
+        <p>{{perfilActual}}</p>
+        <p>{{retoActual}}</p>
+    </div>
     <div class='juglar-folders'>
         <img class="juglar-folder" src="assets/static/juglar/folder.png" (click) = "onFolderClick('holtzman')" >
         <img class="juglar-folder" src="assets/static/juglar/folder.png" (click) = "onFolderClick('jessica')" >
@@ -8,10 +10,12 @@
         <img class="juglar-folder" src="assets/static/juglar/folder.png" (click) = "onFolderClick('ninos')" >
         <img class="juglar-folder" src="assets/static/juglar/folder.png" (click) = "onFolderClick('precuela')" >
     </div>
-    <button *ngIf = "acceptAble" class="juglar-aceptar" (click) = 'onAccept()'>Aceptar Reto</button><span class="juglar-aceptar-texto">{{msnAceptar}}</span>
+    
     <div class="juglar-opciones">
         <button  *ngIf = "basicAble" class="{{poolBasico}}" (click) = "changePool('basico')">Retos Básicos</button>
         <button  *ngIf = "masterAble" class="{{poolMaster}}" (click) = "changePool('master')">Retos del Master</button>
+        <button *ngIf = "acceptAble" class="juglar-button" (click) = 'onAccept()'>Aceptar Reto</button>
         <button  class="juglar-button" (click) = "onContinue()">Volver</button>
     </div>
+    <span class="juglar-aceptar-texto">{{msnAceptar}}</span>
 </div>

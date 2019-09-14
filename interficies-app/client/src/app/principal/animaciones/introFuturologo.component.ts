@@ -10,15 +10,9 @@ import { AppComponent } from '../../app.component';
 })
 
 export class IntroFuturologoComponent {
-  
-  achivement = 'Viste las animaciones: Futurólogo';
 
   constructor(private userService: UserService,  private router: Router, private app: AppComponent) {
     var user = userService.getUserLoggedIn();
-    var nAvatar = user.currentGender + '-vidente';
-    
-    userService.updateAvatar(user.username, nAvatar).subscribe(response => {});
-
     userService.updateRole(user.username, "Vidente").subscribe(response => {
       if(response["status"] == 0) {
         user.currentRol = "Vidente";
@@ -26,13 +20,9 @@ export class IntroFuturologoComponent {
         app.updateLogin();
       }
     });
-    
   }
 
   onContinue() {
-   
-      
-        this.router.navigate(["futurologo"]);
-    
+    this.router.navigate(["futurologo"]);
   }
 }
