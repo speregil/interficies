@@ -6,13 +6,8 @@ export class User {
     currentGender: string;
     level: string;
     achivements: [];
-
     
-    constructor ( u : string, n : string, r : string, l : string) {
-        this.username = u;
-        this.shownName = n;
-        this.currentRol = r;
-        this.level = l;
+    constructor () {
         this.achivements = [];
         this.currentGender = 'chico';
     }

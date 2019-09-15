@@ -37,12 +37,13 @@ service.register = function(username, password, shownName, admin, callback){
 
         user.save(function(err, user, ver){
             if(err){
+                connection.disconnect(db);
                 callback(1, err['errmsg'], user);
             }
             else{
+                connection.disconnect(db);
                 if(!admin) {
                     ProgressService.createProgressProfile(user._id, function(status, err, prof){
-                        connection.disconnect(db);
                         if(status > 0)
                             callback(1, err, user);
                         else
@@ -50,7 +51,6 @@ service.register = function(username, password, shownName, admin, callback){
                     });
                 }
                 else {
-                    connection.disconnect(db);
                     callback(0, null, user);
                 }
             }

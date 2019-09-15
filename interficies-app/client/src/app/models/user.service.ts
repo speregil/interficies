@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
+import { ConsoleReporter } from 'jasmine';
 
 @Injectable()
 export class UserService {
@@ -24,6 +25,7 @@ export class UserService {
 
   setUserLoggedIn(user:User) {
     this.isUserLoggedIn = true;
+    localStorage.removeItem('currentUser');
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
@@ -86,8 +88,9 @@ export class UserService {
   }
 
   localUpdateAchivemets(user, pText, pPoints) {
-    var achivement = { text: pText, points : pPoints }
+    var achivement = { _id: '', userID: '', text: pText, points : pPoints }
     user.achivements.push(achivement);
+    localStorage.removeItem('currentUser');
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 

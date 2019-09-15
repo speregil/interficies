@@ -44,19 +44,28 @@ export class AppComponent {
         alert(data['mensaje']);
       else{
         var userModel = data["data"];
+        var user : User = new User();
+        this.userService.setUserLoggedIn(user);
+        this.username = "";
+        this.password = "";
+        this.loggedUser = this.userService.getUserLoggedIn();
+        
         this.userService.getProgressProfile(userModel["username"]).subscribe(progress => {
           var progressModel = progress["progOb"];
-          var user : User = new User(this.username, userModel["shownName"], progressModel["currentRol"], progressModel["level"]);        
+          user.username = userModel["username"];
+          user.shownName = userModel["shownName"];
+          user.currentRol = progressModel["currentRol"];
+          user.level = progressModel["level"];       
           user.currentGender = progressModel["avatar"].split('-')[0];
-          this.userService.getAchivements(this.username).subscribe(response => {
+          this.userService.setUserLoggedIn(user);
+          this.loggedUser = this.userService.getUserLoggedIn();
+
+          this.userService.getAchivements(userModel["username"]).subscribe(response => {
             user.achivements = response["list"];
             this.userService.setUserLoggedIn(user);
             this.loggedUser = this.userService.getUserLoggedIn();
-            this.checkNotifications(this.username);
-            this.username = "";
-            this.password = "";
 
-            
+            this.checkNotifications(userModel["username"]);
             this.notifyLogin(true);  //Notifica que hubo un login a todos los observadores
           });
         });
