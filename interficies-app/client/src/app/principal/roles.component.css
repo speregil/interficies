@@ -16,3 +16,6 @@
 .reto-button{ color: white; background-color: transparent; border: none; font-size: large }
 .reto-button:hover{ color: cyan }
 .reto-button:active{ color: black }
+
+.collection-container p { font-size: x-large; padding-bottom: 1vh; cursor: pointer }
+.collection-container p:hover { color: cyan }

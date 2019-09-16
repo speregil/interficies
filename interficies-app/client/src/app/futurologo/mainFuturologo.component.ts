@@ -27,7 +27,6 @@ export class MainFuturologoComponent {
     challenges.getMasterChallenges('oraculo').subscribe(response => {
       if(response['mensaje'] == null){
         this.masterChallenges = response['list'];
-        console.log(this.masterChallenges);
         this.masterAble = true;
       }
     });
@@ -69,11 +68,13 @@ export class MainFuturologoComponent {
         if(response['mensaje'])
           this.msnAceptar = response['mensaje'];
         else {
-          this.msnAceptar = 'Reto Aceptado';
+          this.msnAceptar += '- Reto Aceptado';
           this.basicAble = false;
           this.masterAble = false;
         }
       });
+
+      this.userService.saveProgress(user.username, "videnteAsig").subscribe(response => { this.msnAceptar += "- Progreso Guardado"});
     }
   }
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user.model';
-import { ConsoleReporter } from 'jasmine';
 
 @Injectable()
 export class UserService {
@@ -68,6 +67,10 @@ export class UserService {
 
   getProgressProfile(user: string) {
     return this.http.get<{}>('http://' + this.host + '/progress/profile/' + user);
+  }
+
+  getProgressState(user, flag){
+    return this.http.get<{}>('http://' + this.host + '/progress/state/' + user + '/' + flag);
   }
 
   getAchivements(user: string) {

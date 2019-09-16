@@ -20,6 +20,7 @@ export class RolesComponent implements LoginObserver {
   currentText = "";
 
   // Sección de navegación
+  basico = false;
   intermedio = false;
   experto = false;
 
@@ -59,8 +60,9 @@ export class RolesComponent implements LoginObserver {
       this.userService.getProgressProfile(user.username).subscribe(response => {
         if(response["status"] == 0) {
           var progress = response["progOb"];
-          this.intermedio = progress["f"] && progress["j"];
-          this.experto =  progress["l"] && progress["d"];
+          this.basico = progress["vidente"] && progress["juglar"];
+          this.intermedio = progress["arqueologo"];
+          this.experto =  progress["critico"];
         }
       });
     }
@@ -86,5 +88,17 @@ export class RolesComponent implements LoginObserver {
 
   onChallenge( text ) {
     this.txtReto = text;
+  }
+
+  onComic(chapter){
+    switch( chapter ) {
+      case 1:
+          this.userService.setInitComic("1");
+          this.userService.setLastComic("16");
+          this.userService.setComicBg('comic-1')
+          this.router.navigate(['comic']);
+          break;
+    }
+    
   }
 }

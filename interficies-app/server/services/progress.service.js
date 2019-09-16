@@ -82,6 +82,37 @@ service.getProfile = function(user, callback) {
     });
 }
 
+service.getFlag = function(user, flag){
+    var db = connection.connect();
+    User.find({username: user}, function(err, search){
+        if(err) {
+            connection.disconnect(db);
+            callback("Error en la base de datos", false);
+        }
+        else {
+            if(search[0]) {
+                Progress.find({userID: search[0]._id}, function(err, profile) {
+                    connection.disconnect(db);
+                    if(err)
+                        callback(err['errmsg'], false);
+                    else {
+                        var prof = profile[0];
+                        if(prof)
+                            callback(null, prof[flag]);
+                        else {
+                            callback("El usuario no se ha registrado", false);
+                        }
+                    }
+                });
+            }
+            else {
+                connection.disconnect(db);
+                callback("El usuario no existe", false);
+            }
+        }
+    });
+}
+
 /**
  * Retorna una lista con todos los logros del usuario cuyo username entra por parametro
  * user Nombre de usuario cuyos logros se desean recuperar
