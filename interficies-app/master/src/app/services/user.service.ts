@@ -31,15 +31,23 @@ export class UserService {
 
     setUserLoggedIn(user:User) {
         this.isUserLoggedIn = true;
-        localStorage.setItem('currentUser', JSON.stringify(user));
+        localStorage.setItem('masterUser', JSON.stringify(user));
     }
 
     setUserLoggedOut() {
         this.isUserLoggedIn = false;
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('masterUser');
     }
     
     getUserLoggedIn() {
-        return JSON.parse(localStorage.getItem('currentUser'));
+        return JSON.parse(localStorage.getItem('masterUser'));
+    }
+
+    setAchivement(pUser, pText, pPoints) {
+        return this.http.post<{}>('http://' + this.host + '/progress/achivement', {user : pUser, text : pText, points: pPoints});
+    }
+
+    saveProgress(pUser, pFlag) {
+        return this.http.post<{}>('http://' + this.host + '/progress/save', {user : pUser, flag : pFlag});
     }
 }

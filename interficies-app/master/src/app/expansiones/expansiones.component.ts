@@ -69,7 +69,7 @@ export class ExpansionesComponent {
   onChallengeClick(text, id, points){
     this.challengeText = text;
     this.challengeID = id;
-    if(points == 0 ) {
+    if(points <= 0 ) {
       this.selectedGrade = 10;
       this.msn2 = 'Sin Calificar';
     }
@@ -81,14 +81,28 @@ export class ExpansionesComponent {
   }
 
   onGrade(){
-    this.msn = "Guardando Puntaje";
+    this.msn = "Guardando Puntaje..";
     this.participants.gradeChallenge(this.challengeID, this.selectedGrade).subscribe(response => {
       if(response['mensaje'])
         this.msn = response['mensaje'];
       else {
-        this.msn = 'Notificando...';
-        this.participants.addNotification(this.selectedParticipant, "Nuevo logro contenido").subscribe(response => this.msn = '');
-      }
+        this.msn = 'Notificando.';
+        this.user.setAchivement(this.selectedParticipant, "Has realizado la misión del oráculo", this.selectedGrade).subscribe(response => {
+          this.msn = 'Notificando...';
+          if(response['status'] > 0) {
+            this.msn = response['mensaje'];
+          }
+          else {
+            this.user.saveProgress(this.selectedParticipant, "vidente").subscribe(response => {
+              this.msn = 'Notificando.....'; 
+              this.participants.addNotification(this.selectedParticipant, "Nuevo logro obtenido").subscribe(response => {
+                this.msn = '';
+                this.msn2 = 'Calificado';
+              });
+            });
+          }
+        });  
+      }    
     });
   }
 }

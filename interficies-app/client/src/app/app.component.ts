@@ -65,7 +65,7 @@ export class AppComponent {
             this.userService.setUserLoggedIn(user);
             this.loggedUser = this.userService.getUserLoggedIn();
 
-            this.checkNotifications(userModel["username"]);
+            this.checkNotifications();
             this.notifyLogin(true);  //Notifica que hubo un login a todos los observadores
           });
         });
@@ -107,8 +107,9 @@ export class AppComponent {
     }
   }
 
-  checkNotifications(username){
-    this.userService.getNotifications(username).subscribe(response => {
+  checkNotifications(){
+    var user = this.userService.getUserLoggedIn();
+    this.userService.getNotifications(user.username).subscribe(response => {
       if(response['mensaje']){
         console.log(response['mensaje']);
       }
@@ -116,12 +117,11 @@ export class AppComponent {
         var mensaje = "";
         var notifications = response['list'];
         if(notifications.length > 0) {
-          console.log(notifications.length);
           for(var notification of notifications){
-            console.log(notification['mensaje']);
             mensaje += notification['mensaje'] + "\n";
           }
           alert(mensaje);
+          this.userService.checkLevel(user);
         }
       }
     });

@@ -15,6 +15,7 @@ export class MainFuturologoComponent {
 
   retoActual = "";
   msnAceptar = "";
+  cargando = true;
   basico = true;
   basicAble = true;
   masterAble = false;
@@ -24,8 +25,8 @@ export class MainFuturologoComponent {
   poolMaster = "vidente-button";
 
   constructor(private userService: UserService, private router: Router, private http: HttpClient, private challenges: ChallengesService) {
+    this.msnAceptar = "Cargando";
     var user = this.userService.getUserLoggedIn();
-
     this.userService.getProgressState(user.username, 'videnteAsig').subscribe(response => {
         if(response['flag']){
           this.basicAble = false;
@@ -38,20 +39,24 @@ export class MainFuturologoComponent {
             }
           });
         }
+        this.cargando = false;
+        this.msnAceptar = '';
     });
   }
   
   onOracleClick() {
-    if(this.userService.isUserLogged() && this.basicAble) {
-      this.retoActual = "Procesando...";
-      this.acceptAble = false;
-      if(this.basico)
-        this.getBasicChallenge();
+    if(!this.cargando){
+      if(this.userService.isUserLogged() && this.basicAble) {
+        this.retoActual = "Procesando...";
+        this.acceptAble = false;
+        if(this.basico)
+          this.getBasicChallenge();
+        else
+          this.getMasterChallenge();
+      }
       else
-        this.getMasterChallenge();
+        this.retoActual = 'Ya tienes un reto asignado o ya lo completaste';
     }
-    else
-      this.retoActual = 'Ya tienes un reto asignado o ya lo completaste';
   }
 
   getBasicChallenge(){
@@ -73,21 +78,23 @@ export class MainFuturologoComponent {
   }
 
   onAccept() {
-    if(this.basicAble) {
+    if(this.basicAble && !this.cargando) {
       var user = this.userService.getUserLoggedIn();
-
+      this.msnAceptar = "Guardando...";
+      this.cargando = true;
       this.userService.addChallenge(user.username, 'oraculo', this.retoActual).subscribe(response => {
         if(response['mensaje'])
           this.msnAceptar = response['mensaje'];
         else {
-          this.msnAceptar += '- Reto Aceptado';
-          this.basicAble = false;
-          this.masterAble = false;
-          this.acceptAble = false;
+          this.userService.saveProgress(user.username, "videnteAsig").subscribe(response => { 
+            this.msnAceptar = "Reto Aceptado"
+            this.basicAble = false;
+            this.masterAble = false;
+            this.acceptAble = false;
+            this.cargando = false;
+          });
         }
       });
-
-      this.userService.saveProgress(user.username, "videnteAsig").subscribe(response => { this.msnAceptar += "- Progreso Guardado"});
     }
   }
 
