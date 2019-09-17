@@ -96,4 +96,10 @@ controller.activateFlag = function(user, flag, callback) {
     });
 }
 
+controller.getFlag = function(user, flag, callback){
+    service.getFlag(user, flag, function(err, state){
+        callback(err, state);
+    });
+}
+
 module.exports = controller;

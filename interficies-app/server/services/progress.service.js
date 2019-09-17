@@ -82,7 +82,7 @@ service.getProfile = function(user, callback) {
     });
 }
 
-service.getFlag = function(user, flag){
+service.getFlag = function(user, flag, callback){
     var db = connection.connect();
     User.find({username: user}, function(err, search){
         if(err) {
@@ -97,8 +97,12 @@ service.getFlag = function(user, flag){
                         callback(err['errmsg'], false);
                     else {
                         var prof = profile[0];
-                        if(prof)
-                            callback(null, prof[flag]);
+                        if(prof){
+                            if(prof[flag])
+                                callback(null, prof[flag]);
+                            else
+                                callback('No existe la marca: ' + flag, false);
+                        }                            
                         else {
                             callback("El usuario no se ha registrado", false);
                         }

@@ -24,16 +24,25 @@ export class MainFuturologoComponent {
   poolMaster = "vidente-button";
 
   constructor(private userService: UserService, private router: Router, private http: HttpClient, private challenges: ChallengesService) {
-    challenges.getMasterChallenges('oraculo').subscribe(response => {
-      if(response['mensaje'] == null){
-        this.masterChallenges = response['list'];
-        this.masterAble = true;
-      }
+    var user = this.userService.getUserLoggedIn();
+
+    this.userService.getProgressState(user.username, 'videnteAsig').subscribe(response => {
+        if(response['flag']){
+          this.basicAble = false;
+        }
+        else{
+          this.challenges.getMasterChallenges('oraculo').subscribe(response => {
+            if(response['mensaje'] == null){
+              this.masterChallenges = response['list'];
+              this.masterAble = true;
+            }
+          });
+        }
     });
   }
   
   onOracleClick() {
-    if(this.userService.isUserLogged()) {
+    if(this.userService.isUserLogged() && this.basicAble) {
       this.retoActual = "Procesando...";
       this.acceptAble = false;
       if(this.basico)
@@ -41,6 +50,8 @@ export class MainFuturologoComponent {
       else
         this.getMasterChallenge();
     }
+    else
+      this.retoActual = 'Ya tienes un reto asignado o ya lo completaste';
   }
 
   getBasicChallenge(){
@@ -64,6 +75,7 @@ export class MainFuturologoComponent {
   onAccept() {
     if(this.basicAble) {
       var user = this.userService.getUserLoggedIn();
+
       this.userService.addChallenge(user.username, 'oraculo', this.retoActual).subscribe(response => {
         if(response['mensaje'])
           this.msnAceptar = response['mensaje'];
@@ -71,6 +83,7 @@ export class MainFuturologoComponent {
           this.msnAceptar += '- Reto Aceptado';
           this.basicAble = false;
           this.masterAble = false;
+          this.acceptAble = false;
         }
       });
 

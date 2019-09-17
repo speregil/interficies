@@ -84,6 +84,12 @@ router.get('/getavatar/:username', function(req, res, next) {
     });
 });
 
+router.get('/state/:username/:flag', function(req,res,next){
+    controller.getFlag(req.params.username, req.params.flag, function(err, state){
+        res.json({mensaje: err, flag: state});
+    });
+});
+
 /**
  * Activa la bandera de progreso que entra por parametro al usuario específicado
  * params: user, flag. Encriptados en el cuerpo
