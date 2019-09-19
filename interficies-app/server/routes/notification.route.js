@@ -21,6 +21,12 @@
      });
  });
 
+ router.post('/whipe', function(req, res, next) {
+    controller.whipeNotifications(req.body.username, function(err){
+       res.json({mensaje : err});
+    });
+});
+
  router.get('/list/:username', function(req, res, next){
     controller.getNotifications(req.params.username, function(err, notifications){
         res.json({mensaje: err, list: notifications});

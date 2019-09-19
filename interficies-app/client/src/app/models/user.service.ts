@@ -97,24 +97,23 @@ export class UserService {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
-  checkLevel(user) {
+  checkLevel(user, callback) {
     var achivements = user.achivements;
     var puntos = 0;
     for(var achivement of achivements) {
       puntos += Number.parseInt(achivement["points"]);
     }
-
-    if(puntos >= 50 && puntos < 100 ){
-      this.updateLevel(user, 'Practicante 1');
+    if(puntos >= 45 && puntos < 100 ){
+      this.updateLevel(user, 'Practicante 1', function(updated){ callback(updated)});
     }
     else if(puntos >= 100 && puntos < 150){
-      this.updateLevel(user, 'Practicante 2');
+      this.updateLevel(user, 'Practicante 2', function(updated){ callback(updated)});
     }
     else if(puntos >= 150 && puntos < 200){
-      this.updateLevel(user, 'Experto');
+      this.updateLevel(user, 'Experto', function(updated){ callback(updated)});
     }
     else if (puntos >= 200){
-      this.updateLevel(user, 'Magis');
+      this.updateLevel(user, 'Magis', function(updated){ callback(updated)});
     }
   }
 
@@ -126,9 +125,20 @@ export class UserService {
     return this.http.post<{}>('http://' + this.host + '/progress/avatar', {username : pUser, avatar : pAvatar});
   }
 
-  updateLevel(user, plevel){
+  updateLevel(user, plevel, callback){
+    console.log("Actualizando");
     user.level = plevel;
-    return this.http.post<{}>('http://' + this.host + '/progress/level', {username : user, level : plevel});
+    this.http.post<{}>('http://' + this.host + '/progress/level', {username : user.username, level : plevel}).subscribe(response =>{
+      if(response['mensaje']){
+        console.log(response['mensaje']);
+        callback(false);
+      }
+      else{
+        localStorage.removeItem('currentUser');
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        callback(true);
+      }
+    });
   }
 
   getAvatar(pUser){
@@ -153,5 +163,9 @@ export class UserService {
 
   getNotifications(pUser){
     return this.http.get<{}>('http://' + this.host + '/notifications/list/' + pUser);
+  }
+
+  whipeNotifications(pUser){
+    return this.http.post<{}>('http://' + this.host + '/notifications/whipe', {username : pUser});
   }
 }

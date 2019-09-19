@@ -62,5 +62,25 @@
         }
     });
  }
+
+ service.whipeNotifications = function(usuario, callback){
+    var db = connection.connect();
+    User.find({username: usuario, admin: false}, function(err, find){
+        if(err){
+            connection.disconnect(db);
+            callback("Error en la base de datos");
+        }
+        else if(find[0]){
+            Notification.deleteMany({user: find._id}, function(err){
+                connection.disconnect(db);
+                console.log("Borrados");
+                if(err)
+                    callback("No fue posible eliminar las notificaciones");
+                else
+                    callback(null);
+            });
+        }
+    });
+ }
  
  module.exports = service;

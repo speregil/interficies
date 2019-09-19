@@ -82,7 +82,7 @@ export class MainFuturologoComponent {
       var user = this.userService.getUserLoggedIn();
       this.msnAceptar = "Guardando...";
       this.cargando = true;
-      this.userService.addChallenge(user.username, 'oraculo', this.retoActual).subscribe(response => {
+      this.userService.addChallenge(user.username, 'vidente', this.retoActual).subscribe(response => {
         if(response['mensaje'])
           this.msnAceptar = response['mensaje'];
         else {

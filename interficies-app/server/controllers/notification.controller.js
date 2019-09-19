@@ -30,4 +30,10 @@ controller.getNotifications = function(username, callback) {
     });
 }
 
+controller.whipeNotifications = function(username, callback){
+    service.whipeNotifications(username, function(err){
+        callback(err);
+    });
+}
+
 module.exports = controller;

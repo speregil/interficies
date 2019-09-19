@@ -93,12 +93,17 @@ export class ExpansionesComponent {
             this.msn = response['mensaje'];
           }
           else {
-            this.user.saveProgress(this.selectedParticipant, "vidente").subscribe(response => {
-              this.msn = 'Notificando.....'; 
-              this.participants.addNotification(this.selectedParticipant, "Nuevo logro obtenido").subscribe(response => {
-                this.msn = '';
-                this.msn2 = 'Calificado';
-              });
+            this.user.saveProgress(this.selectedParticipant, this.challengeText).subscribe(response => {
+              if(response["status"] == 0){
+                this.msn = 'Notificando.....'; 
+                this.participants.addNotification(this.selectedParticipant, "Nuevo logro obtenido").subscribe(response => {
+                  this.msn = '';
+                  this.msn2 = 'Calificado';
+                });
+              }
+              else{
+                this.msn = 'Cuidado, el usuario no se ha actualizado, vualva a intentar'; 
+              }
             });
           }
         });  

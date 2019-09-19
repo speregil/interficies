@@ -121,7 +121,14 @@ export class AppComponent {
             mensaje += notification['mensaje'] + "\n";
           }
           alert(mensaje);
-          this.userService.checkLevel(user);
+          console.log('verificando');
+          this.userService.checkLevel(user, updated => {
+              this.updateLogin() 
+          });
+          this.userService.whipeNotifications(user.username).subscribe(response => {
+            if(response['mensaje'])
+              console.log(response['mensaje']);
+          });
         }
       }
     });
