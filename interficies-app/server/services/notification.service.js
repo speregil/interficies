@@ -71,9 +71,8 @@
             callback("Error en la base de datos");
         }
         else if(find[0]){
-            Notification.deleteMany({user: find._id}, function(err){
+            Notification.deleteMany({user: find[0]._id}, function(err){
                 connection.disconnect(db);
-                console.log("Borrados");
                 if(err)
                     callback("No fue posible eliminar las notificaciones");
                 else

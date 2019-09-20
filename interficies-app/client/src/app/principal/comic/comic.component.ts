@@ -2,6 +2,7 @@ import { Component, OnDestroy} from '@angular/core';
 import {Router} from "@angular/router";
 import {Howl, Howler} from 'howler';
 import { UserService } from '../../models/user.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'comic',
@@ -20,7 +21,7 @@ export class ComicComponent implements OnDestroy {
   currentBg = "";
   bgSound = null;
 
-  constructor(private userService: UserService, private router: Router){
+  constructor(private userService: UserService, private router: Router, private app: AppComponent){
     this.initComic = this.userService.getInitComic();
     this.lastComic = this.userService.getLastComic();
     this.currentComic = this.initComic;
@@ -107,7 +108,12 @@ export class ComicComponent implements OnDestroy {
         else {
           alert("Logro obtenido: " + text);
           this.userService.localUpdateAchivemets(user, text, points);
-          this.userService.checkLevel(user);
+          this.userService.checkLevel(user, updated => {
+            if(updated){
+              alert("Aumentaste de nivel");
+              this.app.updateLogin();
+            }
+          });
           this.setRoute(achivementNum);
         }
       });  

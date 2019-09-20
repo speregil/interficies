@@ -103,7 +103,7 @@ export class UserService {
     for(var achivement of achivements) {
       puntos += Number.parseInt(achivement["points"]);
     }
-    if(puntos >= 45 && puntos < 100 ){
+    if(puntos >= 50 && puntos < 100 ){
       this.updateLevel(user, 'Practicante 1', function(updated){ callback(updated)});
     }
     else if(puntos >= 100 && puntos < 150){
@@ -126,11 +126,9 @@ export class UserService {
   }
 
   updateLevel(user, plevel, callback){
-    console.log("Actualizando");
     user.level = plevel;
     this.http.post<{}>('http://' + this.host + '/progress/level', {username : user.username, level : plevel}).subscribe(response =>{
       if(response['mensaje']){
-        console.log(response['mensaje']);
         callback(false);
       }
       else{

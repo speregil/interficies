@@ -16,7 +16,7 @@
 <div class="grid-container" >
     <div class="grid-item">
         <ul>
-            <li *ngFor = 'let c of challengesList'><span (click) = 'onChallengeClick(c.text, c._id, c.points)'>{{c.type}}</span></li>
+            <li *ngFor = 'let c of challengesList'><span (click) = 'onChallengeClick(c.text, c._id, c.type,  c.points)'>{{c.type}}</span></li>
         </ul>
     </div>
     <div class="grid-item" *ngIf='isSelected'>

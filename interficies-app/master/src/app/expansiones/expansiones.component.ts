@@ -23,6 +23,7 @@ export class ExpansionesComponent {
   msn2 = '';
   challengeText = '';
   challengeID = '';
+  challengeType = '';
   isSelected = false;
   
   constructor(private service: GroupService, private user: UserService, private participants: ParticipantsService){
@@ -66,9 +67,10 @@ export class ExpansionesComponent {
     this.getChallenges();
   }
 
-  onChallengeClick(text, id, points){
+  onChallengeClick(text, id, type, points){
     this.challengeText = text;
     this.challengeID = id;
+    this.challengeType = type;
     if(points <= 0 ) {
       this.selectedGrade = 10;
       this.msn2 = 'Sin Calificar';
@@ -82,6 +84,15 @@ export class ExpansionesComponent {
 
   onGrade(){
     this.msn = "Guardando Puntaje..";
+    if(this.msn2 == 'Sin Calificar') {
+      this.notifyNotGraded();
+    }
+    else{
+      this.notifyGraded();
+    }
+  }
+
+  notifyNotGraded(){
     this.participants.gradeChallenge(this.challengeID, this.selectedGrade).subscribe(response => {
       if(response['mensaje'])
         this.msn = response['mensaje'];
@@ -93,7 +104,7 @@ export class ExpansionesComponent {
             this.msn = response['mensaje'];
           }
           else {
-            this.user.saveProgress(this.selectedParticipant, this.challengeText).subscribe(response => {
+            this.user.saveProgress(this.selectedParticipant, this.challengeType).subscribe(response => {
               if(response["status"] == 0){
                 this.msn = 'Notificando.....'; 
                 this.participants.addNotification(this.selectedParticipant, "Nuevo logro obtenido").subscribe(response => {
@@ -102,12 +113,25 @@ export class ExpansionesComponent {
                 });
               }
               else{
-                this.msn = 'Cuidado, el usuario no se ha actualizado, vualva a intentar'; 
+                this.msn = 'Cuidado, el usuario no se ha actualizado, vuelva a intentar'; 
               }
             });
           }
         });  
       }    
+    });
+  }
+
+  notifyGraded(){
+    this.participants.gradeChallenge(this.challengeID, this.selectedGrade).subscribe(response => {
+      if(response['mensaje'])
+        this.msn = response['mensaje'];
+      else{
+        this.participants.addNotification(this.selectedParticipant, "Un puntaje ha cambiado").subscribe(response => {
+          this.msn = '';
+          this.msn2 = 'Calificado';
+        });
+      }
     });
   }
 }

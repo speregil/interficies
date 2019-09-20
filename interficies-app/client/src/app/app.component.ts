@@ -102,11 +102,13 @@ export class AppComponent {
     if(confirm("¿Desea salir de la aplicación?")) {
       this.userService.setUserLoggedOut();
       this.loggedUser = null;
-
       this.notifyLogin(false);
     }
   }
 
+  /**
+   * Verifica si hay notificaciones para el usuario en la base de datos, revisa si hay cambios de nivel y borra las notificaciones viejas
+   */
   checkNotifications(){
     var user = this.userService.getUserLoggedIn();
     this.userService.getNotifications(user.username).subscribe(response => {
@@ -121,11 +123,11 @@ export class AppComponent {
             mensaje += notification['mensaje'] + "\n";
           }
           alert(mensaje);
-          console.log('verificando');
           this.userService.checkLevel(user, updated => {
               this.updateLogin() 
           });
           this.userService.whipeNotifications(user.username).subscribe(response => {
+            console.log('whipping');
             if(response['mensaje'])
               console.log(response['mensaje']);
           });
