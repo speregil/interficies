@@ -102,7 +102,7 @@ export class AjustesComponent {
               else {
                 alert('Logro desbloqueado: ' + this.achivement.text);
                 this.userService.localUpdateAchivemets(user, this.achivement.text, this.achivement.points);
-                this.userService.checkLevel(user);
+                this.userService.checkLevel(user, function(updated){});
               }
             });
         }

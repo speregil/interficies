@@ -157,6 +157,22 @@ export class AppComponent {
     }
   }
 
+  onBlog(){
+    var user = this.userService.getUserLoggedIn();
+    var text = "Has entrado al blog de recursos";
+    if(this.userService.checkUserAchivements(user, text)){
+      this.userService.setAchivement(user.username, text, 10).subscribe(response => {
+        if(response['mensaje'])
+          alert(response['mensaje']);
+        else {
+          alert('Logro desbloqueado: ' + text);
+          this.userService.localUpdateAchivemets(user, text, 10);
+          this.userService.checkLevel(user, function(updated){});
+        }
+      });
+    }
+  }
+
   /**
    * Funciones para obtener la información del usuario y de su progreso del objeto conservado en memoria
    */
