@@ -56,7 +56,7 @@ export class JuglarComponent {
   ngOnInit() {
     this.bgSound.play();
     this.bgSound.loop();
-    Howler.volume(1);
+    Howler.volume(2);
   }
 
   ngOnStop(){
@@ -123,5 +123,9 @@ export class JuglarComponent {
 
   onContinue() {
     this.router.navigate(["roles"]);
+  }
+
+  ngOnDestroy() { 
+    this.bgSound.stop();
   }
 }

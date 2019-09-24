@@ -13,6 +13,7 @@ import { ComicComponent } from './principal/comic/comic.component';
 import { LogrosComponent } from './principal/logros/logros.component';
 import { RemediacionesComponent } from './remediaciones/remediaciones.component';
 import { LaboratorioComponent } from './arqueologo/laboratorio.arqueologia';
+import { TallerComponent } from './arqueologo/taller.arqueologia';
 import { DeliberatoriumComponent } from './arqueologo/deliberatorium.arqueologia';
 import { JuglarComponent } from './juglar/juglar.component';
 import { MainFuturologoComponent } from './futurologo/mainFuturologo.component';
@@ -49,6 +50,7 @@ import { ChallengesService } from './models/challenges.service';
     LogrosComponent,
     RemediacionesComponent,
     LaboratorioComponent,
+    TallerComponent,
     DeliberatoriumComponent,
     JuglarComponent,
     MainFuturologoComponent,

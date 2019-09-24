@@ -10,6 +10,7 @@ import { ComicComponent } from './principal/comic/comic.component';
 import { LogrosComponent } from './principal/logros/logros.component';
 import { RemediacionesComponent } from './remediaciones/remediaciones.component';
 import { LaboratorioComponent } from './arqueologo/laboratorio.arqueologia';
+import { TallerComponent } from './arqueologo/taller.arqueologia';
 import { DeliberatoriumComponent } from './arqueologo/deliberatorium.arqueologia';
 import { JuglarComponent } from './juglar/juglar.component';
 import { MainFuturologoComponent } from './futurologo/mainFuturologo.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'futurologo', component: MainFuturologoComponent },
   { path: 'juglar', component: JuglarComponent },
   { path: 'laboratorio', component: LaboratorioComponent },
+  { path: 'taller', component: TallerComponent },
   { path: 'deliberatorium', component: DeliberatoriumComponent },
   { path: 'investigador', component: InvestigadorComponent },
   { path: 'interprete', component: InterpreteComponent },
