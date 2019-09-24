@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { UserService } from '../models/user.service';
 import { LoginObserver } from '../models/loginObserver.interface';
 import { HttpClient } from '@angular/common/http';
+import { DownloadService } from '../models/downloads.service';
 
 @Component({
   selector: 'roles',
@@ -38,7 +39,7 @@ export class RolesComponent implements LoginObserver {
 
   // Sección de colecciones
 
-  constructor(private userService: UserService, private principal: AppComponent, private router: Router, private http: HttpClient) {
+  constructor(private userService: UserService, private principal: AppComponent, private router: Router, private http: HttpClient, private download: DownloadService) {
     this.isLogged = this.userService.isUserLogged();
     this.principal.addLoginObserver(this);
     this.showRoleProgress();
@@ -108,5 +109,11 @@ export class RolesComponent implements LoginObserver {
           break;
     }
     
+  }
+
+  onDownload(url){
+    this.download.downloadFile(url).subscribe(response => {
+      window.location.href = response.url;
+		}), error => console.log(error);
   }
 }

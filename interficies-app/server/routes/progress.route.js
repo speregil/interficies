@@ -99,7 +99,7 @@ router.post('/save', function(req, res, next) {
         if(err)
             res.json({status : 1, mensaje : err});
         else
-            res.json({status : 0, mensaje : ""});
+            res.json({status : 0, mensaje : null});
     });
 });
 

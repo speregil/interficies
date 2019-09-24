@@ -12,6 +12,8 @@ var ProgressSchema = new Schema({
     vidente:Boolean,
     juglarAsig:Boolean,
     juglar:Boolean,
+    tallerAsig:Boolean,
+    taller:Boolean,
     arqueologo:Boolean,
     criticoAsig:Boolean,
     critico:Boolean,

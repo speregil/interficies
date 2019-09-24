@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { IntroInterpreteComponent } from './principal/animaciones/introInterpret
 import { RegistroService } from './principal/registro/registro.service';
 import { UserService } from './models/user.service';
 import { ChallengesService } from './models/challenges.service';
+import { DownloadService } from './models/downloads.service';
 
 @NgModule({
   declarations: [
@@ -73,12 +75,14 @@ import { ChallengesService } from './models/challenges.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    HttpModule,
     FormsModule
   ],
   providers: [
     RegistroService,
     UserService,
-    ChallengesService
+    ChallengesService,
+    DownloadService
   ],
   bootstrap: [AppComponent]
 })
