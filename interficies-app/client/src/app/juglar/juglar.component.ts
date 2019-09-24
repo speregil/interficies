@@ -17,6 +17,7 @@ export class JuglarComponent {
   perfilActual = "";
   retoActual = "";
   msnAceptar = "";
+  cargando = true;
   basico = true;
   basicAble = true;
   masterAble = false;
@@ -32,11 +33,23 @@ export class JuglarComponent {
 
 
   constructor(private userService: UserService, private router: Router, private http: HttpClient, private challenges: ChallengesService) {
-    challenges.getMasterChallenges('juglar').subscribe(response => {
-      if(response['mensaje'] == null && response['list'].length > 0){
-        this.masterChallenges = response['list'];
-        this.masterAble = true;
-      }
+    
+    this.msnAceptar = "Cargando";
+    var user = this.userService.getUserLoggedIn();
+    this.userService.getProgressState(user.username, 'juglarAsig').subscribe(response => {
+        if(response['flag']){
+          this.basicAble = false;
+        }
+        else{
+          this.challenges.getMasterChallenges('juglar').subscribe(response => {
+            if(response['mensaje'] == null && response['list'].length > 0){
+              this.masterChallenges = response['list'];
+              this.masterAble = true;
+            }
+          });
+        }
+        this.cargando = false;
+        this.msnAceptar = '';
     });
   }
 
@@ -51,13 +64,17 @@ export class JuglarComponent {
   }
 
   onFolderClick( folder ) {
-    if(this.userService.isUserLogged()) {
+    if(!this.cargando && this.basicAble) {
       this.retoActual = "Procesando...";
       this.acceptAble = false;
       if(this.basico)
         this.getBasicChallenge( folder );
       else
         this.getMasterChallenge();
+    }
+    else{
+      this.perfilActual = " ";
+      this.retoActual = "Ya aceptaste o completaste un reto en esta sección";
     }
   }
 
@@ -85,28 +102,26 @@ export class JuglarComponent {
   }
 
   onAccept() {
-    if(this.basicAble) {
+    if(this.basicAble && !this.cargando) {
+      this.msnAceptar = "Guardando...";
       var user = this.userService.getUserLoggedIn();
       this.userService.addChallenge(user.username, 'juglar', this.retoActual).subscribe(response => {
         if(response['mensaje'])
           this.msnAceptar = response['mensaje'];
         else {
-          this.msnAceptar = 'Reto Aceptado';
-          this.basicAble = false;
-          this.masterAble = false;
+          this.userService.saveProgress(user.username, "juglarAsig").subscribe(response => { 
+            this.msnAceptar = "Reto Aceptado"
+            this.basicAble = false;
+            this.masterAble = false;
+            this.acceptAble = false;
+            this.cargando = false;
+          });
         }
       });
     }
   }
 
   onContinue() {
-    if(this.userService.isUserLogged()) {
-      var user = this.userService.getUserLoggedIn();
-      this.userService.saveProgress(user.username, "j").subscribe(response => {
-        if(response["status"] == 0) {
-          this.router.navigate(["roles"]);
-        }
-      });
-    }
+    this.router.navigate(["roles"]);
   }
 }
