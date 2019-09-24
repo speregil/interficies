@@ -38,9 +38,9 @@
   <div class="grid-item collection-container">
     <h1>Tu Colección</h1>
     <p (click)="onComic(1)">Comic - Capitulo 1</p>
-    <p (click)="onComic(2)">Comic - Capitulo 2</p>
-    <p (click)="onComic(3)">Comic - Capitulo 3</p>
-    <p>Novela - Secretos en Xanadu</p>
+    <p (click)="onComic(2)" *ngIf="comic2 == true">Comic - Capitulo 2</p>
+    <p (click)="onComic(3)" *ngIf="comic3 == true">Comic - Capitulo 3</p>
+    <p *ngIf="novela == true">Novela - Secretos en Xanadu</p>
   </div>
 </div>
 

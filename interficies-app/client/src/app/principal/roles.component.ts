@@ -24,6 +24,12 @@ export class RolesComponent implements LoginObserver {
   intermedio = false;
   experto = false;
 
+  // Seccion de colecciones
+  comic2 = false;
+  comic3 = false;
+  novela = false;
+  final = false;
+
   // Sección de retos
   msnRetos = "Cargando...";
   txtReto = "";

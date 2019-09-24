@@ -7,8 +7,7 @@
 .vidente-aceptar-texto{ font-size: larger; margin-left: 3px }
 
 .vidente-oraculo { display: block; width: 25%; margin-top: 10px; margin-left: 38% }
-.vidente-oraculo:hover { border: 2px solid white }
-.vidente-oraculo:active { border: 2px solid cyan }
+.vidente-oraculo:hover { cursor: pointer }
 
 .vidente-opciones { margin-top: 2vh; margin-left: 20% }
 .vidente-button { font-size: larger; color: white; border: 2px solid white; border-radius: 15px; background-color: transparent; margin-left: 5%; margin-right: 5% }
