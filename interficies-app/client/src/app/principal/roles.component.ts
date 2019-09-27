@@ -5,6 +5,7 @@ import { UserService } from '../models/user.service';
 import { LoginObserver } from '../models/loginObserver.interface';
 import { HttpClient } from '@angular/common/http';
 import { DownloadService } from '../models/downloads.service';
+import {Howl, Howler} from 'howler';
 
 @Component({
   selector: 'roles',
@@ -37,11 +38,17 @@ export class RolesComponent implements LoginObserver {
   txtReto = "";
   retos = [];
 
-  // Sección de colecciones
+  bgSound = null;
 
   constructor(private userService: UserService, private principal: AppComponent, private router: Router, private http: HttpClient, private download: DownloadService) {
     this.isLogged = this.userService.isUserLogged();
     this.principal.addLoginObserver(this);
+    this.bgSound = new Howl({
+      src: ['/assets/static/snd_portada.mp3'],
+      loop: true
+    });
+    Howler.volume(0.5);
+    this.bgSound.play();
     this.showRoleProgress();
     this.getCurrentRol();
     this.getChallenges();
@@ -70,7 +77,8 @@ export class RolesComponent implements LoginObserver {
           var progress = response["progOb"];
           this.basico = progress["vidente"] && progress["juglar"];
           this.jar = progress["vidente"] && progress["juglar"];
-          this.intermedio = progress["arqueologo"];
+          this.comic2 = progress["vidente"] && progress["juglar"];
+          this.intermedio = progress["taller"];
           this.experto =  progress["critico"];
         }
       });
@@ -102,18 +110,27 @@ export class RolesComponent implements LoginObserver {
   onComic(chapter){
     switch( chapter ) {
       case 1:
-          this.userService.setInitComic("1");
-          this.userService.setLastComic("16");
-          this.userService.setComicBg('comic-1')
-          this.router.navigate(['comic']);
-          break;
+        this.userService.setInitComic("1");
+        this.userService.setLastComic("16");
+        this.userService.setComicBg('comic-1')
+        this.router.navigate(['comic']);
+        break;
+      case 2:
+        this.userService.setInitComic("17");
+        this.userService.setLastComic("29");
+        this.userService.setComicBg('comic-2')
+        this.router.navigate(['comic']);
+        break;  
     }
-    
   }
 
   onDownload(url){
     this.download.downloadFile(url).subscribe(response => {
       window.location.href = response.url;
 		}), error => console.log(error);
+  }
+
+  ngOnDestroy() { 
+    this.bgSound.stop();
   }
 }

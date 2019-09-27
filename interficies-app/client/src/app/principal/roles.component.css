@@ -5,7 +5,7 @@
 .grid-item ul { list-style-type: none }
 
 .rol-container { font-size: x-large; text-align: justify; margin-right: 15px; background-image: url("../../assets/static/avatar/frame.png"); display: inline; position: relative }
-.rol-container img { width: 100%;margin-left: 3% }
+.rol-container img { width: 95%;margin-left: 6% }
 .rol-container p { padding-left: 6%; padding-right: 4% }
 
 .rol-button{ width: 32%; height: 130px; margin-left: 15%; margin-top: 2vh; color: white; background-color: transparent }
