@@ -98,7 +98,7 @@ export class ExpansionesComponent {
         this.msn = response['mensaje'];
       else {
         this.msn = 'Notificando.';
-        this.user.setAchivement(this.selectedParticipant, "Has realizado la misión del oráculo", this.selectedGrade).subscribe(response => {
+        this.user.setAchivement(this.selectedParticipant, "Has realizado la misión del " + this.challengeType, this.selectedGrade).subscribe(response => {
           this.msn = 'Notificando...';
           if(response['status'] > 0) {
             this.msn = response['mensaje'];

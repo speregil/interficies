@@ -10,11 +10,25 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LaboratorioComponent {
  
+  basicAble = true;
+  cargando = true;
+  msn = '';
+
   currentCursor = 'lab-container';
   currentColors = [];
   currentImages = [];
 
   constructor(private userService: UserService, private router: Router, private http: HttpClient) {
+    this.msn = "Cargando";
+    var user = this.userService.getUserLoggedIn();
+    this.userService.getProgressState(user.username, 'arqueologo').subscribe(response => {
+        if(response['flag']){
+          this.basicAble = false;
+        }
+        this.msn = '';
+        this.cargando = false;
+    });
+
     for(var i = 0; i < 9; i++){
       this.currentColors.push('img-container');
     }
@@ -66,27 +80,58 @@ export class LaboratorioComponent {
   }
 
   validate(){
-    var mistakes = 0;
-    var correct = 0;
-    for(var i = 0; i < this.currentImages.length; i++){
-      var image = this.currentImages[i].split('/');
-      var source = image[0];
-      var color = this.currentColors[i];
+    if(this.basicAble && !this.cargando){
+      var mistakes = 0;
+      var correct = 0;
+      for(var i = 0; i < this.currentImages.length; i++){
+        var image = this.currentImages[i].split('/');
+        var source = image[0];
+        var color = this.currentColors[i];
 
-      if(source == 'Gabriella' && color == 'img-Acontainer')
-        correct++;
-      else if(source == 'MyC' && color == 'img-Rcontainer')
-        correct++;
-      else if(source == 'Golpe' && color == 'img-Vcontainer')
-        correct++;
-      else
-        mistakes++; 
+        if(source == 'Gabriella' && color == 'img-Acontainer')
+          correct++;
+        else if(source == 'MyC' && color == 'img-Rcontainer')
+          correct++;
+        else if(source == 'Golpe' && color == 'img-Vcontainer')
+          correct++;
+        else
+          mistakes++; 
+      }
+
+      if(mistakes > 0)
+        alert("Hay " + mistakes + " datos que no coinciden. Vuelva a intentar");
+      else{
+        alert("Correcto");
+        this.msn = "Espera un momento por favor...";
+        this.cargando = true;
+        this.saveAchivement();
+      }
     }
+    else{
+      alert('Ya completaste este reto previamente');
+    }
+  }
 
-    if(mistakes > 0)
-      alert("Hay " + mistakes + " datos que no coinciden. Vuelva a intentar");
-    else
-      alert("Correcto");
+  saveAchivement(){
+    var user = this.userService.getUserLoggedIn();
+    this.userService.setAchivement(user.username, 'Has desarrollado la misión del arqueólogo', 10).subscribe(response => {
+      if(response['mensaje'])
+        this.msn = response['mensaje'];
+      else {
+        this.userService.saveProgress(user.username, 'arqueologo').subscribe(response => {
+          if(response["status"] == 0){
+            this.msn = '';
+            this.basicAble = false;
+            alert('Logro desbloqueado: Has desarrollado la misión del arqueólogo');
+            this.userService.localUpdateAchivemets(user, 'Has desarrollado la misión del arqueólogo', 10);
+            this.userService.checkLevel(user, function(updated){});
+          }
+          else{
+            this.msn = 'Cuidado, el usuario no se ha actualizado, vuelva a intentar'; 
+          }
+        }); 
+      }
+    });
   }
 
   reset(){
@@ -96,13 +141,6 @@ export class LaboratorioComponent {
   }
 
   onContinue() {
-    if(this.userService.isUserLogged()) {
-      var user = this.userService.getUserLoggedIn();
-      this.userService.saveProgress(user.username, "l").subscribe(response => {
-        if(response["status"] == 0) {
-          this.router.navigate(["roles"]);
-        }
-      });
-    }
+    this.router.navigate(["roles"]);    
   }
 }
