@@ -8,6 +8,8 @@
 .rol-container img { width: 95%;margin-left: 6% }
 .rol-container p { padding-left: 6%; padding-right: 4% }
 
+.nav-container { display: grid; grid-template-columns: 50% 50%; margin-top: 10vh }
+
 .rol-button{ width: 32%; height: 130px; margin-left: 15%; margin-top: 2vh; color: white; background-color: transparent }
 .rol-button:hover{ filter: grayscale(100%); color: cyan}
 .rol-button img { width: 100% }

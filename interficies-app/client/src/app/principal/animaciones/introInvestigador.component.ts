@@ -10,14 +10,12 @@ import { AppComponent } from '../../app.component';
 })
 
 export class IntroInvestigadorComponent {
-  
-  achivement = 'Viste las animaciones: Investigador';
 
   constructor(private userService: UserService,  private router: Router, private app: AppComponent) {
     var user = userService.getUserLoggedIn();
-    userService.updateRole(user.username, "Investigador").subscribe(response => {
+    userService.updateRole(user.username, "Reportero").subscribe(response => {
       if(response["status"] == 0) {
-        user.currentRol = "Investigador";
+        user.currentRol = "Reportero";
         userService.setUserLoggedIn(user);
         app.updateLogin();
       }
@@ -25,8 +23,6 @@ export class IntroInvestigadorComponent {
   }
 
   onContinue() {
-    
-        this.router.navigate(["investigador"]);
-    
+    this.router.navigate(["investigador"]);
   }
 }

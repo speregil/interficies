@@ -5,26 +5,17 @@
     <p>{{currentText}}</p>
   </div>
   
-  <div class="grid-item">
+  <div class="grid-item nav-container">
     <div>
-      <div (click) = "onContinue('animaciones-futurologo')" class="rol-button"><img src="assets/static/iconos/vidente.png"><label>Vidente</label></div>
-      <div (click) = "onContinue('animaciones-juglar')" class="rol-button"><img src="assets/static/iconos/juglar.png"><label>Juglar</label></div>
+        <div (click) = "onContinue('animaciones-futurologo')" class="rol-button"><img src="assets/static/iconos/vidente.png"><label>Vidente</label></div>
+        <div (click) = "onContinue('animaciones-juglar')" class="rol-button"><img src="assets/static/iconos/juglar.png"><label>Juglar</label></div>
+        <div *ngIf="basico == true" (click) = "onContinue('taller')" class="rol-button"><img src="assets/static/iconos/arqueologo.png"><label>Taller</label></div>
     </div>
 
-    <div *ngIf="basico == true">
-      <div (click) = "onContinue('taller')" class="rol-button"><img src="assets/static/iconos/arqueologo.png"><label>Taller</label></div>
-    </div>
-
-    <div *ngIf="intermedio == true">
-      <div (click) = "onContinue('animaciones-laboratorio')" class="rol-button"><img src="assets/static/iconos/arqueologo.png"><label>Laboratorio</label></div>
-    </div>
-
-    <div *ngIf="experto == true">
-      <div (click) = "onContinue('animaciones-investigador')" class="rol-button"><img src="assets/static/iconos/reportero.png"><label>Reportero</label></div>
-    </div>
-
-    <div *ngIf="experto == true">
-      <div (click) = "onContinue('animaciones-interprete')" class="rol-button"><img src="assets/static/iconos/critico.png"><label>Crítico</label></div>
+    <div>
+        <div *ngIf="intermedio == true" (click) = "onContinue('animaciones-laboratorio')" class="rol-button"><img src="assets/static/iconos/arqueologo.png"><label>Laboratorio</label></div>
+        <div *ngIf="experto == true" (click) = "onContinue('animaciones-investigador')" class="rol-button"><img src="assets/static/iconos/reportero.png"><label>Reportero</label></div>
+        <div *ngIf="master == true" (click) = "onContinue('animaciones-interprete')" class="rol-button"><img src="assets/static/iconos/critico.png"><label>Crítico</label></div>
     </div>
   </div>
 

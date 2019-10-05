@@ -69,8 +69,12 @@ export class ComicComponent implements OnDestroy {
         this.setAchivement(1);
         break;
       }
+      case '17' : {
+        this.setAchivement(2);
+        break;
+      }
       default : {
-        this.setRoute(1);
+        this.setRoute();
         break;
       }
     }
@@ -90,20 +94,25 @@ export class ComicComponent implements OnDestroy {
           points = 20;
           this.saveAchivement(currentUser, text, points, 1);
       }
+      else if(achivementNum == 2) {
+        text = 'Has leído los capitulos centrales del Cómic';
+        points = 20;
+        this.saveAchivement(currentUser, text, points, 2);
+    }
       else {
-        this.setRoute(1);
+        this.setRoute();
       }
     }
     else
-      this.setRoute(achivementNum);
+      this.setRoute();
   }
 
-  saveAchivement(user, text, points, achivementNum){
+  saveAchivement(user, text, points){
     if(this.userService.checkUserAchivements(user, text)){
       this.userService.setAchivement(user.username, text, points).subscribe(response => {
         if(response['status'] > 0) {
           alert(response['mensaje']);
-          this.setRoute(achivementNum);
+          this.setRoute();
         }
         else {
           alert("Logro obtenido: " + text);
@@ -114,27 +123,20 @@ export class ComicComponent implements OnDestroy {
               this.app.updateLogin();
             }
           });
-          this.setRoute(achivementNum);
+          this.setRoute();
         }
       });  
     }
     else
-    this.setRoute(achivementNum);
+    this.setRoute();
   }
 
   /**
    * Navega a la siguiente pagina dependiendo del numero de la pagina inicial reportada
    * @param routeNum Primera pagina reportada
    */
-  setRoute(routeNum) {
-    var routeName = "";
-    switch (routeNum) {
-      case 1 : {
-        routeName = "roles";
-        break;
-      }
-    }
-    this.router.navigate([routeName]);
+  setRoute() {
+    this.router.navigate(["roles"]);
   }
 
   /**

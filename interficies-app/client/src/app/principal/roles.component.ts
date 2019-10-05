@@ -25,6 +25,7 @@ export class RolesComponent implements LoginObserver {
   basico = false;
   intermedio = false;
   experto = false;
+  master = false;
 
   // Seccion de colecciones
   jar = false;
@@ -79,7 +80,8 @@ export class RolesComponent implements LoginObserver {
           this.jar = progress["vidente"] && progress["juglar"];
           this.comic2 = progress["vidente"] && progress["juglar"];
           this.intermedio = progress["taller"];
-          this.experto =  progress["critico"];
+          this.experto =  progress["arqueologo"];
+          this.master =  progress["critico"];
         }
       });
     }
