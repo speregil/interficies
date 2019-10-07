@@ -92,12 +92,12 @@ export class ComicComponent implements OnDestroy {
       if(achivementNum == 1) {
           text = 'Has leído la primera parte del Cómic';
           points = 20;
-          this.saveAchivement(currentUser, text, points, 1);
+          this.saveAchivement(currentUser, text, points);
       }
       else if(achivementNum == 2) {
         text = 'Has leído los capitulos centrales del Cómic';
         points = 20;
-        this.saveAchivement(currentUser, text, points, 2);
+        this.saveAchivement(currentUser, text, points);
     }
       else {
         this.setRoute();

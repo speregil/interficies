@@ -16,3 +16,11 @@
 .img-Acontainer { width: 250px; height: 250px; border: 5px solid cyan }
 .img-Rcontainer { width: 250px; height: 250px; border: 5px solid red }
 .img-Vcontainer { width: 250px; height: 250px; border: 5px solid rgb(0, 255, 0) }
+
+.video { margin-top: 5vh; margin-left: 25% }
+.taller-advice { font-size: xx-large; margin-left: 35%; margin-top: 2vh }
+.taller-container { margin-left: 10% }
+.taller-button { width: 35%; margin-left: 5% }
+.taller-button a { color: white; text-decoration: none }
+.taller-button a:visited { color: white; text-decoration: none }
+.taller-button a:hover { color: cyan; text-decoration: none }
