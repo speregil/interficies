@@ -56,4 +56,9 @@ export class InvestigadorComponent {
   onContinue() {
     this.router.navigate(["roles"]); 
   }
+
+  onReset() {
+    this.selectedAnswers = ["a","a","a","a","a","a","a","a"];
+    this.questionState = ["normal","normal","normal","normal","normal","normal","normal","normal"];
+  }
 }
