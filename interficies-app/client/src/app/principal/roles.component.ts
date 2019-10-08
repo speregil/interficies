@@ -29,6 +29,7 @@ export class RolesComponent implements LoginObserver {
 
   // Seccion de colecciones
   jar = false;
+  cronica = false;
   comic2 = false;
   comic3 = false;
   novela = false;
@@ -81,6 +82,8 @@ export class RolesComponent implements LoginObserver {
           this.comic2 = progress["vidente"] && progress["juglar"];
           this.intermedio = progress["taller"];
           this.experto =  progress["arqueologo"];
+          this.comic3 = progress["arqueologo"];
+          this.cronica = progress["cronicaAsig"];
           this.master =  progress["critico"];
         }
       });
@@ -113,14 +116,20 @@ export class RolesComponent implements LoginObserver {
     switch( chapter ) {
       case 1:
         this.userService.setInitComic("1");
-        this.userService.setLastComic("16");
+        this.userService.setLastComic("15");
         this.userService.setComicBg('comic-1')
         this.router.navigate(['comic']);
         break;
       case 2:
-        this.userService.setInitComic("17");
-        this.userService.setLastComic("29");
+        this.userService.setInitComic("16");
+        this.userService.setLastComic("28");
         this.userService.setComicBg('comic-2')
+        this.router.navigate(['comic']);
+        break;
+      case 3:
+        this.userService.setInitComic("29");
+        this.userService.setLastComic("43");
+        this.userService.setComicBg('comic-3')
         this.router.navigate(['comic']);
         break;  
     }

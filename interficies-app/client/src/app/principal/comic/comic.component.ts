@@ -73,6 +73,10 @@ export class ComicComponent implements OnDestroy {
         this.setAchivement(2);
         break;
       }
+      case '30' : {
+        this.setAchivement(3);
+        break;
+      }
       default : {
         this.setRoute();
         break;
@@ -98,7 +102,12 @@ export class ComicComponent implements OnDestroy {
         text = 'Has leído los capitulos centrales del Cómic';
         points = 20;
         this.saveAchivement(currentUser, text, points);
-    }
+      }
+      else if(achivementNum == 3) {
+        text = 'Has leído el desenlace del cómic';
+        points = 20;
+        this.saveAchivement(currentUser, text, points);
+      }
       else {
         this.setRoute();
       }
