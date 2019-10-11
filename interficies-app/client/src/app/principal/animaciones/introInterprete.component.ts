@@ -10,14 +10,12 @@ import { AppComponent } from '../../app.component';
 })
 
 export class IntroInterpreteComponent {
-  
-  achivement = 'Viste las animaciones: Interprete';
 
   constructor(private userService: UserService,  private router: Router, private app: AppComponent) {
     var user = userService.getUserLoggedIn();
-    userService.updateRole(user.username, "Interprete").subscribe(response => {
+    userService.updateRole(user.username, "Critico").subscribe(response => {
       if(response["status"] == 0) {
-        user.currentRol = "Interprete";
+        user.currentRol = "Critico";
         userService.setUserLoggedIn(user);
         app.updateLogin();
       }
@@ -25,8 +23,6 @@ export class IntroInterpreteComponent {
   }
 
   onContinue() {
-    
-        this.router.navigate(["interprete"]);
-    
+    this.router.navigate(["interprete"]);
   }
 }

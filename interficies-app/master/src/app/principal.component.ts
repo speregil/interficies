@@ -8,16 +8,34 @@ import { Router } from "@angular/router";
   styleUrls: ['./principal.component.css']
 })
 
+/**
+ * Componente para controlar el menu principal de la aplicación del master
+ */
 export class PrincipalComponent {
 
-    loggedUser = null;
+  //--------------------------------------------------------------------------------
+  // Campos y Atributos
+  //--------------------------------------------------------------------------------
 
-    constructor(private service: UserService, private router: Router){
-        this.loggedUser = this.service.getUserLoggedIn();
-    }
+  loggedUser = null;  // Atributo que guarda el usuario que se encuentra actualmente en sesión
 
-    onExit(){
-      this.service.setUserLoggedOut()
-      this.router.navigate(['']);
-    }
+  //--------------------------------------------------------------------------------
+  // Constructor
+  //--------------------------------------------------------------------------------
+
+  constructor(private service: UserService, private router: Router){
+    this.loggedUser = this.service.getUserLoggedIn();
+  }
+
+  //--------------------------------------------------------------------------------
+  // Funciones
+  //--------------------------------------------------------------------------------
+
+  /**
+   * Saca de sesión al usuario actual y navega hacia la ventana de login
+   */
+  onExit(){
+    this.service.setUserLoggedOut()
+    this.router.navigate(['']);
+  }
 } 

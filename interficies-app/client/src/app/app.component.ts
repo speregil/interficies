@@ -16,11 +16,15 @@ import { LoginObserver } from './models/loginObserver.interface';
  */
 export class AppComponent {
   
-  loginObservers: LoginObserver[];   // Lista de componentes que necesitan ser notificados cuando se realiza un login
+  //-------------------------------------------------------------------------------------------------------------------------------
+  // Campos y Atributos
+  //-------------------------------------------------------------------------------------------------------------------------------
 
-  username = "";      // Nombre del usuario que desea ingresar
-  password = "";      // Password del usuario que desea ingresar
-  loggedUser = null;  // Objeto que representa la infromación de un usuario loggeado
+  username = "";                      // Campo para el nombre del usuario que desea ingresar
+  password = "";                      // Campo para el password del usuario que desea ingresar
+
+  loggedUser = null;                  // Atributo que representa la información del usuario en sesión
+  loginObservers: LoginObserver[];    // Atributo que guarda la lista de componentes que necesitan ser notificados cuando se realiza un login
 
 //-------------------------------------------------------------------------------------------------------------------------------
 // Constructor
@@ -37,6 +41,8 @@ export class AppComponent {
 
   /**
    * Maneja el proceso de ingreso seguro al portal y actualiza la información en la barra
+   * username Campo del nombre de usuario
+   * password Campo de la contraseña del usuario
    */
   login(){
     this.registro.login(this.username, this.password).subscribe(data => {
@@ -83,6 +89,7 @@ export class AppComponent {
     this.password = pass;
     this.login();
   }
+
   /**
    * Actualiza el usuario en sesión si se ha hecho un login externo
    */
@@ -143,6 +150,9 @@ export class AppComponent {
     return this.userService.isUserLogged();
   }
 
+  /**
+   * Navega a la portada o al menu principal, dependiendo del progreso actual del usuario en sesión
+   */
   goHome(){
     if(this.loggedUser) {
       if(this.loggedUser.currentRol != 'Ninguno'){
@@ -157,6 +167,9 @@ export class AppComponent {
     }
   }
 
+  /**
+   * Navega hacia el blog y salva el logro correspondiente si no lo tenia previamente
+   */
   onBlog(){
     var user = this.userService.getUserLoggedIn();
     var text = "Has entrado al blog de recursos";

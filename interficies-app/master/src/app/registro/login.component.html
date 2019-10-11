@@ -1,6 +1,6 @@
 <div class="form-container">
-    <label>Usuario</label><input class="main-text" [(ngModel)]="username" type="text">
-    <label>Contraseña</label><input class="main-text" [(ngModel)]="password" type="password">
+    <label>Usuario</label><input class="main-text" [(ngModel)]="username" type="text" (keyup.enter)="login()">
+    <label>Contraseña</label><input class="main-text" [(ngModel)]="password" type="password" (keyup.enter)="login()">
 <div>
 <div class="option-container">
     <input type="button" (click) = "login()" value="Iniciar Sesión" class="main-button">

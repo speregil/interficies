@@ -17,8 +17,8 @@ var ProgressSchema = new Schema({
     arqueologo:Boolean,
     criticoAsig:Boolean,
     critico:Boolean,
-    ensayoAsig:Boolean,
-    ensayo:Boolean,
+    periodistaAsig:Boolean,
+    periodista:Boolean,
 });
 
 module.exports = mongoose.model('Progress', ProgressSchema);

@@ -23,7 +23,7 @@ export class InvestigadorComponent {
   constructor(private userService: UserService, private router: Router, private download: DownloadService) {
     this.msn = "Cargando...";
     var user = this.userService.getUserLoggedIn();
-    this.userService.getProgressState(user.username, 'criticoAsig').subscribe(response => {
+    this.userService.getProgressState(user.username, 'periodistaAsig').subscribe(response => {
         if(response['flag']){
           this.basicAble = false;
         }
@@ -71,11 +71,11 @@ export class InvestigadorComponent {
 
   setChallange(){
     var user = this.userService.getUserLoggedIn();
-    this.userService.addChallenge(user.username, 'critico', "Crónica de la conspiración en Xanadú").subscribe(response => {
+    this.userService.addChallenge(user.username, 'periodista', "Como periodista cubriendo los hechos al redor del masivo complot que llevó a la caida de Xanadú. La crónica que vas a escribir describe los hechos detrás de esta conspiración.").subscribe(response => {
       if(response['mensaje'])
         this.msn = response['mensaje'];
       else {
-        this.userService.saveProgress(user.username, "criticoAsig").subscribe(response => { 
+        this.userService.saveProgress(user.username, "periodistaAsig").subscribe(response => { 
           this.onDownload();
         });
       }

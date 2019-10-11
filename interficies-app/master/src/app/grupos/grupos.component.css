@@ -16,6 +16,7 @@
 .list-container { margin-top: 5vh }
 .list-container p { font-size: xx-large }
 .list-container li { list-style: square; font-size: xx-large; cursor: pointer }
-.list-container li:hover { color: red }
+.list-container li img { width: 2%; margin-left: 5% }
+.list-container li img:hover { -webkit-filter: grayscale(100%); filter: grayscale(100%); cursor: pointer }
 
 hr { width: 50% }
