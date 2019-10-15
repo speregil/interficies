@@ -37,6 +37,7 @@ import { IntroInterpreteComponent } from './principal/animaciones/introInterpret
 
 import { RegistroService } from './principal/registro/registro.service';
 import { UserService } from './models/user.service';
+import { MusicService } from './models/music.service';
 import { ChallengesService } from './models/challenges.service';
 import { DownloadService } from './models/downloads.service';
 
@@ -81,6 +82,7 @@ import { DownloadService } from './models/downloads.service';
   providers: [
     RegistroService,
     UserService,
+    MusicService,
     ChallengesService,
     DownloadService
   ],

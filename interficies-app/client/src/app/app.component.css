@@ -18,10 +18,12 @@
 .header-data{ display: grid; grid-template-columns: 60% auto; margin-left: 4%; margin-top: 1vh }
 .header-name { width: 100%; display: grid; grid-template-columns: 33% 33% 33%; padding-left: 10%; padding-top: 1vh }
 .header-info { color: white; font-size: x-large }
-.header-options { width: 100%; display: grid; grid-template-columns: auto auto auto; margin-left: 5% }
+.header-options { width: 100%; display: grid; grid-template-columns: auto auto auto auto; margin-left: 5% }
 .header-option { width: 20% }
 .header-option img { width: 100% }
 .header-option img:hover { width: 100%; filter: grayscale(100%); -webkit-filter: grayscale(100%);}
 .header-close { width: 20%; cursor: pointer; margin-left: 5% }
-.header-close:hover { filter: grayscale(100%); -webkit-filter: grayscale(100%) } 
+.header-close:hover { filter: grayscale(100%); -webkit-filter: grayscale(100%) }
+.header-sound { width: 20%; cursor: pointer; margin-left: 5% }
+.header-sound:hover { filter: grayscale(100%); -webkit-filter: grayscale(100%) }  
 

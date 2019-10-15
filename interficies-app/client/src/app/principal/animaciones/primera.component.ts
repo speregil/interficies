@@ -1,6 +1,8 @@
 import { Component} from '@angular/core';
 import { Router } from "@angular/router";
 import { UserService } from '../../models/user.service';
+import { MusicService } from 'src/app/models/music.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'animacion-primera',
@@ -13,7 +15,10 @@ import { UserService } from '../../models/user.service';
  */
 export class PrimeraAnimacionComponent {
 
-  constructor(private userService: UserService,  private router: Router) {}
+  constructor(private userService: UserService,  private router: Router, music: MusicService, private principal: AppComponent) {
+    music.setBg("");
+    principal.notifyBgChange();  
+  }
 
   /**
    * Navega hacia el componente del comic, capitulos 1 a 15

@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { RegistroService } from './principal/registro/registro.service';
 import { UserService } from './models/user.service';
+import {Howl, Howler} from 'howler';
 import { User } from './models/user.model';
 import { LoginObserver } from './models/loginObserver.interface';
+import { MusicService } from './models/music.service';
 
 @Component({
   selector: 'app-root',
@@ -26,13 +28,28 @@ export class AppComponent {
   loggedUser = null;                  // Atributo que representa la información del usuario en sesión
   loginObservers: LoginObserver[];    // Atributo que guarda la lista de componentes que necesitan ser notificados cuando se realiza un login
 
+  bgSound = null;                     // Atributo que controla la musica de fondo
+
 //-------------------------------------------------------------------------------------------------------------------------------
 // Constructor
 //-------------------------------------------------------------------------------------------------------------------------------
 
-  constructor(private registro: RegistroService, private userService: UserService, private router: Router){
+  constructor(private registro: RegistroService, private userService: UserService, private router: Router, private music: MusicService){
     this.loginObservers = new Array();
     this.updateLogin();
+    
+    var currentBg = music.getBg();
+    this.bgSound = new Howl({
+      src: ['/assets/static/sounds/' + currentBg ],
+      loop: true
+    });
+    Howler.volume(0.5);
+    this.bgSound.play();
+  }
+
+  ngOnDestroy(){
+    this.bgSound.stop();
+    this.music.removeBg();
   }
 
 //-------------------------------------------------------------------------------------------------------------------------------
@@ -111,6 +128,20 @@ export class AppComponent {
       this.loggedUser = null;
       this.notifyLogin(false);
     }
+  }
+
+  /**
+   * Cambia la musica de fondo al ser notificado por otro componente del portal
+   */
+  notifyBgChange(){
+    this.bgSound.stop();
+    var currentBg = this.music.getBg();
+    this.bgSound = new Howl({
+      src: ['/assets/static/sounds/' + currentBg ],
+      loop: true
+    });
+    Howler.volume(0.5);
+    this.bgSound.play();
   }
 
   /**
@@ -253,6 +284,21 @@ export class AppComponent {
   private notifyLogin(logged: boolean) {
     for (var observer of this.loginObservers) {
         observer.notifyLogin(logged);
+    }
+  }
+
+  /**
+   * Apaga/Enciende el sonido de fondo en la aplicacion
+   */
+  private turnSound(){
+    var sound = this.music.isOn();
+    if(sound) {
+      this.bgSound.stop();
+      this.music.setOff();
+    }
+    else{
+      this.bgSound.play();
+      this.music.setOn();
     }
   }
 }

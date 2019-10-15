@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {Howl, Howler} from 'howler';
+import { MusicService } from '../models/music.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'portada',
@@ -10,30 +11,14 @@ import {Howl, Howler} from 'howler';
 /**
  * Componente para manejar la ventana de la portada principal
  */
-export class PortadaComponent implements OnInit, OnDestroy {
-  
-    //-------------------------------------------------------------------------
-    // Campos y Atributos
-    //-------------------------------------------------------------------------
-
-    bgSound = new Howl({
-        src: ['/assets/static//snd_portada.mp3'],       // Atributo para manejar la musica de fondo
-        loop: true
-    });
+export class PortadaComponent {
 
     //-------------------------------------------------------------------------
     // Constructor
     //-------------------------------------------------------------------------
 
-    constructor() {}
-
-    ngOnInit() {
-      this.bgSound.play();
-      this.bgSound.loop();
-      Howler.volume(0.5);
-    }
-
-    ngOnDestroy() { 
-      this.bgSound.stop();
+    constructor( music: MusicService, private principal: AppComponent ) {
+      music.setBg('snd_portada.mp3');
+      principal.notifyBgChange();
     }
 }
