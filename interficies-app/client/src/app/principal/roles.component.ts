@@ -84,6 +84,7 @@ export class RolesComponent implements LoginObserver {
           this.experto =  progress["arqueologo"];
           this.comic3 = progress["arqueologo"];
           this.cronica = progress["criticoAsig"];
+          this.novela = progress["critico"];
           this.master =  progress["critico"];
         }
       });
