@@ -8,22 +8,41 @@ import { User } from '../services/user.model';
   styleUrls: ['./participantes.css']
 })
 
+/**
+ * Componente para manejar la lista de participantes actuales y para eliminarlos
+ */
 export class ListaParticipantesComponent {
 
-    @Input() participantes : Array<User>;
-    @Input() msn: String;
+  //------------------------------------------------------------------------------------------
+  // Campos y Atributos
+  //------------------------------------------------------------------------------------------
 
-    @Output() emitter = new EventEmitter<string>();
+    @Input() participantes : Array<User>;             // Atributo injectado de la lista de participantes actual en el sistema
+    @Input() msn: String;                             // Atributo injectado del mensaje del resultado de la operación actual
+    @Output() emitter = new EventEmitter<string>();   // Atributo para emitir el resultado de la operación actual
+
+  //------------------------------------------------------------------------------------------
+  // Constructor
+  //------------------------------------------------------------------------------------------
 
     constructor(private service: ParticipantsService){}
 
-    unregister(username){
-      if(confirm('Desea eliminar este usuario')){
-        this.service.unregisterParticipant(username).subscribe(data => {
-          if(data["mensaje"])
-            alert(data["mensaje"]);
-          this.emitter.emit("delete");
-        });
-      }
+  //------------------------------------------------------------------------------------------
+  // Funciones
+  //------------------------------------------------------------------------------------------
+
+  /**
+   * Elimina del sistema al usuario cuyo username entra por parámetro, si no ha iniciado ninguna experiencia aún
+   * @param username Nombre de usuario a eliminar. Se recupera de la lista de usuarios
+   * Alerta el resultado de la operación, fallida o exitosa
+   */
+  unregister(username){
+    if(confirm('Desea eliminar este usuario')){
+      this.service.unregisterParticipant(username).subscribe(data => {
+      if(data["mensaje"])
+        alert(data["mensaje"]);
+        this.emitter.emit("delete");
+      });
     }
+  }
 } 

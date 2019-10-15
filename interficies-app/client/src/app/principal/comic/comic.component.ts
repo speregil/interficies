@@ -15,11 +15,19 @@ import { AppComponent } from '../../app.component';
  */
 export class ComicComponent implements OnDestroy {
   
-  currentComic = "0";             // Indice que identifica la pagina que se esta mostrando
-  initComic = "0";                // Indice que identifica la primera pagina de la secuencia
-  lastComic = "0";                // Indice que identifica la ultima pagina de la secuencia
-  currentBg = "";
-  bgSound = null;
+  //----------------------------------------------------------------------------------------------------------
+  // Campos y Atributos
+  //----------------------------------------------------------------------------------------------------------
+
+  currentComic = "0";             // Atributo que identifica la pagina que se esta mostrando
+  initComic = "0";                // Atributo que identifica la primera pagina de la secuencia
+  lastComic = "0";                // Atributo que identifica la ultima pagina de la secuencia
+  currentBg = "";                 // Atributo que identifica la musica de fondo que suena durante la secuencia
+  bgSound = null;                 // Atributo que controla la musica de fondo
+
+  //----------------------------------------------------------------------------------------------------------
+  // Constructor
+  //----------------------------------------------------------------------------------------------------------
 
   constructor(private userService: UserService, private router: Router, private app: AppComponent){
     this.initComic = this.userService.getInitComic();
@@ -34,8 +42,17 @@ export class ComicComponent implements OnDestroy {
     this.bgSound.play();
   }
 
+  ngOnDestroy() { 
+    this.bgSound.stop();
+  }
+
+  //----------------------------------------------------------------------------------------------------------
+  // Funciones
+  //----------------------------------------------------------------------------------------------------------
+
   /**
-   * Cambia la pagina actual a la siguiente en la secuencia y enciende el sonido correspondiente
+   * Cambia la pagina actual a la siguiente en la secuencia y mueve la vista al ancla que entra por parametro
+   * @param $element Ancla en el DOM hacia donde se mueve la ventana
    */
   onSig($element) {
     var current = Number(this.currentComic);
@@ -48,7 +65,7 @@ export class ComicComponent implements OnDestroy {
   }
 
   /**
-   * Cambia la pagina actual a la anterior en la secuencia y enciende el sonido correspondiente
+   * Cambia la pagina actual a la anterior en la secuencia
    */
   onPrev() {
     var current = Number(this.currentComic);
@@ -60,7 +77,7 @@ export class ComicComponent implements OnDestroy {
   }
 
   /**
-   * Controla la navegacion del componente del comic a cualquier otro basandose en la pagina inicial reportada
+   * Controla la asignación del logro por leer el comic basandose en la pagina inicial reportada
    */
   onContinue() {
     var initComic = this.userService.getInitComic();
@@ -116,6 +133,12 @@ export class ComicComponent implements OnDestroy {
       this.setRoute();
   }
 
+  /**
+   * Salva el logro al usuario en sesión con los datos que entran por parámetro
+   * @param user Usuario en la sesión
+   * @param text Texto del logro a guardar
+   * @param points Puntos del logro a guardar
+   */
   saveAchivement(user, text, points){
     if(this.userService.checkUserAchivements(user, text)){
       this.userService.setAchivement(user.username, text, points).subscribe(response => {
@@ -141,17 +164,9 @@ export class ComicComponent implements OnDestroy {
   }
 
   /**
-   * Navega a la siguiente pagina dependiendo del numero de la pagina inicial reportada
-   * @param routeNum Primera pagina reportada
+   * Navega a la página pricipal
    */
   setRoute() {
     this.router.navigate(["roles"]);
-  }
-
-  /**
-   * Detiene todos los sonidos antes de destruir el componente
-   */
-  ngOnDestroy() { 
-    this.bgSound.stop();
   }
 }

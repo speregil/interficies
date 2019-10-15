@@ -25,6 +25,6 @@
 <div class="list-container">
     <p>{{msn3}}</p>
     <ul>
-        <li *ngFor="let p of participantsList" (click)="unasign(p.username)">{{p.shownName}}</li>
+        <li *ngFor="let p of participantsList"><label>{{p.shownName}}</label><img src="./assets/static/basura.png" (click)="unasign(p.username)"></li>
     </ul>
 </div>

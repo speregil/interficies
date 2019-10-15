@@ -1,3 +1,2 @@
-.animacion-continuar { position: absolute; width: 2%; left: 90%; top: 90vh; z-index: 2; background-color: transparent; opacity: 0.5 }
-.animacion-continuar:hover{ color: cyan; border-color: cyan; opacity: 1 }
-.animacion-continuar:active{ color: black; border-color: black; opacity: 1}
+.video { margin-top: 10vh; margin-left: 25% }
+.animacion-continuar { width: 15%; margin-left: 42%; margin-top: 5vh }

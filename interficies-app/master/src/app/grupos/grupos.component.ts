@@ -9,23 +9,45 @@ import { ParticipantsService } from '../services/participants.service';
   styleUrls: ['./grupos.component.css']
 })
 
+/**
+ * Componente para manejar la creación de grupos y el registro de participantes en ellos
+ */
 export class GroupComponent {
 
-    groupName = "";
-    groupList = [];
-    participantsList = [];
-    unasignedList = [];
-    selectedGroup = "";
-    selectedParticipant = "";
-    msn = "";
-    msn2 = "";
-    msn3 = "Selecciona un grupo";
+    //--------------------------------------------------------------------------------------------
+    // Campos y Atributos
+    //--------------------------------------------------------------------------------------------
+
+    groupName = "";                     // Campo para el nombre del nuevo grupo
+
+    groupList = [];                     // Atributo que guarda la lista de todos los grupos en el sistema que le pertenecen al master en sesion
+    participantsList = [];              // Atributo que guarda la lista de participantes del grupo actualmente seleccionado
+    unasignedList = [];                 // Atributo que guarda la lista de todos los participantes sin asignar en el sistema
+
+    selectedGroup = "";                 // Campo para el ID del grupo actualmente seleccionado
+    selectedParticipant = "";           // Campo para el username del participante actualmente seleccionado
+
+    msn = "";                           // Atributo para los mensajes de estado del registro de grupos
+    msn2 = "Cargando Información";                          // Atributo para los mensajes de estado de los procesos de administracion de grupos
+    msn3 = "Selecciona un grupo";       // Atributo para indicar al usuario que las listas se han cargado
+
+    //--------------------------------------------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------------------------------------------
 
     constructor(private service: GroupService, private user: UserService, private participants: ParticipantsService){
         this.getGroups();
         this.getUnasigned();
     }
 
+    //--------------------------------------------------------------------------------------------
+    // Funciones
+    //--------------------------------------------------------------------------------------------
+
+    /**
+     * Crea un nuevo grupo en base al nombre provisto en el campo correspondiente
+     * Comunica el estado de la operacion en msn y actualiza los mensajes correspondientes
+     */
     createGroup(){
         var master = this.user.getUserLoggedIn();
         this.msn = "";
@@ -42,23 +64,36 @@ export class GroupComponent {
                 this.getGroups();
             });
         }
+        else
+            this.msn = "Debe darle un nombre el nuevo grupo";
     }
 
+    /**
+     * Recupera la lista de todos los grupos asociados al master en sesion actualmente
+     */
     getGroups(){
         var master = this.user.getUserLoggedIn();
         this.service.listGroups(master.username).subscribe(response => {
             this.groupList = response["list"]
             if(this.selectedGroup)
                 this.getParticipants();
+            this.msn2 = "";
         });
     }
 
+    /**
+     * Detecta el cambio de selección de la lista de grupos para buscar de nuevo la lista de participantes
+     */
     onSelectChange(){
         this.msn3 = "Cargando Lista de participantes";
         this.participantsList = [];
         this.getParticipants();
     }
 
+    /**
+     * Recupera la lista de participantes del grupo seleccionado
+     * selectedGroup Campo con el ID del grupo seleccionado actualmente
+     */
     getParticipants(){
         this.service.listParticipants(this.selectedGroup).subscribe(response => {
             this.participantsList = response["list"]
@@ -66,12 +101,21 @@ export class GroupComponent {
         });
     }
 
+    /**
+     * Recupera la lista de todos los participantes sin grupo asignado en el sistema
+     */
     getUnasigned(){
         this.participants.listUnasigned().subscribe(response =>{
             this.unasignedList = response["list"]
         });
     }
 
+    /**
+     * Procedimiento para asignar el participante sin asignar seleccionado al grupo actual
+     * selectedParticipant Username del participante seleccionado actual
+     * selectedGroup ID del grupo seleccionado actual
+     * Reporta el estado del proceso en el atributo msn2
+     */
     asign(){
         if(confirm("¿Desea asignar el participante al grupo?")){
             this.msn2 = "Asignando";
@@ -92,6 +136,11 @@ export class GroupComponent {
         }
     }
 
+    /**
+     * Desasigna de su grupo actual al participante cuyo username entra por parametro
+     * @param username nombre de usuario del participante a desasignar
+     * Reporta el estado de la operación en el atributo msn2
+     */
     unasign( username ){
         if(confirm("¿Desea eliminar al participante del grupo?")){
             this.msn2 = "Eliminando";
@@ -112,6 +161,11 @@ export class GroupComponent {
         }
     }
 
+    /**
+     * Elimina el grupo seleccionado actual si no tiene ningun participante asignado
+     * selectedGroup ID del grupo seleccionado actual
+     * Reporta el estado del proceso en msn2
+     */
     removeGroup(){
         if(this.selectedGroup && confirm("¿Desea eliminar este grupo?")){
             if(this.participantsList.length > 0){

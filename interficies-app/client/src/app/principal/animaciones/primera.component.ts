@@ -8,10 +8,16 @@ import { UserService } from '../../models/user.service';
   styleUrls: ['./primera.component.css']
 })
 
+/**
+ * Componente para manejar el comportamiento de la animación de portada
+ */
 export class PrimeraAnimacionComponent {
 
   constructor(private userService: UserService,  private router: Router) {}
 
+  /**
+   * Navega hacia el componente del comic, capitulos 1 a 15
+   */
   onContinue() {
     this.userService.setInitComic("1");
     this.userService.setLastComic("15");
