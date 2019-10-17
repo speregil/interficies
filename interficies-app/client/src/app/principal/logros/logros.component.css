@@ -1,0 +1,11 @@
+.logros-title { font-size: xx-large; margin-top: 10vh; margin-left: 2% }
+
+.logros-puntos { font-size: x-large; margin-top: 10vh; margin-left: 15% }
+
+.logros-container { font-size: x-large; margin-top: 2vh; margin-left: 2% }
+
+.logro { width: 80%; display: grid; grid-template-columns: 10% 45% 45% }
+
+.logro img { margin: auto; width: 90% }
+
+.logro label { margin: auto }

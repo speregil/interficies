@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistroService } from '../registro/registro.service';
 import { UserService } from '../../models/user.service';
-import { User } from '../../models/user.model';
 
 @Component({
   selector: 'logros',

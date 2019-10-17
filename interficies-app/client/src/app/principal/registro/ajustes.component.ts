@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { AppComponent } from '../../app.component';
 import { UserService } from '../../models/user.service';
+import { MusicService } from '../../models/music.service';
 
 @Component({
   selector: 'ajustes',
@@ -7,12 +9,33 @@ import { UserService } from '../../models/user.service';
   styleUrls: ['./registro.component.css']
 })
 
+/**
+ * Componente que controla las opciones de personalización del usuario en sesión
+ */
 export class AjustesComponent {
 
-    achivement = { text: "Has seleccionado tu avatar", points: 5 };
+    //-------------------------------------------------------------------------------------------------
+    // Campos y Atributos
+    //-------------------------------------------------------------------------------------------------
 
-    constructor(private userService: UserService){
+    password = "";          // Campo para guardar la nueva clave del usuario
+    confirmacion = "";      // Campo para guardar la confirmacion de la clave
+    girlSelected = "";      // Campo que determina si el avatar del usuario actual es el femenino, y modelar la clase css correspondiente
+    boySelected = "";       // Campo que determina si el avatar del usuario actual es el masculino, y modelar la clase css correspondiente
+    msn = "";               // Campo que guarda los mensajes del estado de la operación de cambio de contraseña
+    msn2 = "";              // Campo que guarfa los mensajes del estado de la operación de cambio de avatar
+
+    achivement = { text: "Has seleccionado tu avatar", points: 5 };     // Atributo que modela el logro asociado a elegir el avatar por primera vez
+
+    //-------------------------------------------------------------------------------------------------
+    // Constructor
+    //-------------------------------------------------------------------------------------------------
+
+    constructor(private userService: UserService, music: MusicService, private principal: AppComponent){
         var user = this.userService.getUserLoggedIn();
+        music.setBg('');
+        principal.notifyBgChange();
+
         this.msn2 = 'Cargando datos...';
         this.userService.getAvatar(user.username).subscribe(response => {
             if(response["avatar"]) {
@@ -30,13 +53,16 @@ export class AjustesComponent {
         });
     }
 
-    password = "";
-    confirmacion = "";
-    girlSelected = "";
-    boySelected = "";
-    msn = "";
-    msn2 = "";
+    //-------------------------------------------------------------------------------------------------
+    // Funciones
+    //-------------------------------------------------------------------------------------------------
 
+    /**
+     * Maneja el procedimiento de cambio de contraseña del usuario en base a la información en los campos correspondientes
+     * password Campo con la nueva clave
+     * confirmacion Campo con la confirmación de la nueva clave
+     * Reporta el estado del procedimiento en el campo msn
+     */
     changePassword(){
         if(confirm("¿Desea cambiar su clave?")) {
             if(this.password){
@@ -61,6 +87,11 @@ export class AjustesComponent {
         }
     }
 
+    /**
+     * Maneja el procedimiento de cambio de avatar basado en la imagen seleccionada
+     * @param option girl o boy, dependiendo de la imagen seleccionada
+     * Reporta el estado del procedimiento en el campo msn2
+     */
     onClickAvatar(option){
         if(confirm("¿Desea cambiar su avatar?")) {
             this.msn2 = "cambiando...";
@@ -94,6 +125,10 @@ export class AjustesComponent {
         }
     }
 
+    /**
+     * Agrega el logro correspondiente si es la primera vez que el usuario cambia su avatar
+     * @param user  Usuario en sesión actualmente
+     */
     private setAchivement( user ){
         if(this.userService.checkUserAchivements(user, this.achivement.text)){
             this.userService.setAchivement(user.username, this.achivement.text, this.achivement.points).subscribe(response => {
@@ -108,6 +143,10 @@ export class AjustesComponent {
         }
     }
 
+    /**
+     * Cambia el estilo de la imagen del avatar que el usuario ha elegdo
+     * @param option girl o boy, dependiendo de la selección del usuario
+     */
     private changeAvatar(option){
         if(option == 'girl'){
             this.girlSelected = "selected";
