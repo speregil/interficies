@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { MusicService } from '../models/music.service';
 import { AppComponent } from '../app.component';
 

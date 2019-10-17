@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import { Router } from "@angular/router";
-import { UserService } from '../../models/user.service';
+import { MusicService } from 'src/app/models/music.service';
 import { AppComponent } from '../../app.component';
 
 @Component({
@@ -9,14 +9,20 @@ import { AppComponent } from '../../app.component';
   styleUrls: ['./primera.component.css']
 })
 
+/**
+ * Componente para controlar la animacion de introduccion a la experiencia del oraculo
+ */
 export class IntroOraculoComponent {
-  
-  achivement = 'Viste las animaciones: Oraculo';
 
-  constructor(private userService: UserService,  private router: Router, private app: AppComponent) {}
+  constructor(private router: Router, music: MusicService, private principal: AppComponent) {
+    music.setBg("");
+    principal.notifyBgChange(); 
+  }
 
+  /**
+   * Navega hacia el componente del oraculo
+   */
   onContinue() {
-    
-        this.router.navigate(["arqueologo/oraculo"]);
+    this.router.navigate(["arqueologo/oraculo"]);
   }
 }

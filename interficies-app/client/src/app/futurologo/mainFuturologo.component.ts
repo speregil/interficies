@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
-import {Howl, Howler} from 'howler';
 import { UserService } from '../models/user.service';
 import { ChallengesService } from '../models/challenges.service';
+import { MusicService } from 'src/app/models/music.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'interacciones',
@@ -27,15 +28,11 @@ export class MainFuturologoComponent {
 
   bgSound = null;
 
-  constructor(private userService: UserService, private router: Router, private http: HttpClient, private challenges: ChallengesService) {
+  constructor(private userService: UserService, private router: Router, private http: HttpClient, private challenges: ChallengesService, music: MusicService, private principal: AppComponent) {
     this.msnAceptar = "Cargando";
 
-    this.bgSound = new Howl({
-      src: ['/assets/static/oraculo.mp3'],
-      loop: true
-    });
-    Howler.volume(0.5);
-    this.bgSound.play();
+    music.setBg("oraculo.mp3");
+    principal.notifyBgChange(); 
 
 
     var user = this.userService.getUserLoggedIn();
@@ -125,9 +122,5 @@ export class MainFuturologoComponent {
 
   onContinue() {  
     this.router.navigate(["roles"]);
-  }
-
-  ngOnDestroy() { 
-    this.bgSound.stop();
   }
 }

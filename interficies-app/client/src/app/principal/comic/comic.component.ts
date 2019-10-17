@@ -1,6 +1,6 @@
 import { Component, OnDestroy} from '@angular/core';
 import {Router} from "@angular/router";
-import {Howl, Howler} from 'howler';
+import { MusicService } from '../../models/music.service';
 import { UserService } from '../../models/user.service';
 import { AppComponent } from '../../app.component';
 
@@ -13,7 +13,7 @@ import { AppComponent } from '../../app.component';
 /**
  * Componente que maneja el visor configurable del comic
  */
-export class ComicComponent implements OnDestroy {
+export class ComicComponent {
   
   //----------------------------------------------------------------------------------------------------------
   // Campos y Atributos
@@ -29,21 +29,13 @@ export class ComicComponent implements OnDestroy {
   // Constructor
   //----------------------------------------------------------------------------------------------------------
 
-  constructor(private userService: UserService, private router: Router, private app: AppComponent){
+  constructor(private userService: UserService, private router: Router, private app: AppComponent, music: MusicService){
     this.initComic = this.userService.getInitComic();
     this.lastComic = this.userService.getLastComic();
     this.currentComic = this.initComic;
-    this.currentBg = this.userService.getComicBg();
-    this.bgSound = new Howl({
-      src: ['/assets/static/comic-soundtrack/' + this.currentBg + '.mp3'],
-      loop: true
-    });
-    Howler.volume(0.5);
-    this.bgSound.play();
-  }
-
-  ngOnDestroy() { 
-    this.bgSound.stop();
+    var currentBg = this.userService.getComicBg();
+    music.setBg('/comic/' + currentBg);
+    app.notifyBgChange();
   }
 
   //----------------------------------------------------------------------------------------------------------

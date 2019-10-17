@@ -5,7 +5,7 @@ import { UserService } from '../models/user.service';
 import { LoginObserver } from '../models/loginObserver.interface';
 import { HttpClient } from '@angular/common/http';
 import { DownloadService } from '../models/downloads.service';
-import {Howl, Howler} from 'howler';
+import { MusicService } from '../models/music.service';
 
 @Component({
   selector: 'roles',
@@ -53,22 +53,14 @@ export class RolesComponent implements LoginObserver {
   // Constructor
   //----------------------------------------------------------------------------------------------------------
 
-  constructor(private userService: UserService, private principal: AppComponent, private router: Router, private http: HttpClient, private download: DownloadService) {
+  constructor(private userService: UserService, private principal: AppComponent, private router: Router, private http: HttpClient, private download: DownloadService, music: MusicService) {
     this.isLogged = this.userService.isUserLogged();
     this.principal.addLoginObserver(this);
-    this.bgSound = new Howl({
-      src: ['/assets/static/snd_portada.mp3'],
-      loop: true
-    });
-    Howler.volume(0.5);
-    this.bgSound.play();
+    music.setBg('snd_portada.mp3');
+    principal.notifyBgChange();
     this.showRoleProgress();
     this.getCurrentRol();
     this.getChallenges();
-  }
-
-  ngOnDestroy() { 
-    this.bgSound.stop();
   }
 
   //----------------------------------------------------------------------------------------------------------
