@@ -36,15 +36,11 @@ export class AppComponent {
 
   constructor(private registro: RegistroService, private userService: UserService, private router: Router, private music: MusicService){
     this.loginObservers = new Array();
-    this.updateLogin();
-    
-    var currentBg = music.getBg();
     this.bgSound = new Howl({
-      src: ['/assets/static/sounds/' + currentBg ],
+      src: [''],
       loop: true
     });
-    Howler.volume(0.5);
-    this.bgSound.play();
+    this.updateLogin();
   }
 
   ngOnDestroy(){
@@ -134,14 +130,16 @@ export class AppComponent {
    * Cambia la musica de fondo al ser notificado por otro componente del portal
    */
   notifyBgChange(){
-    this.bgSound.stop();
+    this.bgSound.unload();
     var currentBg = this.music.getBg();
     this.bgSound = new Howl({
       src: ['/assets/static/sounds/' + currentBg ],
       loop: true
     });
     Howler.volume(0.5);
-    this.bgSound.play();
+
+    if(this.music.isOn()) 
+      this.bgSound.play();
   }
 
   /**
