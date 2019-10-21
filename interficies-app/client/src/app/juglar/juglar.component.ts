@@ -3,38 +3,47 @@ import { Router } from "@angular/router";
 import { UserService } from '../models/user.service';
 import { ChallengesService } from '../models/challenges.service';
 import { HttpClient } from '@angular/common/http';
-import {Howl, Howler} from 'howler';
+import { MusicService } from 'src/app/models/music.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'juglar',
   templateUrl: './juglar.component.html',
   styleUrls: ['./juglar.component.css']
 })
+/**
+ * Componente que controla la experiencia del juglar
+ */
 export class JuglarComponent {
   
-  masterChallenges = [];
+  //---------------------------------------------------------------------------------------------
+  // Atributos y Campos
+  //---------------------------------------------------------------------------------------------
 
-  perfilActual = "";
-  retoActual = "";
-  msnAceptar = "";
-  cargando = true;
-  basico = true;
-  basicAble = true;
-  masterAble = false;
-  acceptAble = false;
+  perfilActual = "";                        // Campo que guarda el texto del perfil actual seleccionado
+  retoActual = "";                          // Campo que guarda el texto del reto actual seleccionado
+  msnAceptar = "";                          // Campo que guarda el estado del procedimiento actual
 
-  poolBasico = "selected";
-  poolMaster = "juglar-button";
+  masterChallenges = [];                    // Atributo que determina la lista de retos hechos por el master
+  cargando = true;                          // Bandera para determinar que la expericia está cargando algo
+  basico = true;                            // Bandera que determina si es posible seleccionar retos en la experiencia
+  basicAble = true;                         // Bandera que determina si es posible seleccionar retos del basicos
+  masterAble = false;                       // Bandera que determina si es posible seleccionar retos del master
+  acceptAble = false;                       // Bandera que determina si es posible aceptar el reto actual
 
-  bgSound = new Howl({
-    src: ['/assets/static/mosca.mp3'],
-    loop: true
-});
+  poolBasico = "selected";                  // Atributo que determina si se estan seleccionado retos del pool básico 
+  poolMaster = "juglar-button";             // Atributo que determina si se están seleccionado retos del pool del master
 
+  //---------------------------------------------------------------------------------------------
+  // Constructor
+  //---------------------------------------------------------------------------------------------
 
-  constructor(private userService: UserService, private router: Router, private http: HttpClient, private challenges: ChallengesService) {
+  constructor(private userService: UserService, private router: Router, private http: HttpClient, private challenges: ChallengesService, music: MusicService, private principal: AppComponent) {
     
     this.msnAceptar = "Cargando";
+    music.setBg("mosca.mp3");
+    principal.notifyBgChange();  
+    
     var user = this.userService.getUserLoggedIn();
     this.userService.getProgressState(user.username, 'juglarAsig').subscribe(response => {
         if(response['flag']){
@@ -53,16 +62,15 @@ export class JuglarComponent {
     });
   }
 
-  ngOnInit() {
-    this.bgSound.play();
-    this.bgSound.loop();
-    Howler.volume(5);
-  }
+  //---------------------------------------------------------------------------------------------
+  // Funciones
+  //---------------------------------------------------------------------------------------------
 
-  ngOnStop(){
-    this.bgSound.stop();
-  }
-
+  /**
+   * Muestra un reto al azar del la lista de retos del folder que entra por parámetro
+   * @param folder Personaje del que se desea sacar un reto al azar
+   * El texto del nuevo reto se guarda  en el campo retoActual
+   */
   onFolderClick( folder ) {
     if(!this.cargando && this.basicAble) {
       this.retoActual = "Procesando...";
@@ -78,6 +86,10 @@ export class JuglarComponent {
     }
   }
 
+  /**
+   * Recupera un reto basico del personaje que entra por parámetro
+   * @param folder Personaje del que se desea recuperar el reto
+   */
   getBasicChallenge( folder ){
     
     this.http.get('assets/static/juglar/' + folder + '/' + folder + '.txt', {responseType: 'text'}).subscribe(perfil => {
@@ -94,6 +106,9 @@ export class JuglarComponent {
     });
   }
 
+  /**
+   * Recupera un reto del pool de retos del master
+   */
   getMasterChallenge(){
     var i = Math.floor(Math.random() * this.masterChallenges.length);
     var challenge = this.masterChallenges[i];
@@ -101,6 +116,10 @@ export class JuglarComponent {
     this.acceptAble = true;
   }
 
+  /**
+   * Acepta el reto actual y lo agrega a la lista de retos del usuario en sesión
+   * Reporta el resultado de la operación en el campo msnAceptar
+   */
   onAccept() {
     if(this.basicAble && !this.cargando) {
       this.msnAceptar = "Guardando...";
@@ -121,11 +140,10 @@ export class JuglarComponent {
     }
   }
 
+  /**
+   * Navega al menu principal
+   */
   onContinue() {
     this.router.navigate(["roles"]);
-  }
-
-  ngOnDestroy() { 
-    this.bgSound.stop();
   }
 }

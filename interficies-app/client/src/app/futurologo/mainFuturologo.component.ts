@@ -11,22 +11,33 @@ import { AppComponent } from '../app.component';
   templateUrl: './mainFuturologo.component.html',
   styleUrls: ['./mainFuturologo.component.css']
 })
+/**
+ * Componente que controla la experiencia del Oráculo
+ */
 export class MainFuturologoComponent {
 
-  masterChallenges = [];
+  //-------------------------------------------------------------------------------------------------
+  // Atributos y Campos
+  //-------------------------------------------------------------------------------------------------
 
-  retoActual = "";
-  msnAceptar = "";
-  cargando = true;
-  basico = true;
-  basicAble = true;
-  masterAble = false;
-  acceptAble = false;
+  retoActual = "";                      // Campo que contiene el texto del reto que actualmente se está mostrando
+  msnAceptar = "";                      // Campo que contiene el estado actual del procedimiento registrado
 
-  poolBasico = "selected";
-  poolMaster = "vidente-button";
+  masterChallenges = [];                // Atributo que modela la lista de retos hechos por el master
+  cargando = true;                      // Bandera para indicar que la experiencia está cargando datos
+  basico = true;                        // Bandera que determina que se pueden aceptar retos básicos
+  basicAble = true;                     // Bandera que determina que es posible interactuar con el oraculo
+  masterAble = false;                   // Bandera que determina si es posible aceptar retos del master
+  acceptAble = false;                   // Bandera que determina si es posible aceptar el reto actual
 
-  bgSound = null;
+  poolBasico = "selected";              // Determina si el usuario está usando los retos básicos
+  poolMaster = "vidente-button";        // Determina si el usuario está usando los retos del master
+
+  bgSound = null;                       // Atributo que modela el sonido de fondo
+
+  //-------------------------------------------------------------------------------------------------
+  // Constructor
+  //-------------------------------------------------------------------------------------------------
 
   constructor(private userService: UserService, private router: Router, private http: HttpClient, private challenges: ChallengesService, music: MusicService, private principal: AppComponent) {
     this.msnAceptar = "Cargando";
@@ -53,6 +64,14 @@ export class MainFuturologoComponent {
     });
   }
   
+  //-------------------------------------------------------------------------------------------------
+  // Funciones
+  //-------------------------------------------------------------------------------------------------
+
+  /**
+   * Procedimiento para mostrar un reto al azar del pool seleccionado
+   * Coloca eb retoActual el texto del reto recuperado
+   */
   onOracleClick() {
     if(!this.cargando){
       if(this.userService.isUserLogged() && this.basicAble) {
@@ -68,6 +87,9 @@ export class MainFuturologoComponent {
     }
   }
 
+  /**
+   * Procedimiento para buscar en el sistema un reto del pool basico
+   */
   getBasicChallenge(){
     this.http.get('assets/static/oraculo/config.json', {responseType: 'json'}).subscribe(data => {
       var len = parseInt(data["num"]);
@@ -79,6 +101,9 @@ export class MainFuturologoComponent {
     });
   }
 
+  /**
+   * Procedimiento para buscar en el sistema un reto del pool del master
+   */
   getMasterChallenge(){
     var i = Math.floor(Math.random() * this.masterChallenges.length);
     var challenge = this.masterChallenges[i];
@@ -86,6 +111,10 @@ export class MainFuturologoComponent {
     this.acceptAble = true;
   }
 
+  /**
+   * Procedimeinto para aceptar el reto actual y registrarlo en al lista de retos del usuario actual
+   * El reto solo se acepta si no se ha aceptado un reto del mismo tipo previamente
+   */
   onAccept() {
     if(this.basicAble && !this.cargando) {
       var user = this.userService.getUserLoggedIn();
@@ -107,6 +136,10 @@ export class MainFuturologoComponent {
     }
   }
 
+  /**
+   * Cambia el pool del retos a elegir por aquel que entra por parametro
+   * @param nPool Nuevo pool a elegir basico o master
+   */
   changePool(nPool){
     if(nPool == 'basico'){
       this.poolBasico = "selected";
@@ -120,6 +153,9 @@ export class MainFuturologoComponent {
     }
   }
 
+  /**
+   * Navega hacia el menu principal
+   */
   onContinue() {  
     this.router.navigate(["roles"]);
   }
