@@ -1,5 +1,8 @@
-<img src="../assets/static/iconos/normal/continuar.png" (click)="onContinue()" class="animacion-continuar"/>
-<video width="100%" height="auto" autoplay>
+<video #vid width="50%" height="auto" autoplay class="video">
     <source src="assets/static/animations/anim-lab.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
+<div class='button-container'>
+    <button (click)="onAgain()" class="main-button animacion-button ">VOLVER A VER</button>
+    <button (click)="onContinue()" class="main-button animacion-button ">CONTINUAR</button>
+</div>
