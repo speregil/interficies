@@ -30,14 +30,23 @@ export class TallerComponent {
   constructor(private userService: UserService, private router: Router, private download: DownloadService, music: MusicService, private principal: AppComponent) {
     this.msn = "Cargando";
     music.setBg("");
-    principal.notifyBgChange(); 
+    principal.notifyBgChange();
+
     var user = this.userService.getUserLoggedIn();
     this.userService.getProgressState(user.username, 'tallerAsig').subscribe(response => {
         if(response['flag']){
           this.basicAble = false;
         }
         this.cargando = false;
-        this.msn = "Para comenzar la activdad, presiona ACEPTAR";
+        this.msn = "Para comenzar la actividad, presiona ACEPTAR";
+
+        this.userService.updateRole(user.username, "Arqueologo").subscribe(response => {
+          if(response["status"] == 0) {
+            user.currentRol = "Arqueologo";
+            userService.setUserLoggedIn(user);
+            principal.updateLogin();
+          }
+        });
     });
   }
 

@@ -27,6 +27,8 @@ export class IntroLaboratorioComponent {
 
   constructor(private userService: UserService,  private router: Router, music: MusicService, private principal: AppComponent) {
     var user = userService.getUserLoggedIn();
+    music.setBg("");
+    principal.notifyBgChange();
     userService.updateRole(user.username, "Arqueologo").subscribe(response => {
       if(response["status"] == 0) {
         user.currentRol = "Arqueologo";
