@@ -9,11 +9,11 @@
     <div>
         <div (click) = "onContinue('animaciones-futurologo')" class="rol-button"><img src="assets/static/iconos/vidente.png"><p>Vidente</p></div>
         <div (click) = "onContinue('animaciones-juglar')" class="rol-button"><img src="assets/static/iconos/juglar.png"><p>Juglar</p></div>
-        <div *ngIf="basico == true" (click) = "onContinue('taller')" class="rol-button"><img src="assets/static/iconos/arqueologo.png"><p>Taller</p></div>
+        <div *ngIf="basico == true" (click) = "onContinue('taller')" class="rol-button"><img src="assets/static/iconos/taller.png"><p>Taller</p></div>
     </div>
 
     <div>
-        <div *ngIf="intermedio == true" (click) = "onContinue('animaciones-laboratorio')" class="rol-button"><img src="assets/static/iconos/arqueologo.png"><p>Laboratorio</p></div>
+        <div *ngIf="intermedio == true" (click) = "onContinue('animaciones-laboratorio')" class="rol-button"><img src="assets/static/iconos/laboratorio.png"><p>Laboratorio</p></div>
         <div *ngIf="experto == true" (click) = "onContinue('animaciones-investigador')" class="rol-button"><img src="assets/static/iconos/reportero.png"><p>Reportero</p></div>
         <div *ngIf="master == true" (click) = "onContinue('animaciones-interprete')" class="rol-button"><img src="assets/static/iconos/critico.png"><p>Crítico</p></div>
     </div>

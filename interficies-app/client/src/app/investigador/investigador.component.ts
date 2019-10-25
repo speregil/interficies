@@ -101,6 +101,7 @@ export class InvestigadorComponent {
    */
   setChallange(){
     var user = this.userService.getUserLoggedIn();
+    this.msn = "No te vayas, espera un momento...";
     this.userService.addChallenge(user.username, 'periodista', "Como periodista cubriendo los hechos al redor del masivo complot que llevó a la caida de Xanadú. La crónica que vas a escribir describe los hechos detrás de esta conspiración.").subscribe(response => {
       if(response['mensaje'])
         this.msn = response['mensaje'];
@@ -132,7 +133,7 @@ export class InvestigadorComponent {
    */
   onDownload(){
     var url = './assets/static/reportero/cronica.docx';
-    this.msn = "Reto Aceptado"
+    this.msn = "Nuevo Reto Agregado";
     this.basicAble = false;
     this.cargando = false;
     this.download.downloadFile(url).subscribe(response => {
