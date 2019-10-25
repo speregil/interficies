@@ -40,6 +40,7 @@ export class RolesComponent implements LoginObserver {
   comic2 = false;
   comic3 = false;
   novela = false;
+  ensayo = false;
   final = false;
 
   // Sección de retos
@@ -106,6 +107,8 @@ export class RolesComponent implements LoginObserver {
           this.cronica = progress["periodistaAsig"];
           this.master =  progress["periodista"];
           this.novela =  progress["periodista"];
+          this.ensayo =  progress["criticoAsig"];
+          this.final = progress["critico"];
         }
       });
     }

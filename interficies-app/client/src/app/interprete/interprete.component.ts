@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { UserService } from '../models/user.service';
 import { DownloadService } from '../models/downloads.service';
+import { MusicService } from 'src/app/models/music.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'interprete',
@@ -9,19 +11,31 @@ import { DownloadService } from '../models/downloads.service';
   styleUrls: ['./interprete.component.css']
 })
 
+/**
+ * Componente que controla el cuestionario del Critico
+ */
 export class InterpreteComponent {
 
-   selectedAnswers = ["a","a","a","a","a","a","a","a"];
-   correctAnswers = ["c","a","c","a","b","b","c","c"];
-   questionState = ["normal","normal","normal","normal","normal","normal","normal","normal"];
+  //------------------------------------------------------------------------------------------------------
+  // Campos y Atributos
+  //------------------------------------------------------------------------------------------------------
 
-   msn = "";
+  msn = "";                                                                                       // Campo donde se guarda el estado del proceso actual
+  selectedAnswers = ["a","a","a","a","a","a","a","a"];                                            // Campo que guarda las respuestas seleccionadas por el usuario
+  questionState = ["normal","normal","normal","normal","normal","normal","normal","normal"];      // Campo que guarda el estado de las preguntas verificadas
 
-   basicAble = true;
-   cargando = true;
+  correctAnswers = ["c","a","c","a","b","b","c","c"];                                             // Atributo que guarda las respuesta correctas del cuestionario
+  basicAble = true;                                                                               // Atributo que determina si es posible realizar la actividad o no
+  cargando = true;                                                                                // Atributo que determina si la pagina esta cargando algo o no
 
-  constructor(private userService: UserService, private router: Router, private download: DownloadService) {
+  //------------------------------------------------------------------------------------------------------
+  // Constructor
+  //------------------------------------------------------------------------------------------------------
+
+  constructor(private userService: UserService, private router: Router, private download: DownloadService, music: MusicService, private principal: AppComponent) {
     this.msn = "Cargando...";
+    music.setBg("");
+    principal.notifyBgChange(); 
     var user = this.userService.getUserLoggedIn();
     this.userService.getProgressState(user.username, 'criticoAsig').subscribe(response => {
         if(response['flag']){
@@ -32,6 +46,14 @@ export class InterpreteComponent {
     });
   }
   
+  //------------------------------------------------------------------------------------------------------
+  // Funciones
+  //------------------------------------------------------------------------------------------------------
+
+  /**
+   * Compara las respuestas del usuario con las correctas y guarda el logro en caso de ser todas correctas
+   * Reporta en el campo msn si hay respuestas incorrectas dado el caso
+   */
   verify(){
     if(this.basicAble && !this.cargando){  
       var allCorrect = true;
@@ -52,8 +74,15 @@ export class InterpreteComponent {
       else
         this.msn = "Hay respuestas incorrectas";
     }
+    else{
+      this.msn = "Ya completaste este reto";
+    }
   }
 
+  /**
+   * Guarda el logro correspondiente al usuario que se encuentra en sesion
+   * Alerta del estado del proceso
+   */
   private setAchivement(){
     var user = this.userService.getUserLoggedIn();
     if(this.userService.checkUserAchivements(user, "Has contestado el cuestionario sobre la novela")){
@@ -69,7 +98,12 @@ export class InterpreteComponent {
     }
   }
 
+  /**
+   * Guarda el nuevo reto asociado al critico si se contestaron todas las preguntas correctamente
+   * Reporta el estado del proceso en el campo msn
+   */
   setChallange(){
+    this.msn = "No te vayas todavia...";
     var user = this.userService.getUserLoggedIn();
     this.userService.addChallenge(user.username, 'critico', "Como crítico, vas a analizar los eventos descubiertos por J'Martín y sus compañeros para escribir un ensayo que explore las implicaciones eticas y sociales de los planes de Xanadú.").subscribe(response => {
       if(response['mensaje'])
@@ -82,18 +116,28 @@ export class InterpreteComponent {
     });
   }
 
+  /**
+   * Navega al menu principal
+   */
   onContinue() {
     this.router.navigate(["roles"]); 
   }
 
+  /**
+   * Reinicia todas las respuestas del usuario
+   */
   onReset() {
     this.selectedAnswers = ["a","a","a","a","a","a","a","a"];
     this.questionState = ["normal","normal","normal","normal","normal","normal","normal","normal"];
   }
 
+  /**
+   * Procedimiento que descarga la plantilla del ensayo
+   * Reporta el estado del proceso en el campo msn
+   */
   onDownload(){
     var url = './assets/static/critico/ensayo.docx';
-    this.msn = "Reto Aceptado"
+    this.msn = "Tienes un nuevo reto";
     this.basicAble = false;
     this.cargando = false;
     this.download.downloadFile(url).subscribe(response => {
