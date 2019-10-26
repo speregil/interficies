@@ -132,7 +132,7 @@ export class InvestigadorComponent {
    * Descarga la plantilla de la cronica
    */
   onDownload(){
-    var url = './assets/static/reportero/cronica.docx';
+    var url = './assets/static/reportero/cronica.pdf';
     this.msn = "Nuevo Reto Agregado";
     this.basicAble = false;
     this.cargando = false;

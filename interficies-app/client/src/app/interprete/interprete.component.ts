@@ -136,7 +136,7 @@ export class InterpreteComponent {
    * Reporta el estado del proceso en el campo msn
    */
   onDownload(){
-    var url = './assets/static/critico/ensayo.docx';
+    var url = './assets/static/critico/ensayo.pdf';
     this.msn = "Tienes un nuevo reto";
     this.basicAble = false;
     this.cargando = false;

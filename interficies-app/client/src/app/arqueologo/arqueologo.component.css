@@ -6,11 +6,11 @@
 .lab-opciones { display: grid; grid-template-columns: auto auto auto }
 
 .lab-resaltadores { display: grid; grid-template-columns: 20% auto auto auto 20%; margin-bottom: 2vh;}
-.lab-resaltadores img { width: 75px; height: auto; padding-left: 150px; padding-right: 150px; cursor: pointer }
+.lab-resaltadores img { width: 75px; height: auto; cursor: pointer }
 .lab-resaltadores p { padding-left: 100px; padding-right: 100px; font-size: large }
 
-.lab-tabla { width: 100%; height: auto; margin-left: 5%; margin-bottom: 50px }
-.lab-tabla td { padding: 15px }
+.lab-tabla { width: 80%; height: auto; margin-left: 17%; margin-bottom: 50px; table-layout: fixed }
+.lab-tabla td,th{ width: 100px; overflow: hidden; }
 
 .img-container { width: 250px; height: 250px; border: 5px solid white }
 .img-Acontainer { width: 250px; height: 250px; border: 5px solid cyan }

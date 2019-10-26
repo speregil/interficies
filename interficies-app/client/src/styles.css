@@ -8,3 +8,4 @@ body { font-family: 'principal', Arial, sans-serif; font-weight:normal; font-sty
 .main-button:hover{ color: cyan; border-color: cyan; }
 .main-button:active{ color: black; border-color: black; }
 
+.video-container { background-image: url("./assets/static/video.png"); width: 50%; height: 75vh; margin: auto; background-size: 100% 100%; background-repeat: no-repeat; }
