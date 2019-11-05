@@ -12,7 +12,6 @@ import { CreditosComponent } from './principal/creditos/creditos.component';
 import { InstruccionesComponent } from './principal/instrucciones/instrucciones.component';
 import { ComicComponent } from './principal/comic/comic.component';
 import { LogrosComponent } from './principal/logros/logros.component';
-import { RemediacionesComponent } from './remediaciones/remediaciones.component';
 import { LaboratorioComponent } from './arqueologo/laboratorio.arqueologia';
 import { TallerComponent } from './arqueologo/taller.arqueologia';
 import { DeliberatoriumComponent } from './arqueologo/deliberatorium.arqueologia';
@@ -51,7 +50,6 @@ import { DownloadService } from './models/downloads.service';
     InstruccionesComponent,
     ComicComponent,
     LogrosComponent,
-    RemediacionesComponent,
     LaboratorioComponent,
     TallerComponent,
     DeliberatoriumComponent,

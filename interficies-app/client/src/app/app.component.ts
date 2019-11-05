@@ -29,6 +29,7 @@ export class AppComponent {
   loginObservers: LoginObserver[];    // Atributo que guarda la lista de componentes que necesitan ser notificados cuando se realiza un login
 
   bgSound = null;                     // Atributo que controla la musica de fondo
+  isSound = true;                       // Determina si el sonido está encendido o no
 
 //-------------------------------------------------------------------------------------------------------------------------------
 // Constructor
@@ -123,6 +124,7 @@ export class AppComponent {
       this.userService.setUserLoggedOut();
       this.loggedUser = null;
       this.notifyLogin(false);
+      this.router.navigate([""]);
     }
   }
 
@@ -293,10 +295,19 @@ export class AppComponent {
     if(sound) {
       this.bgSound.stop();
       this.music.setOff();
+      this.isSound = false;
     }
     else{
       this.bgSound.play();
       this.music.setOn();
+      this.isSound = true;
     }
+  }
+
+  /**
+   * Retorna si el sonido del portal está encendido o no
+   */
+  private isSoundOn(){
+    return this.isSound;
   }
 }

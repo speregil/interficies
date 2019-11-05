@@ -8,7 +8,6 @@ import { AjustesComponent } from './principal/registro/ajustes.component';
 import { InstruccionesComponent } from './principal/instrucciones/instrucciones.component';
 import { ComicComponent } from './principal/comic/comic.component';
 import { LogrosComponent } from './principal/logros/logros.component';
-import { RemediacionesComponent } from './remediaciones/remediaciones.component';
 import { LaboratorioComponent } from './arqueologo/laboratorio.arqueologia';
 import { TallerComponent } from './arqueologo/taller.arqueologia';
 import { DeliberatoriumComponent } from './arqueologo/deliberatorium.arqueologia';
@@ -40,7 +39,6 @@ const routes: Routes = [
   { path: 'instrucciones', component: InstruccionesComponent },
   { path: 'comic', component: ComicComponent },
   { path: 'logros', component: LogrosComponent },
-  { path: 'remediaciones', component: RemediacionesComponent },
   { path: 'futurologo', component: MainFuturologoComponent },
   { path: 'juglar', component: JuglarComponent },
   { path: 'laboratorio', component: LaboratorioComponent },
