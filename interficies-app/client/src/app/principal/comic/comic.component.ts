@@ -22,6 +22,7 @@ export class ComicComponent {
   currentComic = "0";             // Atributo que identifica la pagina que se esta mostrando
   initComic = "0";                // Atributo que identifica la primera pagina de la secuencia
   lastComic = "0";                // Atributo que identifica la ultima pagina de la secuencia
+  onLast = false;                 // Determina si el lector se encuetra en la última página o no
   currentBg = "";                 // Atributo que identifica la musica de fondo que suena durante la secuencia
   bgSound = null;                 // Atributo que controla la musica de fondo
 
@@ -53,6 +54,12 @@ export class ComicComponent {
     if(current <= last) {
       this.currentComic = current + "";
     }
+
+    if(current == last)
+      this.onLast = true
+    else
+      this.onLast = false;
+
     $element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
   }
 
@@ -62,6 +69,7 @@ export class ComicComponent {
   onPrev() {
     var current = Number(this.currentComic);
     var first = Number(this.initComic);
+    this.onLast = false;
     current--;
     if(current >= first) {
       this.currentComic = current + "";

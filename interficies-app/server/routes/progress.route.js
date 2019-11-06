@@ -66,24 +66,38 @@ router.post('/role', function(req, res, next) {
     });
 });
 
+/**
+ * Actualiza el avatar de un usuario
+ * params: user, avatar. Encriptados en el cuerpo
+ */
 router.post('/avatar', function(req, res, next) {
     controller.updateAvatar(req.body.username, req.body.avatar, function (err){
         res.json({mensaje : err});
     });
 });
 
+/**
+ * Actualiza el nivel de un usuario
+ * params: user, nivel. Encriptados en el cuerpo
+ */
 router.post('/level', function(req, res, next){
     controller.updateLevel(req.body.username, req.body.level, function(err){
         res.json({mensaje : err});
     });
 });
 
+/**
+ * Retorna el avatar actual de usuario que entra por parámetro
+ */
 router.get('/getavatar/:username', function(req, res, next) {
     controller.getAvatar(req.params.username, function (err, actualAvatar){
         res.json({mensaje : err, avatar: actualAvatar});
     });
 });
 
+/**
+ * Retorna el estado de la bandera que entra por parametro del usuario especificado
+ */
 router.get('/state/:username/:flag', function(req,res,next){
     controller.getFlag(req.params.username, req.params.flag, function(err, state){
         res.json({mensaje: err, flag: state});

@@ -15,11 +15,11 @@ var cors = require('cors');                    // Libreria para manejar el proto
 // Rutas
 //---------------------------------------------------------------------------------------
 
-var login = require('./routes/login.route');            //API para el manejo de login y la información del usuario
-var progress = require('./routes/progress.route');
-var group = require('./routes/group.route');
-var challenge = require('./routes/challenge.route');
-var notification = require('./routes/notification.route');
+var login = require('./routes/login.route');                    // API para el manejo de login y la información del usuario
+var progress = require('./routes/progress.route');              // API para el manejo del progreso en la experienciade un usuario
+var group = require('./routes/group.route');                    // API para la administración de grupos
+var challenge = require('./routes/challenge.route');            // API para la asignación de retos a un usuario
+var notification = require('./routes/notification.route');      // API para la administración de notificaciones de un usuario
 
 //---------------------------------------------------------------------------------------
 // Servidor

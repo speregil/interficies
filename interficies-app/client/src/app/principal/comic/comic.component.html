@@ -3,5 +3,4 @@
 </div>
 <img src="../assets/static/iconos/normal/prev.png" (click) = "onPrev()" class="comic-prev">
 <img src="../assets/static/iconos/normal/sig.png" (click) = "onSig(top)" class="comic-sig">
-<button (click)="onContinue()" class="comic-continuar">Continuar</button>
-<a href='#top'>top</a>
+<button *ngIf="onLast == true" (click)="onContinue()" class="comic-continuar">Continuar</button>

@@ -2,9 +2,9 @@
  * Enrutador para el API de Login de la aplicación
  */
 
- //-------------------------------------------------------------------------------------
- // Requerimientos
- //-------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
+// Requerimientos
+//-------------------------------------------------------------------------------------
 
 var express = require('express');                                   // Libreria base de express
 var controller = require('../controllers/login.controller');        // Controlador del API                                
@@ -26,6 +26,19 @@ router.post('/register', function(req, res, next) {
 });
 
 /**
+ * Operación de eliminación de un usuario
+ * params: usuario. Encriptados en el cuerpo
+ */
+router.post('/unregister', function(req, res, next){
+    controller.unregister(req, function(err){
+        if(err)
+            res.json({status : 1, mensaje : err});
+        else
+            res.json({status : 0, mensaje: ""});
+    });
+});
+
+/**
  * Operación para verificación de login y retorno de la info del usuario registrado
  * params: usuario, password. Encriptados en el cuerpo
  */
@@ -38,12 +51,13 @@ router.post('/login', function(req, res, next) {
     });
 });
 
-router.post('/unregister', function(req, res, next){
-    controller.unregister(req, function(err){
-        if(err)
-            res.json({status : 1, mensaje : err});
-        else
-            res.json({status : 0, mensaje: ""});
+/**
+ * Operación para cambiar la clave de un usuario
+ * params: usuario, nuevo password. Encriptados en el cuerpo
+ */
+router.post('/changepass', function(req, res, next) {
+    controller.changePassword(req.body.username, req.body.password, function(err){
+        res.json({mensaje: err});
     });
 });
 
@@ -56,15 +70,12 @@ router.get('/participantes', function(req, res, next) {
     });
 });
 
+/**
+ * Operación para obtener la lista de todos los participantes sin asignar a un grupo
+ */
 router.get('/unasigned', function(req, res, next) {
     controller.getUnasigned(function(err, participants){
         res.json({mensaje: err, list: participants});
-    });
-});
-
-router.post('/changepass', function(req, res, next) {
-    controller.changePassword(req.body.username, req.body.password, function(err){
-        res.json({mensaje: err});
     });
 });
 
