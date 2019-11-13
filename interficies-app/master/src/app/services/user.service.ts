@@ -8,7 +8,7 @@ import { User } from './user.model';
 @Injectable()
 export class UserService {
   
-    host = 'localhost:3100';
+    host = '34.95.158.164:3100';
     private isUserLoggedIn = false;
 
     constructor ( private http: HttpClient) {}
