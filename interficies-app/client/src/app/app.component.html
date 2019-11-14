@@ -1,5 +1,5 @@
 <div class='header'>
-  <img src="../assets/static/iconos/normal/home.png" class="home" (click) = "goHome()"/>
+  <img src="./assets/static/iconos/normal/home.png" class="home" (click) = "goHome()"/>
   
   <span class="header-nav">
     <a routerLink ="/creditos">Creditos</a>
@@ -10,7 +10,7 @@
   <span class="header-login" *ngIf="isLogged()==false">
     <input [(ngModel)]="username" type="text"  class="header-form" placeholder="Usuario">
     <input [(ngModel)]="password" type="password"  class="header-form" placeholder="Contraseña">
-    <img src="../assets/static/iconos/normal/continuar.png" class="header-go" (click) = "login()"/>
+    <img src="./assets/static/iconos/normal/continuar.png" class="header-go" (click) = "login()"/>
   </span>
 
   <span *ngIf="isLogged()" class="header-data">
@@ -21,11 +21,11 @@
     </span>
 
     <span class="header-options">
-      <a routerLink ="/logros" class="header-option"><img src="../assets/static/iconos/normal/logros.png"></a>
-      <a routerLink="/ajustes" class="header-option"><img src="../assets/static/iconos/normal/config.png"></a>
-      <img *ngIf="isSoundOn()==true" class="header-sound" (click)="turnSound()" src="../assets/static/iconos/normal/sound-on.png">
-      <img *ngIf="isSoundOn()==false" class="header-sound" (click)="turnSound()" src="../assets/static/iconos/normal/sound-off.png">
-      <img class="header-close" (click)="logout()" src="../assets/static/iconos/normal/cerrar.png">
+      <a routerLink ="/logros" class="header-option"><img src="./assets/static/iconos/normal/logros.png"></a>
+      <a routerLink="/ajustes" class="header-option"><img src="./assets/static/iconos/normal/config.png"></a>
+      <img *ngIf="isSoundOn()==true" class="header-sound" (click)="turnSound()" src="./assets/static/iconos/normal/sound-on.png">
+      <img *ngIf="isSoundOn()==false" class="header-sound" (click)="turnSound()" src="./assets/static/iconos/normal/sound-off.png">
+      <img class="header-close" (click)="logout()" src="./assets/static/iconos/normal/cerrar.png">
     </span>
   </span>
 </div>
