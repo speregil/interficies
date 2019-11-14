@@ -19,10 +19,7 @@ import { JuglarComponent } from './juglar/juglar.component';
 import { MainFuturologoComponent } from './futurologo/mainFuturologo.component';
 import { InvestigadorComponent } from './investigador/investigador.component';
 import { InterpreteComponent } from './interprete/interprete.component';
-import { ExpansionesComponent } from './expansiones/expansiones.component';
-import { DebatesExpansiones } from './expansiones/debates/debates.expansiones';
-import { JuegoExpansiones } from './expansiones/juego/juego.expansiones';
-import { NarratonesExpansiones } from './expansiones/narratones/narratones.expansiones';
+
 import { AppRoutingModule } from './/app-routing.module';
 
 import { PrimeraAnimacionComponent } from './principal/animaciones/primera.component';
@@ -57,10 +54,6 @@ import { RegistroService } from './principal/registro/registro.service';
     MainFuturologoComponent,
     InvestigadorComponent,
     InterpreteComponent,
-    ExpansionesComponent,
-    DebatesExpansiones,
-    JuegoExpansiones,
-    NarratonesExpansiones,
     PrimeraAnimacionComponent,
     IntroFuturologoComponent,
     IntroOraculoComponent,

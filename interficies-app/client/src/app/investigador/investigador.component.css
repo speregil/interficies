@@ -1,4 +1,4 @@
-.cuestionario-container { background-image: url("../../assets/static/laboratorio/fondo-taller.jpg"); border: 1px solid black; height: 100vh;}
+.cuestionario-container { background-image: url("./assets/static/laboratorio/fondo-taller.jpg"); border: 1px solid black; height: 100vh;}
 
 .normal { border: 0; margin-top: 5vh }
 .normal label { font-size: xx-large; margin-left: 2%; margin-right: 2% }

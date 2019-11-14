@@ -4,7 +4,7 @@
 .grid-item { text-align: justify;  }
 .grid-item ul { list-style-type: none }
 
-.rol-container { font-size: x-large; text-align: justify; margin-right: 15px; background-image: url("../../assets/static/avatar/frame.png"); display: inline; position: relative }
+.rol-container { font-size: x-large; text-align: justify; margin-right: 15px; background-image: url("./assets/static/avatar/frame.png"); display: inline; position: relative }
 .rol-container img { width: 95%;margin-left: 6% }
 .rol-container p { padding-left: 6%; padding-right: 4% }
 

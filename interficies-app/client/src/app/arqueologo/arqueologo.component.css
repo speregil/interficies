@@ -1,7 +1,7 @@
-.lab-container { background-image: url("../../assets/static/laboratorio/fondo-lab.jpg"); border: 1px solid black; font-size: large }
-.lab-Acontainer { background-image: url("../../assets/static/laboratorio/fondo-lab.jpg"); border: 1px solid black; cursor: url("../../assets/static/laboratorio/azul-ico.png") 20 100, auto; font-size: large }
-.lab-Rcontainer { background-image: url("../../assets/static/laboratorio/fondo-lab.jpg"); border: 1px solid black; cursor: url("../../assets/static/laboratorio/rojo-ico.png") 20 100, auto; font-size: large }
-.lab-Vcontainer { background-image: url("../../assets/static/laboratorio/fondo-lab.jpg"); border: 1px solid black; cursor: url("../../assets/static/laboratorio/verde-ico.png") 20 100, auto; font-size: large }
+.lab-container { background-image: url("./assets/static/laboratorio/fondo-lab.jpg"); border: 1px solid black; font-size: large }
+.lab-Acontainer { background-image: url("./assets/static/laboratorio/fondo-lab.jpg"); border: 1px solid black; cursor: url("./assets/static/laboratorio/azul-ico.png") 20 100, auto; font-size: large }
+.lab-Rcontainer { background-image: url("./assets/static/laboratorio/fondo-lab.jpg"); border: 1px solid black; cursor: url("./assets/static/laboratorio/rojo-ico.png") 20 100, auto; font-size: large }
+.lab-Vcontainer { background-image: url("./assets/static/laboratorio/fondo-lab.jpg"); border: 1px solid black; cursor: url("./assets/static/laboratorio/verde-ico.png") 20 100, auto; font-size: large }
 
 .lab-opciones { display: grid; grid-template-columns: auto auto auto }
 
