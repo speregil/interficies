@@ -11,7 +11,7 @@ export class ChallengesService {
     // Atributos
     //------------------------------------------------------------------------------------
 
-    host = 'localhost:3100';        // Host u puerto de escucha del servidor
+    host = '34.95.158.164:3100';        // Host u puerto de escucha del servidor
 
     //------------------------------------------------------------------------------------
     // Constructor

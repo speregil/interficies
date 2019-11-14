@@ -17,7 +17,7 @@ export class UserService {
   private currentLastComic;       // Guarna la última página del comic actual
   private currentComicBg;         // Guarda la musica de fondo del lector actual del comic
  
-  host = 'localhost:3100';        // Host y puerto del servidor
+  host = '34.95.158.164:3100';        // Host y puerto del servidor
 
   //------------------------------------------------------------------------
   // Constructor

@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class RegistroService {
   
-    host = 'localhost:3100';
+    host = '34.95.158.164:3100';
 
     constructor ( private http: HttpClient) {}
 

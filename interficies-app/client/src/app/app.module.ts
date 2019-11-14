@@ -34,11 +34,11 @@ import { IntroJuglarComponent } from './principal/animaciones/introJuglar.compon
 import { IntroInvestigadorComponent } from './principal/animaciones/introInvestigador.component';
 import { IntroInterpreteComponent } from './principal/animaciones/introInterprete.component';
 
-import { RegistroService } from './principal/registro/registro.service';
 import { UserService } from './models/user.service';
 import { MusicService } from './models/music.service';
 import { ChallengesService } from './models/challenges.service';
 import { DownloadService } from './models/downloads.service';
+import { RegistroService } from './principal/registro/registro.service';
 
 @NgModule({
   declarations: [
@@ -78,11 +78,11 @@ import { DownloadService } from './models/downloads.service';
     FormsModule
   ],
   providers: [
-    RegistroService,
     UserService,
     MusicService,
     ChallengesService,
-    DownloadService
+    DownloadService,
+	RegistroService
   ],
   bootstrap: [AppComponent]
 })
