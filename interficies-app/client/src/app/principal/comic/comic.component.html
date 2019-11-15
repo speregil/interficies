@@ -1,6 +1,6 @@
 <div class="comic-container" #top>
     <img src="assets/static/comic/comic-{{currentComic}}.jpg">
 </div>
-<img src="../assets/static/iconos/normal/prev.png" (click) = "onPrev()" class="comic-prev">
-<img src="../assets/static/iconos/normal/sig.png" (click) = "onSig(top)" class="comic-sig">
+<img src="./assets/static/iconos/normal/prev.png" (click) = "onPrev()" class="comic-prev">
+<img src="./assets/static/iconos/normal/sig.png" (click) = "onSig(top)" class="comic-sig">
 <button *ngIf="onLast == true" (click)="onContinue()" class="comic-continuar">Continuar</button>

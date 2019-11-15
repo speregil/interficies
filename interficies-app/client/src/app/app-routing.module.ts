@@ -15,10 +15,6 @@ import { JuglarComponent } from './juglar/juglar.component';
 import { MainFuturologoComponent } from './futurologo/mainFuturologo.component';
 import { InvestigadorComponent } from './investigador/investigador.component';
 import { InterpreteComponent } from './interprete/interprete.component';
-import { ExpansionesComponent } from './expansiones/expansiones.component';
-import { DebatesExpansiones } from './expansiones/debates/debates.expansiones';
-import { JuegoExpansiones } from './expansiones/juego/juego.expansiones';
-import { NarratonesExpansiones } from './expansiones/narratones/narratones.expansiones';
 import { AppComponent } from './app.component';
 
 import { PrimeraAnimacionComponent } from './principal/animaciones/primera.component';
@@ -46,12 +42,6 @@ const routes: Routes = [
   { path: 'deliberatorium', component: DeliberatoriumComponent },
   { path: 'investigador', component: InvestigadorComponent },
   { path: 'interprete', component: InterpreteComponent },
-  { path: 'expansiones', component: ExpansionesComponent, children: [
-      { path: 'debates', component: DebatesExpansiones },
-      { path: 'juego', component: JuegoExpansiones },
-      { path: 'narratones', component: NarratonesExpansiones }
-    ]
-  },
   { path: 'animaciones-primera', component: PrimeraAnimacionComponent },
   { path: 'animaciones-futurologo', component: IntroFuturologoComponent },
   { path: 'animaciones-juglar', component: IntroJuglarComponent },

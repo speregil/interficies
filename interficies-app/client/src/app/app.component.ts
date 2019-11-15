@@ -135,7 +135,7 @@ export class AppComponent {
     this.bgSound.unload();
     var currentBg = this.music.getBg();
     this.bgSound = new Howl({
-      src: ['/assets/static/sounds/' + currentBg ],
+      src: ['./assets/static/sounds/' + currentBg ],
       loop: true
     });
     Howler.volume(0.5);
